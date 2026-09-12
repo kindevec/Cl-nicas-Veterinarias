@@ -21,7 +21,7 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
   return (
     <section 
       id="hero" 
-      className="relative w-full min-h-[480px] sm:min-h-[520px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white"
+      className="relative w-full min-h-[460px] sm:min-h-[500px] pt-28 sm:pt-32 pb-12 sm:pb-14 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white"
     >
       {/* Modern Photographic Canvas with Seamless Transition (Zero Dividing Lines) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

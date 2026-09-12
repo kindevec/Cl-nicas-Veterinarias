@@ -69,13 +69,13 @@ export function HomeExecutiveShowcase({
   };
 
   return (
-    <div className="space-y-20 sm:space-y-28 pb-16">
+    <div className="w-full">
       
       {/* =========================================================================
           BLOQUE 1: LA CLÍNICA (Orden 1 después de Inicio - #nosotros)
           ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-[#FAFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-8 sm:py-12 bg-white border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           {/* Header de la sección */}
           <motion.div 
@@ -83,13 +83,13 @@ export function HomeExecutiveShowcase({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200/80 pb-6"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 border-b border-slate-200/70 pb-4 sm:pb-5"
           >
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                 01 / INFRAESTRUCTURA HOSPITALARIA &amp; ESPECIALISTAS
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0D3D20]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
                 Conoce La Clínica VetCare
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
@@ -103,7 +103,7 @@ export function HomeExecutiveShowcase({
                 e.preventDefault();
                 onNavigate('nosotros');
               }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all shadow-xs hover:scale-105 cursor-pointer shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-300 text-slate-800 text-xs font-bold uppercase tracking-wider transition-all shadow-xs hover:scale-105 cursor-pointer shrink-0"
             >
               <span>Explorar La Clínica</span>
               <ArrowRight className="w-4 h-4 text-[#1A6B38]" />
@@ -111,18 +111,18 @@ export function HomeExecutiveShowcase({
           </motion.div>
 
           {/* Grid de 3 Especialistas Médicos Principales */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {LEADING_DOCTORS.map((doc, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white rounded-3xl overflow-hidden shadow-xs hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[#FAFBF7] rounded-3xl overflow-hidden shadow-xs hover:shadow-lg border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                  <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
                     <Image
                       src={doc.image}
                       alt={doc.name}
@@ -172,8 +172,8 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 2: ESPECIALIDADES MÉDICAS (Orden 2 - #servicios)
           ========================================================================= */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="py-8 sm:py-12 bg-[#FAFBF7] border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           {/* Header con Controles del Carrusel */}
           <motion.div 
@@ -181,13 +181,13 @@ export function HomeExecutiveShowcase({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6"
           >
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                 02 / UNIDADES QUIRÚRGICAS &amp; CLÍNICAS
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0D3D20]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
                 Especialidades Destacadas
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
@@ -201,7 +201,7 @@ export function HomeExecutiveShowcase({
                 type="button"
                 onClick={() => scrollContainer(servicesScrollRef, 'left')}
                 aria-label="Anterior especialidad"
-                className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
+                className="w-10 h-10 rounded-full bg-white hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -209,7 +209,7 @@ export function HomeExecutiveShowcase({
                 type="button"
                 onClick={() => scrollContainer(servicesScrollRef, 'right')}
                 aria-label="Siguiente especialidad"
-                className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
+                className="w-10 h-10 rounded-full bg-white hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -233,12 +233,12 @@ export function HomeExecutiveShowcase({
             ref={servicesScrollRef}
             tabIndex={0}
             aria-label="Carrusel de especialidades médicas"
-            className="flex gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 sm:gap-6 overflow-x-auto pb-2 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {VETERINARY_SERVICES.map((svc) => (
               <div
                 key={svc.id}
-                className="min-w-[280px] sm:min-w-[340px] max-w-[340px] snap-start bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
+                className="min-w-[280px] sm:min-w-[340px] max-w-[340px] snap-start bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
               >
                 <div>
                   <div className="relative h-48 w-full overflow-hidden bg-slate-100">
@@ -315,8 +315,8 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 3: PET SHOP GOURMET & NUTRICIÓN (Orden 3 - #petshop)
           ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-[#FAFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="py-8 sm:py-12 bg-white border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           {/* Header con Controles del Carrusel de Productos */}
           <motion.div 
@@ -324,13 +324,13 @@ export function HomeExecutiveShowcase({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6"
           >
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                 03 / PET SHOP GOURMET &amp; FARMACIA ESPECIALIZADA
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0D3D20]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
                 Nutrición Clínica &amp; Productos Estrella
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
@@ -343,7 +343,7 @@ export function HomeExecutiveShowcase({
                 type="button"
                 onClick={() => scrollContainer(productsScrollRef, 'left')}
                 aria-label="Anterior producto"
-                className="w-10 h-10 rounded-full bg-white hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
+                className="w-10 h-10 rounded-full bg-slate-50 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -351,7 +351,7 @@ export function HomeExecutiveShowcase({
                 type="button"
                 onClick={() => scrollContainer(productsScrollRef, 'right')}
                 aria-label="Siguiente producto"
-                className="w-10 h-10 rounded-full bg-white hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
+                className="w-10 h-10 rounded-full bg-slate-50 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -375,12 +375,12 @@ export function HomeExecutiveShowcase({
             ref={productsScrollRef}
             tabIndex={0}
             aria-label="Carrusel de productos Pet Shop Gourmet"
-            className="flex gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 sm:gap-6 overflow-x-auto pb-2 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {PET_PRODUCTS.map((prod) => (
               <div
                 key={prod.id}
-                className="min-w-[240px] sm:min-w-[280px] max-w-[280px] snap-start bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
+                className="min-w-[240px] sm:min-w-[280px] max-w-[280px] snap-start bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
               >
                 <div>
                   <div className="relative h-44 w-full overflow-hidden bg-slate-100">
@@ -421,7 +421,7 @@ export function HomeExecutiveShowcase({
                   </div>
                 </div>
 
-                <div className="p-4 pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                <div className="p-4 pt-2 border-t border-slate-200/70 flex items-center justify-between gap-2">
                   <div>
                     <span className="text-[9px] text-slate-400 block font-medium">Precio:</span>
                     <span className="text-sm sm:text-base font-black text-[#0D3D20]">
@@ -451,8 +451,8 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 4: CITAS & ACCESO RÁPIDO A URGENCIAS (Orden 4 - #citas)
           ========================================================================= */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="py-8 sm:py-12 bg-[#FAFBF7] border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -464,7 +464,7 @@ export function HomeExecutiveShowcase({
             <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
               04 / ATENCIÓN MÉDICA INMEDIATA &amp; CALCULADORA WSAVA
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0D3D20]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
               Reserva de Consultas &amp; Triage en Vivo
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
@@ -473,14 +473,14 @@ export function HomeExecutiveShowcase({
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.55 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
           >
             {/* Card 1: Urgencias 24/7 */}
-            <div className="p-7 rounded-3xl bg-[#0D3D20] text-white flex flex-col justify-between shadow-xl relative overflow-hidden space-y-6">
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#0D3D20] text-white flex flex-col justify-between shadow-lg relative overflow-hidden space-y-5">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-400/30">
                   <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
@@ -508,7 +508,7 @@ export function HomeExecutiveShowcase({
             </div>
 
             {/* Card 2: Agendamiento en Línea */}
-            <div className="p-7 rounded-3xl bg-white border border-slate-200/90 shadow-md flex flex-col justify-between space-y-6">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between space-y-5">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#1A6B38] text-[10px] font-bold border border-emerald-200">
                   <Calendar className="w-3.5 h-3.5" />
@@ -528,7 +528,7 @@ export function HomeExecutiveShowcase({
                   e.preventDefault();
                   onNavigate('citas', 'agendar');
                 }}
-                className="w-full py-3 px-4 rounded-2xl bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
+                className="w-full py-3 px-4 rounded-2xl bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
               >
                 <span>Agendar en Sistema</span>
                 <ArrowRight className="w-4 h-4" />
@@ -536,7 +536,7 @@ export function HomeExecutiveShowcase({
             </div>
 
             {/* Card 3: Calculadora WSAVA */}
-            <div className="p-7 rounded-3xl bg-gradient-to-br from-emerald-50 to-teal-50/40 border border-emerald-200/80 shadow-md flex flex-col justify-between space-y-6">
+            <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-200/80 shadow-xs flex flex-col justify-between space-y-5">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-emerald-800 text-[10px] font-bold border border-emerald-200 shadow-xs">
                   <Calculator className="w-3.5 h-3.5 text-emerald-600" />

@@ -124,7 +124,7 @@ export default function HomePage() {
       />
 
       {/* Main Container - Full-bleed top so hero banners sit seamlessly under the header */}
-      <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1">
+      <main className="overflow-x-hidden w-full pb-20 md:pb-0 flex-1">
         <AnimatePresence mode="wait">
           {/* TAB 1: INICIO */}
           {activeTab === 'inicio' && (

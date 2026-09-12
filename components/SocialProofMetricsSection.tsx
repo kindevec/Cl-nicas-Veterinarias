@@ -78,7 +78,7 @@ export function SocialProofMetricsSection() {
     <section id="social-proof" className="relative overflow-hidden">
       
       {/* 1. FOREST GREEN STATS RIBBON (Directly inspired by reference image) */}
-      <div className="bg-[#0D3D20] text-white py-6 sm:py-8 border-t border-emerald-800/40">
+      <div className="bg-[#0D3D20] text-white py-5 sm:py-6 border-t border-emerald-800/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-emerald-800/60">
             {METRICS.map((metric, idx) => {
@@ -111,35 +111,35 @@ export function SocialProofMetricsSection() {
       </div>
 
       {/* 2. POETIC EDITORIAL SECTION WITH CUTE CORGIS (Reference PetFood Quote block) */}
-      <div className="py-16 sm:py-20 bg-white">
+      <div className="py-8 sm:py-10 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-14"
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.55 }}
+            className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-10"
           >
             
             {/* Adorable Happy Dogs Image */}
-            <div className="relative w-64 sm:w-72 h-64 sm:h-72 shrink-0 rounded-3xl overflow-hidden shadow-xl border-4 border-[#FAFBF7]">
+            <div className="relative w-56 sm:w-64 h-56 sm:h-64 shrink-0 rounded-3xl overflow-hidden shadow-md border-4 border-[#FAFBF7]">
               <Image
                 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80"
                 alt="Perritos felices jugando juntos"
                 fill
                 className="object-cover object-center"
-                sizes="(max-width: 768px) 280px, 320px"
+                sizes="(max-width: 768px) 240px, 280px"
                 referrerPolicy="no-referrer"
               />
             </div>
 
             {/* Poetic Inspirational Text */}
-            <div className="space-y-4 text-center md:text-left max-w-lg">
+            <div className="space-y-3 text-center md:text-left max-w-lg">
               <div className="inline-block text-[#1A6B38]">
-                <Quote className="w-8 h-8 rotate-180 opacity-80" />
+                <Quote className="w-7 h-7 rotate-180 opacity-80" />
               </div>
 
-              <blockquote className="text-lg sm:text-xl font-medium text-slate-800 italic leading-relaxed">
+              <blockquote className="text-base sm:text-lg font-medium text-slate-800 italic leading-relaxed">
                 &ldquo;Desde nuestro corazón hasta su bienestar: ciencia médica de alta precisión, cuidado Fear-Free sin dolor y nutrición pura para que vivan más años llenos de vitalidad.&rdquo;
               </blockquote>
 
@@ -154,15 +154,15 @@ export function SocialProofMetricsSection() {
       </div>
 
       {/* 3. TESTIMONIOS REALES DE TUTORES (Open Breathable Layout, NO Box-in-Box) */}
-      <div className="py-12 pb-20 bg-[#FAFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="py-8 sm:py-10 bg-[#FAFBF7] border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto space-y-2"
+            className="text-center max-w-2xl mx-auto space-y-1"
           >
             <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Casos Reales</span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
@@ -170,20 +170,20 @@ export function SocialProofMetricsSection() {
             </h3>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {TESTIMONIALS.map((test, idx) => (
               <motion.div
                 key={test.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.55, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
               >
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   <div className="flex text-amber-400 gap-1">
                     {[...Array(test.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 stroke-amber-400" />
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
                     ))}
                   </div>
 
@@ -196,8 +196,8 @@ export function SocialProofMetricsSection() {
                   </span>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 mt-5 flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-slate-200">
+                <div className="pt-3.5 border-t border-slate-100 mt-4 flex items-center gap-3">
+                  <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-slate-200">
                     <Image
                       src={test.avatar}
                       alt={test.patientName}
