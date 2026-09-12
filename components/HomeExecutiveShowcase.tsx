@@ -175,7 +175,7 @@ export function HomeExecutiveShowcase({
       <section className="py-8 sm:py-12 bg-[#FAFBF7] border-t border-slate-200/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
-          {/* Header con Controles del Carrusel */}
+          {/* Header con Enlace de Navegación */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,117 +195,119 @@ export function HomeExecutiveShowcase({
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              {/* Controles de navegación del carrusel */}
-              <button
-                type="button"
-                onClick={() => scrollContainer(servicesScrollRef, 'left')}
-                aria-label="Anterior especialidad"
-                className="w-10 h-10 rounded-full bg-white hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollContainer(servicesScrollRef, 'right')}
-                aria-label="Siguiente especialidad"
-                className="w-10 h-10 rounded-full bg-white hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              <a
-                href="#servicios"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('servicios');
-                }}
-                className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer ml-2"
-              >
-                <span>Ver Todas</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+            <a
+              href="#servicios"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('servicios');
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer shrink-0"
+            >
+              <span>Ver Todas</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </motion.div>
 
-          {/* Carrusel Horizontal de Especialidades */}
-          <div 
-            ref={servicesScrollRef}
-            tabIndex={0}
-            aria-label="Carrusel de especialidades médicas"
-            className="flex gap-5 sm:gap-6 overflow-x-auto pb-2 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {VETERINARY_SERVICES.map((svc) => (
-              <div
-                key={svc.id}
-                className="min-w-[280px] sm:min-w-[340px] max-w-[340px] snap-start bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
-              >
-                <div>
-                  <div className="relative h-48 w-full overflow-hidden bg-slate-100">
-                    {svc.image && (
-                      <Image
-                        src={svc.image}
-                        alt={svc.name}
-                        fill
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        sizes="340px"
-                        referrerPolicy="no-referrer"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[#0D3D20] shadow-sm">
-                        {svc.category}
-                      </span>
-                      {svc.available247 && (
-                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-red-500 text-white shadow-sm flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                          24/7
-                        </span>
-                      )}
-                    </div>
+          {/* Carrusel Horizontal de Especialidades con Controles en los Costados */}
+          <div className="relative group">
+            {/* Botón Lateral Izquierdo */}
+            <button
+              type="button"
+              onClick={() => scrollContainer(servicesScrollRef, 'left')}
+              aria-label="Anterior especialidad"
+              className="absolute left-1 sm:-left-4 lg:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-slate-700 hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+            </button>
 
-                    <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[11px] text-white">
-                      <span className="font-semibold truncate max-w-[200px] drop-shadow-xs">{svc.doctorInCharge}</span>
-                      <span className="px-2 py-0.5 rounded-full bg-black/40 text-emerald-300 font-mono text-[10px] font-bold">
-                        {svc.duration}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 space-y-2">
-                    <h3 className="text-base font-bold text-slate-900 group-hover:text-[#1A6B38] transition-colors line-clamp-2 leading-snug">
-                      {svc.name}
-                    </h3>
-                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
-                      {svc.shortDescription}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-5 pt-3 border-t border-slate-200/80 flex items-center justify-between">
+            <div 
+              ref={servicesScrollRef}
+              tabIndex={0}
+              aria-label="Carrusel de especialidades médicas"
+              className="flex gap-5 sm:gap-6 overflow-x-auto pb-2 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {VETERINARY_SERVICES.map((svc) => (
+                <div
+                  key={svc.id}
+                  className="min-w-[280px] sm:min-w-[340px] max-w-[340px] snap-start bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
+                >
                   <div>
-                    <span className="text-[10px] text-slate-400 block font-medium">Inversión Estimada:</span>
-                    <span className="text-base font-black text-[#0D3D20]">
-                      {formatUSD(svc.priceEstimate)}
-                    </span>
+                    <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                      {svc.image && (
+                        <Image
+                          src={svc.image}
+                          alt={svc.name}
+                          fill
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                          sizes="340px"
+                          referrerPolicy="no-referrer"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                        <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[#0D3D20] shadow-sm">
+                          {svc.category}
+                        </span>
+                        {svc.available247 && (
+                          <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-red-500 text-white shadow-sm flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                            24/7
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[11px] text-white">
+                        <span className="font-semibold truncate max-w-[200px] drop-shadow-xs">{svc.doctorInCharge}</span>
+                        <span className="px-2 py-0.5 rounded-full bg-black/40 text-emerald-300 font-mono text-[10px] font-bold">
+                          {svc.duration}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-5 space-y-2">
+                      <h3 className="text-base font-bold text-slate-900 group-hover:text-[#1A6B38] transition-colors line-clamp-2 leading-snug">
+                        {svc.name}
+                      </h3>
+                      <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                        {svc.shortDescription}
+                      </p>
+                    </div>
                   </div>
 
-                  <a
-                    href="#citas"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onSelectServiceForBooking(svc.name);
-                    }}
-                    className="px-4 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
-                  >
-                    <span>Agendar</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+                  <div className="p-5 pt-3 border-t border-slate-200/80 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block font-medium">Inversión Estimada:</span>
+                      <span className="text-base font-black text-[#0D3D20]">
+                        {formatUSD(svc.priceEstimate)}
+                      </span>
+                    </div>
+
+                    <a
+                      href="#citas"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onSelectServiceForBooking(svc.name);
+                      }}
+                      className="px-4 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
+                    >
+                      <span>Agendar</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Botón Lateral Derecho */}
+            <button
+              type="button"
+              onClick={() => scrollContainer(servicesScrollRef, 'right')}
+              aria-label="Siguiente especialidad"
+              className="absolute right-1 sm:-right-4 lg:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-slate-700 hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+            </button>
           </div>
 
         </div>
@@ -318,7 +320,7 @@ export function HomeExecutiveShowcase({
       <section className="py-8 sm:py-12 bg-white border-t border-slate-200/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
-          {/* Header con Controles del Carrusel de Productos */}
+          {/* Header con Enlace a Pet Shop */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -338,110 +340,113 @@ export function HomeExecutiveShowcase({
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => scrollContainer(productsScrollRef, 'left')}
-                aria-label="Anterior producto"
-                className="w-10 h-10 rounded-full bg-slate-50 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollContainer(productsScrollRef, 'right')}
-                aria-label="Siguiente producto"
-                className="w-10 h-10 rounded-full bg-slate-50 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 border border-slate-200"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              <a
-                href="#petshop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('petshop');
-                }}
-                className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer ml-2"
-              >
-                <span>Catálogo Gourmet</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+            <a
+              href="#petshop"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('petshop');
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer shrink-0"
+            >
+              <span>Catálogo Gourmet</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </motion.div>
 
-          {/* Carrusel Horizontal de Productos */}
-          <div 
-            ref={productsScrollRef}
-            tabIndex={0}
-            aria-label="Carrusel de productos Pet Shop Gourmet"
-            className="flex gap-5 sm:gap-6 overflow-x-auto pb-2 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {PET_PRODUCTS.map((prod) => (
-              <div
-                key={prod.id}
-                className="min-w-[240px] sm:min-w-[280px] max-w-[280px] snap-start bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
-              >
-                <div>
-                  <div className="relative h-44 w-full overflow-hidden bg-slate-100">
-                    <Image
-                      src={prod.image}
-                      alt={prod.name}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                      sizes="280px"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          {/* Carrusel Horizontal de Productos con Controles en los Costados */}
+          <div className="relative group">
+            {/* Botón Lateral Izquierdo */}
+            <button
+              type="button"
+              onClick={() => scrollContainer(productsScrollRef, 'left')}
+              aria-label="Anterior producto"
+              className="absolute left-1 sm:-left-4 lg:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-slate-700 hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+            </button>
 
-                    <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
-                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[#0D3D20] shadow-sm">
-                        {prod.category}
-                      </span>
-                      {prod.formulaVeterinaria && (
-                        <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wider shadow-sm">
-                          Rx Médica
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="absolute bottom-2 left-2.5 flex items-center gap-1 text-amber-300 text-[10px] font-bold drop-shadow-sm">
-                      <Star className="w-3 h-3 fill-amber-400 stroke-amber-400" />
-                      <span>{prod.rating}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 space-y-1.5">
-                    <span className="text-[10px] font-bold text-[#1A6B38] uppercase tracking-wider block">
-                      {prod.brand}
-                    </span>
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#1A6B38] transition-colors line-clamp-2 leading-snug">
-                      {prod.name}
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="p-4 pt-2 border-t border-slate-200/70 flex items-center justify-between gap-2">
+            <div 
+              ref={productsScrollRef}
+              tabIndex={0}
+              aria-label="Carrusel de productos Pet Shop Gourmet"
+              className="flex gap-5 sm:gap-6 overflow-x-auto pb-2 pt-1 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {PET_PRODUCTS.map((prod) => (
+                <div
+                  key={prod.id}
+                  className="min-w-[240px] sm:min-w-[280px] max-w-[280px] snap-start bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shrink-0"
+                >
                   <div>
-                    <span className="text-[9px] text-slate-400 block font-medium">Precio:</span>
-                    <span className="text-sm sm:text-base font-black text-[#0D3D20]">
-                      {formatUSD(prod.price)}
-                    </span>
+                    <div className="relative h-44 w-full overflow-hidden bg-slate-100">
+                      <Image
+                        src={prod.image}
+                        alt={prod.name}
+                        fill
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        sizes="280px"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[#0D3D20] shadow-sm">
+                          {prod.category}
+                        </span>
+                        {prod.formulaVeterinaria && (
+                          <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wider shadow-sm">
+                            Rx Médica
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="absolute bottom-2 left-2.5 flex items-center gap-1 text-amber-300 text-[10px] font-bold drop-shadow-sm">
+                        <Star className="w-3 h-3 fill-amber-400 stroke-amber-400" />
+                        <span>{prod.rating}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 space-y-1.5">
+                      <span className="text-[10px] font-bold text-[#1A6B38] uppercase tracking-wider block">
+                        {prod.brand}
+                      </span>
+                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#1A6B38] transition-colors line-clamp-2 leading-snug">
+                        {prod.name}
+                      </h3>
+                    </div>
                   </div>
 
-                  <a
-                    href={buildWhatsAppUrl(`Cotizar Producto: ${prod.name}`, `(Precio de referencia: ${formatUSD(prod.price)})`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
-                    title={`Cotizar ${prod.name} por WhatsApp`}
-                  >
-                    <MessageCircle className="w-3 h-3 text-emerald-400" />
-                    <span>Cotizar</span>
-                  </a>
+                  <div className="p-4 pt-2 border-t border-slate-200/70 flex items-center justify-between gap-2">
+                    <div>
+                      <span className="text-[9px] text-slate-400 block font-medium">Precio:</span>
+                      <span className="text-sm sm:text-base font-black text-[#0D3D20]">
+                        {formatUSD(prod.price)}
+                      </span>
+                    </div>
+
+                    <a
+                      href={buildWhatsAppUrl(`Cotizar Producto: ${prod.name}`, `(Precio de referencia: ${formatUSD(prod.price)})`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                      title={`Cotizar ${prod.name} por WhatsApp`}
+                    >
+                      <MessageCircle className="w-3 h-3 text-emerald-400" />
+                      <span>Cotizar</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Botón Lateral Derecho */}
+            <button
+              type="button"
+              onClick={() => scrollContainer(productsScrollRef, 'right')}
+              aria-label="Siguiente producto"
+              className="absolute right-1 sm:-right-4 lg:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-slate-700 hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+            </button>
           </div>
 
         </div>
