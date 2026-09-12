@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Background Gradient: Rich Clinical Emerald AOVET -->
+    <!-- Background Gradient: Rich Clinical Emerald VetCare -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0D3D20" />
       <stop offset="50%" stop-color="#1A6B38" />

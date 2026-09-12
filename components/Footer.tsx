@@ -17,10 +17,9 @@ import { BrandLogo } from './BrandLogo';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
-  onOpenAdmin: () => void;
 }
 
-export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
+export function Footer({ onNavigate }: FooterProps) {
   const [emailInput, setEmailInput] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -50,7 +49,7 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
             </div>
 
             <p className="text-xs text-emerald-100/80 max-w-sm leading-relaxed">
-              Hospital Veterinario Quirúrgico de Referencia con atención ininterrumpida de urgencias 24/7, unidad de cuidados intensivos, quirófano estéril AOVET y nutrición biológica de grado médico.
+              Hospital Veterinario Quirúrgico de Referencia con atención ininterrumpida de urgencias 24/7, unidad de cuidados intensivos, quirófano estéril de alta gama y nutrición biológica de grado médico.
             </p>
 
             <div className="space-y-2 text-xs text-emerald-100/90 pt-2">
@@ -90,7 +89,7 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
               </li>
               <li>
                 <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer">
-                  Quirófano AOVET &amp; Ortopedia
+                  Quirófano Quirúrgico &amp; Ortopedia
                 </button>
               </li>
               <li>
@@ -138,10 +137,15 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
                 </button>
               </li>
               <li>
-                <button onClick={onOpenAdmin} className="hover:text-white flex items-center gap-1 cursor-pointer">
-                  <span>Acceso Backoffice Supabase</span>
-                  <ExternalLink className="w-3 h-3 text-emerald-400" />
-                </button>
+                <a
+                  href={buildWhatsAppUrl('Consulta Catálogo Gourmet')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white flex items-center gap-1 cursor-pointer text-emerald-300 font-semibold"
+                >
+                  <span>Pedir Asesoría Directa</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </li>
             </ul>
           </div>

@@ -23,7 +23,6 @@ import { PetProduct } from '@/lib/types';
 
 interface SmartNutritionCalculatorProps {
   onSelectServiceForBooking: (serviceName: string) => void;
-  onAddToCart?: (product: PetProduct) => void;
 }
 
 type PetType = 'perro' | 'gato' | 'exotico';
@@ -31,7 +30,7 @@ type AgeStage = 'cachorro' | 'adulto' | 'senior';
 type ActivityLevel = 'sedentario' | 'moderado' | 'activo';
 type HealthCondition = 'optimo' | 'renal' | 'gastro' | 'dermatologico' | 'articular';
 
-export function SmartNutritionCalculator({ onSelectServiceForBooking, onAddToCart }: SmartNutritionCalculatorProps) {
+export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNutritionCalculatorProps) {
   const [petType, setPetType] = useState<PetType>('perro');
   const [weightKg, setWeightKg] = useState<number>(14);
   const [ageStage, setAgeStage] = useState<AgeStage>('adulto');

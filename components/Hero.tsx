@@ -92,7 +92,7 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
-              Atención médica hospitalaria 24 horas, quirófano estéril AOVET, protocolos sin estrés Fear-Free™ y nutrición biológica personalizada.
+              Atención médica hospitalaria 24 horas, quirófano estéril de alta tecnología, protocolos sin estrés Fear-Free™ y nutrición biológica personalizada.
             </p>
 
             {/* Search Bar (Zero Box-in-Box - Direct Floating Input & Button like PetFood) */}
@@ -130,7 +130,7 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
                 <div className="w-7 h-7 rounded-full bg-emerald-100/80 text-[#1A6B38] flex items-center justify-center">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
-                <span>Veterinarios AOVET</span>
+                <span>Especialistas Certificados</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full bg-amber-100/80 text-amber-700 flex items-center justify-center">

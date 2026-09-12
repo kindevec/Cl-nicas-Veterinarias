@@ -2,19 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ShoppingBag, Database, PhoneCall, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
-import { buildWhatsAppUrl } from '@/lib/utils';
 
 interface HeaderProps {
-  cartCount: number;
-  onOpenCart: () => void;
-  onOpenAdmin: () => void;
   activeSection: string;
   onNavigate: (sectionId: string) => void;
 }
 
-export function Header({ cartCount, onOpenCart, onOpenAdmin, activeSection, onNavigate }: HeaderProps) {
+export function Header({ activeSection, onNavigate }: HeaderProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -102,50 +98,11 @@ export function Header({ cartCount, onOpenCart, onOpenAdmin, activeSection, onNa
           })}
         </nav>
 
-        {/* Action Controls */}
+        {/* Action Controls - Solo CTA principal despejado */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Backoffice Button */}
-          <button
-            id="header-admin-btn"
-            onClick={onOpenAdmin}
-            title="Panel de Gestión Supabase"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-slate-600 hover:text-slate-900 text-xs font-semibold transition-colors cursor-pointer"
-          >
-            <Database className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="hidden xl:inline">Backoffice</span>
-          </button>
-
-          {/* Cart Drawer Trigger */}
-          <button
-            id="header-cart-btn"
-            onClick={onOpenCart}
-            className="relative p-2 rounded-full text-slate-700 hover:text-[#1A6B38] hover:bg-slate-100/60 transition-colors cursor-pointer"
-            aria-label="Abrir Carrito"
-          >
-            <ShoppingBag className="w-5 h-5 text-slate-700" />
-            {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-amber-500 text-white font-black text-[9px] flex items-center justify-center shadow-sm">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
-          {/* Direct WhatsApp Emergency Link */}
-          <a
-            id="header-emergency-call"
-            href={buildWhatsAppUrl('Urgencia Médica Inmediata')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold transition-all active:scale-95 cursor-pointer"
-          >
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-            <span>24/7 Urgencias</span>
-          </a>
-
-          {/* Primary Action Button */}
           <button
             onClick={() => onNavigate('citas')}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Agendar Cita</span>

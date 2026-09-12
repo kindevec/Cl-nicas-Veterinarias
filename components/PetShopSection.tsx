@@ -4,27 +4,21 @@ import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { 
-  ShoppingBag, 
   Search, 
   Sparkles, 
-  ShieldCheck, 
-  Check, 
-  Plus, 
-  Filter, 
   Star,
   Truck,
   Shield,
   RotateCcw,
   Headphones,
-  ArrowRight
+  ArrowRight,
+  MessageCircle
 } from 'lucide-react';
-import { PetProduct, ProductCategory, PetType } from '@/lib/types';
+import { PetProduct, ProductCategory } from '@/lib/types';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 
 interface PetShopSectionProps {
   products: PetProduct[];
-  onAddToCart: (product: PetProduct) => void;
-  onOpenCart: () => void;
 }
 
 const CATEGORIES: { id: ProductCategory; label: string }[] = [
@@ -35,10 +29,9 @@ const CATEGORIES: { id: ProductCategory; label: string }[] = [
   { id: 'accesorios', label: 'Accesorios Médicos' },
 ];
 
-export function PetShopSection({ products, onAddToCart, onOpenCart }: PetShopSectionProps) {
+export function PetShopSection({ products }: PetShopSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('todos');
   const [searchQuery, setSearchQuery] = useState('');
-  const [addedProductId, setAddedProductId] = useState<string | null>(null);
 
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
@@ -51,14 +44,6 @@ export function PetShopSection({ products, onAddToCart, onOpenCart }: PetShopSec
       return matchCategory && matchSearch;
     });
   }, [products, selectedCategory, searchQuery]);
-
-  const handleAdd = (product: PetProduct) => {
-    onAddToCart(product);
-    setAddedProductId(product.id);
-    setTimeout(() => {
-      setAddedProductId(null);
-    }, 1200);
-  };
 
   return (
     <div className="w-full">
@@ -122,31 +107,22 @@ export function PetShopSection({ products, onAddToCart, onOpenCart }: PetShopSec
             </div>
 
             <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-              <div className="relative w-full md:w-72">
+              <div className="relative w-full md:w-80">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar producto o marca..."
-                  className="w-full pl-9 pr-4 py-2 rounded-full bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-emerald-500"
+                  className="w-full pl-9 pr-4 py-2.5 rounded-full bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 shadow-xs"
                 />
               </div>
-
-              <button
-                onClick={onOpenCart}
-                className="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-bold shadow-xs hover:bg-slate-50 transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer"
-              >
-                <ShoppingBag className="w-4 h-4 text-[#1A6B38]" />
-                <span>Ver Carrito</span>
-              </button>
             </div>
           </div>
 
           {/* Product Grid (Like Best Seller in PetFood reference) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {filteredProducts.map((product) => {
-              const isAdded = addedProductId === product.id;
               return (
                 <div
                   key={product.id}
@@ -182,23 +158,22 @@ export function PetShopSection({ products, onAddToCart, onOpenCart }: PetShopSec
                     </div>
                   </div>
 
-                  {/* Price and Cart Button (Minimalist like PetFood reference) */}
-                  <div className="pt-3 border-t border-slate-100 mt-3 flex items-center justify-between">
+                  {/* Price and Direct WhatsApp Quote Link (Demo Kindev) */}
+                  <div className="pt-3 border-t border-slate-100 mt-3 flex items-center justify-between gap-2">
                     <span className="text-sm sm:text-base font-extrabold text-[#0D3D20]">
                       {formatUSD(product.price)}
                     </span>
 
-                    <button
-                      onClick={() => handleAdd(product)}
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-xs ${
-                        isAdded
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-[#0D3D20] hover:bg-[#1A6B38] text-white hover:scale-105'
-                      }`}
-                      aria-label="Añadir al carrito"
+                    <a
+                      href={buildWhatsAppUrl(`Cotizar Producto: ${product.name}`, `(Precio referencia: ${formatUSD(product.price)})`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                      title={`Cotizar ${product.name} por WhatsApp`}
                     >
-                      {isAdded ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
-                    </button>
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Cotizar</span>
+                    </a>
                   </div>
                 </div>
               );

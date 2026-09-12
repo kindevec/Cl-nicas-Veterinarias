@@ -57,7 +57,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Especialidades Médicas, <span className="text-emerald-400">Quirófano AOVET</span> &amp; Diagnóstico 24/7
+              Especialidades Médicas, <span className="text-emerald-400">Quirófano Quirúrgico</span> &amp; Diagnóstico 24/7
             </h1>
 
             <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal">

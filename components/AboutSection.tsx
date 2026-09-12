@@ -11,9 +11,9 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
     {
       name: 'Dra. Valentina Morales, DVM',
       role: 'Directora Médica & Cirugía Especializada',
-      bio: 'Especialista en cirugía ortopédica y traumatología AOVET con más de 12 años liderando intervenciones de alta complejidad.',
+      bio: 'Especialista en cirugía ortopédica y traumatología avanzada con más de 12 años liderando intervenciones de alta complejidad.',
       image: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=800&q=80',
-      badge: 'Jefa de Quirófano AOVET'
+      badge: 'Jefa de Cirugía Avanzada'
     },
     {
       name: 'Dr. Carlos Mendoza, MSc',
@@ -93,7 +93,7 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
               </div>
 
               <p className="text-sm text-slate-600 leading-relaxed">
-                Combinamos equipamiento hospitalario de última generación con un enfoque compasivo centrado en la tranquilidad del tutor y el paciente. Desde cirugías ortopédicas AOVET hasta planes nutricionales gourmet personalizados, cada intervención está sustentada en medicina basada en evidencia.
+                Combinamos equipamiento hospitalario de última generación con un enfoque compasivo centrado en la tranquilidad del tutor y el paciente. Desde cirugías ortopédicas de alta complejidad hasta planes nutricionales gourmet personalizados, cada intervención está sustentada en medicina basada en evidencia.
               </p>
 
               <div className="space-y-2.5 text-xs text-slate-700 font-semibold">
@@ -153,7 +153,7 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                 </div>
 
                 <div className="pt-2 border-t border-emerald-800/60 text-[10px] font-bold text-amber-300">
-                  AOVET Certificado
+                  Quirófano Certificado
                 </div>
               </div>
 

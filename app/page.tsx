@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { Header } from '@/components/Header';
@@ -12,98 +12,25 @@ import { SmartNutritionCalculator } from '@/components/SmartNutritionCalculator'
 import { PetShopSection } from '@/components/PetShopSection';
 import { SocialProofMetricsSection } from '@/components/SocialProofMetricsSection';
 import { AppointmentScheduler } from '@/components/AppointmentScheduler';
-import { CartDrawer } from '@/components/CartDrawer';
-import { AdminBackofficeModal } from '@/components/AdminBackofficeModal';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
 import { Footer } from '@/components/Footer';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { 
-  CartItem, 
   PetProduct, 
-  Appointment, 
-  Order, 
-  MedicalRecordFile 
+  Appointment 
 } from '@/lib/types';
 import { 
   getStoredAppointments, 
-  getStoredOrders, 
-  getStoredMedicalFiles, 
   getStoredProducts 
 } from '@/lib/supabaseClient';
 
-const CART_STORAGE_KEY = 'vetcare_cart_items_v1';
-
 export default function HomePage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const savedCart = localStorage.getItem(CART_STORAGE_KEY);
-        if (savedCart) return JSON.parse(savedCart);
-      } catch {
-        // ignore
-      }
-    }
-    return [];
-  });
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'inicio' | 'nosotros' | 'servicios' | 'petshop' | 'citas'>('inicio');
   const [bookingService, setBookingService] = useState<string | undefined>(undefined);
 
-  // Database / Backoffice State with lazy initialization
+  // Appointments State
   const [appointments, setAppointments] = useState<Appointment[]>(() => getStoredAppointments());
-  const [orders, setOrders] = useState<Order[]>(() => getStoredOrders());
-  const [medicalFiles, setMedicalFiles] = useState<MedicalRecordFile[]>(() => getStoredMedicalFiles());
   const [products] = useState<PetProduct[]>(() => getStoredProducts());
-
-  // Save Cart Changes
-  useEffect(() => {
-    try {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
-    } catch {
-      // ignore
-    }
-  }, [cartItems]);
-
-  // Cart Handlers
-  const handleAddToCart = (product: PetProduct) => {
-    setCartItems((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prev, { product, quantity: 1 }];
-    });
-  };
-
-  const handleUpdateCartQuantity = (productId: string, delta: number) => {
-    setCartItems((prev) => {
-      return prev
-        .map((item) => {
-          if (item.product.id === productId) {
-            const newQty = item.quantity + delta;
-            return newQty > 0 ? { ...item, quantity: newQty } : null;
-          }
-          return item;
-        })
-        .filter(Boolean) as CartItem[];
-    });
-  };
-
-  const handleRemoveCartItem = (productId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
-  };
-
-  const handleClearCart = () => {
-    setCartItems([]);
-    try {
-      localStorage.removeItem(CART_STORAGE_KEY);
-    } catch {
-      // ignore
-    }
-  };
 
   // Navigation Handler across the 5 Corporate Tabs
   const handleNavigate = (tabId: string) => {
@@ -133,15 +60,10 @@ export default function HomePage() {
     }
   };
 
-  const totalCartCount = cartItems.reduce((acc, it) => acc + it.quantity, 0);
-
   return (
     <div className="min-h-screen bg-[#FAFBF7] text-slate-900 flex flex-col selection:bg-emerald-100 selection:text-emerald-900 font-sans">
       {/* 1. Transparent Header that Materializes Smoothly with Scroll (SmartLegal Standard) */}
       <Header
-        cartCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
-        onOpenAdmin={() => setIsAdminOpen(true)}
         activeSection={activeTab}
         onNavigate={handleNavigate}
       />
@@ -169,7 +91,7 @@ export default function HomePage() {
                       Unidades Clínicas de Referencia
                     </span>
                     <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
-                      Quirófano estéril AOVET, UCI 24 horas y diagnóstico por imagen
+                      Quirófano estéril de alta tecnología, UCI 24 horas y diagnóstico por imagen
                     </h3>
                     <p className="text-slate-500 text-xs sm:text-sm max-w-xl">
                       Descubre nuestro abanico completo de especialidades médicas avanzadas para asegurar el bienestar de tu mascota.
@@ -222,11 +144,7 @@ export default function HomePage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
             >
-              <PetShopSection
-                products={products}
-                onAddToCart={handleAddToCart}
-                onOpenCart={() => setIsCartOpen(true)}
-              />
+              <PetShopSection products={products} />
             </motion.div>
           )}
 
@@ -278,7 +196,6 @@ export default function HomePage() {
 
               <SmartNutritionCalculator 
                 onSelectServiceForBooking={handleSelectServiceForBooking}
-                onAddToCart={handleAddToCart}
               />
               <AppointmentScheduler
                 initialService={bookingService}
@@ -289,28 +206,6 @@ export default function HomePage() {
         </AnimatePresence>
       </main>
 
-      {/* Slide-over Cart Drawer */}
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onUpdateQuantity={handleUpdateCartQuantity}
-        onRemoveItem={handleRemoveCartItem}
-        onClearCart={handleClearCart}
-      />
-
-      {/* Supabase Backoffice Administration Modal */}
-      <AdminBackofficeModal
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        appointments={appointments}
-        orders={orders}
-        medicalFiles={medicalFiles}
-        onAppointmentsChange={setAppointments}
-        onOrdersChange={setOrders}
-        onMedicalFilesChange={setMedicalFiles}
-      />
-
       {/* Persistent Floating WhatsApp Emergency Button */}
       <WhatsAppEmergencyFloat />
 
@@ -318,14 +213,11 @@ export default function HomePage() {
       <BottomNav
         activeSection={activeTab}
         onNavigate={handleNavigate}
-        cartCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
       />
 
       {/* Kindev Official Footer */}
       <Footer
         onNavigate={handleNavigate}
-        onOpenAdmin={() => setIsAdminOpen(true)}
       />
     </div>
   );

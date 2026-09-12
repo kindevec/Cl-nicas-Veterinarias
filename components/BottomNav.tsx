@@ -6,16 +6,14 @@ import { Home, Users, Stethoscope, ShoppingBag, Calendar } from 'lucide-react';
 interface BottomNavProps {
   activeSection: string;
   onNavigate: (sectionId: string) => void;
-  cartCount: number;
-  onOpenCart: () => void;
 }
 
-export function BottomNav({ activeSection, onNavigate, cartCount, onOpenCart }: BottomNavProps) {
+export function BottomNav({ activeSection, onNavigate }: BottomNavProps) {
   const tabs = [
     { id: 'inicio', label: 'Inicio', icon: Home },
     { id: 'nosotros', label: 'Clínica', icon: Users },
     { id: 'servicios', label: 'Servicios', icon: Stethoscope },
-    { id: 'petshop', label: 'Pet Shop', icon: ShoppingBag, badge: cartCount },
+    { id: 'petshop', label: 'Pet Shop', icon: ShoppingBag },
     { id: 'citas', label: 'Citas', icon: Calendar },
   ];
 
@@ -41,11 +39,6 @@ export function BottomNav({ activeSection, onNavigate, cartCount, onOpenCart }: 
             >
               <div className="relative">
                 <Icon className={`w-5 h-5 mb-0.5 ${isActive ? 'text-[#1A6B38]' : 'text-slate-500'} transition-transform`} />
-                {typeof tab.badge === 'number' && tab.badge > 0 && (
-                  <span className="absolute -top-1.5 -right-2 w-4 h-4 rounded-full bg-amber-500 text-white font-black text-[9px] flex items-center justify-center shadow-sm">
-                    {tab.badge}
-                  </span>
-                )}
               </div>
               <span className={`text-[10px] tracking-tight ${isActive ? 'font-bold text-[#0D3D20]' : 'font-medium'}`}>
                 {tab.label}
