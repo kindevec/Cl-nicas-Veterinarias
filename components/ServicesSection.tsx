@@ -58,35 +58,77 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
 
   return (
     <div className="w-full">
-      {/* 1. TOP HERO BANNER with Full-Bleed Background (SmartLegal Standard) */}
-      <section className="relative w-full min-h-[460px] sm:min-h-[500px] pt-32 sm:pt-36 pb-14 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
-        <div className="absolute inset-0 pointer-events-none opacity-25">
-          <Image
-            src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=2000&q=80"
-            alt="Laboratorio e imagenología de alta resolución VetCare"
-            fill
-            priority
-            className="object-cover object-center"
-            referrerPolicy="no-referrer"
-          />
+            {/* 1. TOP HERO BANNER with Photographic Canvas & Modern Transition */}
+      <section className="relative w-full min-h-[480px] sm:min-h-[520px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[58%] h-full">
+            <Image
+              src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1600&q=85"
+              alt="Laboratorio e imagenología de alta resolución VetCare"
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] via-[#0D3D20]/75 via-25% to-transparent hidden lg:block" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] via-[#0D3D20]/80 via-40% to-transparent lg:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0D3D20]/70 via-transparent to-[#0D3D20]/90" />
+          </div>
+
+          <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[45%] bg-[#0D3D20]" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] via-[#0D3D20]/90 to-[#0D3D20]/40" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl space-y-4"
-          >
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Especialidades Médicas, <span className="text-emerald-400">Quirófano Quirúrgico</span> &amp; Diagnóstico 24/7
-            </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-8 space-y-4 text-left"
+            >
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
+                Especialidades Médicas, <span className="text-emerald-400">Quirófano Quirúrgico</span> &amp; Diagnóstico 24/7
+              </h1>
 
-            <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
-              Infraestructura hospitalaria con estándares internacionales, unidad de cuidados intensivos continua y especialistas certificados en cada disciplina.
-            </p>
-          </motion.div>
+              <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
+                Infraestructura hospitalaria con estándares internacionales, unidad de cuidados intensivos continua y especialistas certificados en cada disciplina.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
+                  ⚡ Laboratorio IDEXX (30 min)
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
+                  🩺 Ecografía Doppler Color 3D
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
+                  🏥 Unidad de Triage Continuo
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Floating Glassmorphism Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="hidden lg:flex lg:col-span-4 justify-end"
+            >
+              <div className="p-5 rounded-3xl bg-[#0D3D20]/75 backdrop-blur-xl border border-white/20 text-white max-w-xs space-y-3 shadow-2xl">
+                <div className="text-xs font-bold uppercase tracking-wider text-emerald-300 font-mono">
+                  Diagnóstico Inmediato
+                </div>
+                <p className="text-xs text-emerald-100/85 leading-relaxed">
+                  Resultados bioquímicos, hematología completa y gases sanguíneos procesados in-house durante la atención médica.
+                </p>
+                <div className="pt-2 border-t border-white/10 text-[11px] text-amber-300 font-bold">
+                  Dr. Carlos Mendoza • Cardiología &amp; UCI
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

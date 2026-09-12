@@ -47,35 +47,77 @@ export function PetShopSection({ products }: PetShopSectionProps) {
 
   return (
     <div className="w-full">
-      {/* 1. TOP HERO BANNER with Full-Bleed Background (SmartLegal Standard) */}
-      <section className="relative w-full min-h-[460px] sm:min-h-[500px] pt-32 sm:pt-36 pb-14 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
-        <div className="absolute inset-0 pointer-events-none opacity-30">
-          <Image
-            src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=2000&q=80"
-            alt="Nutrición gourmet para mascotas felices VetCare"
-            fill
-            priority
-            className="object-cover object-center"
-            referrerPolicy="no-referrer"
-          />
+            {/* 1. TOP HERO BANNER with Photographic Canvas & Modern Transition */}
+      <section className="relative w-full min-h-[480px] sm:min-h-[520px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[58%] h-full">
+            <Image
+              src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1600&q=85"
+              alt="Nutrición médica y alimentos gourmet para mascotas VetCare"
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] via-[#0D3D20]/75 via-25% to-transparent hidden lg:block" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] via-[#0D3D20]/80 via-40% to-transparent lg:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0D3D20]/70 via-transparent to-[#0D3D20]/90" />
+          </div>
+
+          <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[45%] bg-[#0D3D20]" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] via-[#0D3D20]/90 to-[#0D3D20]/40" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl space-y-4"
-          >
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Nutrición de Grado Médico &amp; <span className="text-amber-300">Farmacia Especializada</span>
-            </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-8 space-y-4 text-left"
+            >
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
+                Nutrición Médica, <span className="text-emerald-400">Dietas Prescritas</span> &amp; Pet Shop Gourmet
+              </h1>
 
-            <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
-              Fórmulas terapéuticas con respaldo clínico veterinario, nutracéuticos de alta biodisponibilidad y alimentación holística sin preservantes artificiales.
-            </p>
-          </motion.div>
+              <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
+                Alimentación biológica super premium, fármacos veterinarios regulados, nutracéuticos y accesorios ergonómicos certificados para el bienestar integral.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-amber-300">
+                  🥩 Proteína Hidrolizada Grado A
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-amber-300">
+                  🌾 Cero Gluten &amp; Colorantes
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-amber-300">
+                  🚚 Envío Express a Domicilio
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Floating Glassmorphism Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="hidden lg:flex lg:col-span-4 justify-end"
+            >
+              <div className="p-5 rounded-3xl bg-[#0D3D20]/75 backdrop-blur-xl border border-white/20 text-white max-w-xs space-y-3 shadow-2xl">
+                <div className="text-xs font-bold uppercase tracking-wider text-amber-300 font-mono">
+                  Garantía Nutricional
+                </div>
+                <p className="text-xs text-emerald-100/85 leading-relaxed">
+                  Fórmulas avaladas por dietistas veterinarios con palatabilidad superior comprobada para pacientes exigentes.
+                </p>
+                <div className="pt-2 border-t border-white/10 text-[11px] text-emerald-300 font-bold">
+                  Dra. Sofía Rueda • Nutrición Clínica
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
