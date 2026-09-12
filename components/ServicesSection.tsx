@@ -107,6 +107,13 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
               </p>
             </motion.div>
         </div>
+
+        {/* Non-linear organic wave transition into white section */}
+        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none z-10 text-white">
+          <svg className="relative block w-full h-5 sm:h-8" viewBox="0 0 1200 40" preserveAspectRatio="none">
+            <path d="M0,15 C300,35 600,-5 900,22 C1050,32 1150,10 1200,18 L1200,40 L0,40 Z" fill="currentColor"></path>
+          </svg>
+        </div>
       </section>
 
       {/* 2. INTERACTIVE FEATURED SPOTLIGHT CAROUSEL */}

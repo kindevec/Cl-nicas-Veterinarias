@@ -119,10 +119,10 @@ export function HomeExecutiveShowcase({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-[#FAFBF7] rounded-3xl overflow-hidden shadow-xs hover:shadow-lg border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                className="bg-[#FAFBF7] rounded-[36px_16px_36px_16px] overflow-hidden shadow-xs hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 relative"
               >
                 <div>
-                  <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
+                  <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100 rounded-t-[32px]">
                     <Image
                       src={doc.image}
                       alt={doc.name}
@@ -168,11 +168,17 @@ export function HomeExecutiveShowcase({
         </div>
       </section>
 
+      {/* Non-linear wave transition Bloque 1 -> Bloque 2 */}
+      <div className="w-full overflow-hidden leading-none bg-white text-[#FAFBF7] pointer-events-none -mb-1">
+        <svg className="relative block w-full h-4 sm:h-7" viewBox="0 0 1200 40" preserveAspectRatio="none">
+          <path d="M0,0 C300,30 600,-5 900,22 C1050,32 1150,12 1200,18 L1200,40 L0,40 Z" fill="currentColor"></path>
+        </svg>
+      </div>
 
       {/* =========================================================================
           BLOQUE 2: ESPECIALIDADES MÉDICAS (Orden 2 - #servicios)
           ========================================================================= */}
-      <section className="py-8 sm:py-12 bg-[#FAFBF7] border-t border-slate-200/70">
+      <section className="py-8 sm:py-12 bg-[#FAFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           {/* Header con Enlace de Navegación */}
@@ -313,11 +319,17 @@ export function HomeExecutiveShowcase({
         </div>
       </section>
 
+      {/* Non-linear wave transition Bloque 2 -> Bloque 3 */}
+      <div className="w-full overflow-hidden leading-none bg-[#FAFBF7] text-white pointer-events-none -mb-1">
+        <svg className="relative block w-full h-4 sm:h-7" viewBox="0 0 1200 40" preserveAspectRatio="none">
+          <path d="M0,20 C350,45 650,-10 950,25 C1080,40 1150,15 1200,20 L1200,40 L0,40 Z" fill="currentColor"></path>
+        </svg>
+      </div>
 
       {/* =========================================================================
           BLOQUE 3: PET SHOP GOURMET & NUTRICIÓN (Orden 3 - #petshop)
           ========================================================================= */}
-      <section className="py-8 sm:py-12 bg-white border-t border-slate-200/70">
+      <section className="py-8 sm:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           {/* Header con Enlace a Pet Shop */}
@@ -452,11 +464,17 @@ export function HomeExecutiveShowcase({
         </div>
       </section>
 
+      {/* Non-linear wave transition Bloque 3 -> Bloque 4 */}
+      <div className="w-full overflow-hidden leading-none bg-white text-[#FAFBF7] pointer-events-none -mb-1">
+        <svg className="relative block w-full h-4 sm:h-7" viewBox="0 0 1200 40" preserveAspectRatio="none">
+          <path d="M0,0 C300,30 600,-5 900,22 C1050,32 1150,12 1200,18 L1200,40 L0,40 Z" fill="currentColor"></path>
+        </svg>
+      </div>
 
       {/* =========================================================================
           BLOQUE 4: CITAS & ACCESO RÁPIDO A URGENCIAS (Orden 4 - #citas)
           ========================================================================= */}
-      <section className="py-8 sm:py-12 bg-[#FAFBF7] border-t border-slate-200/70">
+      <section className="py-8 sm:py-12 bg-[#FAFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <motion.div 
@@ -485,8 +503,9 @@ export function HomeExecutiveShowcase({
             className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
           >
             {/* Card 1: Urgencias 24/7 */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#0D3D20] text-white flex flex-col justify-between shadow-lg relative overflow-hidden space-y-5">
-              <div className="space-y-3">
+            <div className="p-6 sm:p-7 rounded-[36px_16px_36px_16px] bg-[#0D3D20] text-white flex flex-col justify-between shadow-xl relative overflow-hidden space-y-5 group hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none" />
+              <div className="space-y-3 relative z-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-400/30">
                   <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
                   <span>URGENCIAS 24/7 EN VIVO</span>
@@ -499,12 +518,12 @@ export function HomeExecutiveShowcase({
                 </p>
               </div>
 
-              <div className="pt-2 space-y-2">
+              <div className="pt-2 space-y-2 relative z-10">
                 <a
                   href="https://wa.me/593991952889?text=Hola%20VetCare%2C%20tengo%20una%20URGENCIA%20M%C3%89DICA%20inmediata%20con%20mi%20mascota."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 px-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>Guardia WhatsApp 24h</span>
@@ -513,7 +532,7 @@ export function HomeExecutiveShowcase({
             </div>
 
             {/* Card 2: Agendamiento en Línea */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between space-y-5">
+            <div className="p-6 sm:p-7 rounded-[36px_16px_36px_16px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-5 hover:-translate-y-1">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#1A6B38] text-[10px] font-bold border border-emerald-200">
                   <Calendar className="w-3.5 h-3.5" />
@@ -533,7 +552,7 @@ export function HomeExecutiveShowcase({
                   e.preventDefault();
                   onNavigate('citas', 'agendar');
                 }}
-                className="w-full py-3 px-4 rounded-2xl bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
               >
                 <span>Agendar en Sistema</span>
                 <ArrowRight className="w-4 h-4" />
@@ -541,7 +560,7 @@ export function HomeExecutiveShowcase({
             </div>
 
             {/* Card 3: Calculadora WSAVA */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-200/80 shadow-xs flex flex-col justify-between space-y-5">
+            <div className="p-6 sm:p-7 rounded-[36px_16px_36px_16px] bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-5 hover:-translate-y-1">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-emerald-800 text-[10px] font-bold border border-emerald-200 shadow-xs">
                   <Calculator className="w-3.5 h-3.5 text-emerald-600" />
@@ -561,7 +580,7 @@ export function HomeExecutiveShowcase({
                   e.preventDefault();
                   onNavigate('citas', 'calculadora-nutricional');
                 }}
-                className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-slate-50 border border-emerald-300 text-[#0D3D20] font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-full bg-white hover:bg-slate-50 border border-emerald-300 text-[#0D3D20] font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
               >
                 <span>Calcular Nutrición</span>
                 <ArrowRight className="w-4 h-4 text-emerald-600" />

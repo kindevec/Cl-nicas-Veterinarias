@@ -77,9 +77,10 @@ export function SocialProofMetricsSection() {
   return (
     <section id="social-proof" className="relative overflow-hidden">
       
-      {/* 1. FOREST GREEN STATS RIBBON (Directly inspired by reference image) */}
-      <div className="bg-[#0D3D20] text-white py-5 sm:py-6 border-t border-emerald-800/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 1. FOREST GREEN STATS RIBBON with Soft Radial Glows */}
+      <div className="bg-[#0D3D20] text-white py-6 sm:py-8 border-t border-emerald-800/40 relative">
+        <div className="absolute top-0 left-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-emerald-800/60">
             {METRICS.map((metric, idx) => {
               const Icon = metric.icon;
@@ -90,9 +91,9 @@ export function SocialProofMetricsSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="flex items-center justify-center gap-3 pt-4 sm:pt-0 sm:px-4 text-center"
+                  className="flex items-center justify-center gap-3.5 pt-4 sm:pt-0 sm:px-4 text-center"
                 >
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-emerald-300 shrink-0">
+                  <div className="w-11 h-11 rounded-2xl bg-white/10 backdrop-blur-xs flex items-center justify-center text-emerald-300 border border-emerald-500/20 shrink-0 shadow-xs">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="text-left">
@@ -110,42 +111,95 @@ export function SocialProofMetricsSection() {
         </div>
       </div>
 
-      {/* 2. POETIC EDITORIAL SECTION WITH CUTE CORGIS (Reference PetFood Quote block) */}
-      <div className="py-8 sm:py-10 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. DYNAMIC NON-LINEAR BRAND TICKER RIBBON (Directly inspired by Starbucks Reference) */}
+      <div className="relative py-2.5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white overflow-hidden shadow-lg -rotate-1 scale-[1.03] z-20 border-y border-emerald-400/40 my-[-6px]">
+        <div className="animate-marquee font-mono text-xs font-black tracking-widest uppercase flex items-center gap-8 drop-shadow-xs">
+          <span>★ CIRUGÍA DE ALTA GAMA</span>
+          <span>•</span>
+          <span>UCI 24/7 EN TURNO</span>
+          <span>•</span>
+          <span>QUIRÓFANO ESTÉRIL CLASE 10,000</span>
+          <span>•</span>
+          <span>FEAR-FREE™ CERTIFIED</span>
+          <span>•</span>
+          <span>DIETAS BIOLÓGICAS GOURMET</span>
+          <span>•</span>
+          <span>IDEXX IN-HOUSE 15 MIN</span>
+          <span>•</span>
+          <span>CERO DOLOR MULTIMODAL</span>
+          <span>★</span>
+          <span>CIRUGÍA DE ALTA GAMA</span>
+          <span>•</span>
+          <span>UCI 24/7 EN TURNO</span>
+          <span>•</span>
+          <span>QUIRÓFANO ESTÉRIL CLASE 10,000</span>
+          <span>•</span>
+          <span>FEAR-FREE™ CERTIFIED</span>
+          <span>•</span>
+          <span>DIETAS BIOLÓGICAS GOURMET</span>
+          <span>•</span>
+          <span>IDEXX IN-HOUSE 15 MIN</span>
+          <span>•</span>
+          <span>CERO DOLOR MULTIMODAL</span>
+        </div>
+      </div>
+
+      {/* 3. FLUID ORGANIC WAVE TRANSITION INTO WHITE EDITORIAL SECTION */}
+      <div className="w-full overflow-hidden leading-none bg-[#0D3D20] text-white -mt-1 pointer-events-none">
+        <svg className="relative block w-full h-8 sm:h-12" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,85 380,-30 550,55 C720,140 920,20 1200,50 L1200,120 L0,120 Z" fill="currentColor"></path>
+        </svg>
+      </div>
+
+      {/* 4. POETIC EDITORIAL SECTION WITH ORGANIC ARCHED PHOTO (Dog Grooming Reference) */}
+      <div className="py-10 sm:py-14 bg-white relative overflow-hidden">
+        {/* Subtle decorative paw prints floating organically in background */}
+        <div className="absolute top-6 left-8 text-2xl text-emerald-900/5 select-none pointer-events-none -rotate-12">🐾</div>
+        <div className="absolute bottom-8 right-12 text-3xl text-emerald-900/5 select-none pointer-events-none rotate-45">🐾</div>
+        <div className="absolute top-1/2 right-1/4 text-xl text-emerald-900/5 select-none pointer-events-none 12">🐾</div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.55 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-10"
+            className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-12"
           >
             
-            {/* Adorable Happy Dogs Image */}
-            <div className="relative w-56 sm:w-64 h-56 sm:h-64 shrink-0 rounded-3xl overflow-hidden shadow-md border-4 border-[#FAFBF7]">
-              <Image
-                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80"
-                alt="Perritos felices jugando juntos"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 768px) 240px, 280px"
-                referrerPolicy="no-referrer"
-              />
+            {/* Non-Linear Arched Frame with Organic Backdrop Layer */}
+            <div className="relative w-56 sm:w-64 h-64 sm:h-72 shrink-0">
+              {/* Organic Offset Backdrop Silhouette */}
+              <div className="absolute inset-0 bg-emerald-100/70 rounded-t-full rounded-b-[40px] -rotate-3 scale-105 transition-transform group-hover:rotate-0" />
+              <div className="relative w-full h-full rounded-t-full rounded-b-[38px] overflow-hidden shadow-xl border-4 border-white">
+                <Image
+                  src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80"
+                  alt="Perritos felices jugando juntos"
+                  fill
+                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 240px, 280px"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              {/* Floating Paw Accent Badge */}
+              <div className="absolute -bottom-2 -right-2 w-10 h-10 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center text-lg shadow-md font-bold rotate-6 border-2 border-white">
+                🐾
+              </div>
             </div>
 
             {/* Poetic Inspirational Text */}
-            <div className="space-y-3 text-center md:text-left max-w-lg">
+            <div className="space-y-3.5 text-center md:text-left max-w-lg">
               <div className="inline-block text-[#1A6B38]">
-                <Quote className="w-7 h-7 rotate-180 opacity-80" />
+                <Quote className="w-8 h-8 rotate-180 opacity-80" />
               </div>
 
-              <blockquote className="text-base sm:text-lg font-medium text-slate-800 italic leading-relaxed">
+              <blockquote className="text-base sm:text-xl font-medium text-slate-800 italic leading-relaxed font-serif">
                 &ldquo;Desde nuestro corazón hasta su bienestar: ciencia médica de alta precisión, cuidado Fear-Free sin dolor y nutrición pura para que vivan más años llenos de vitalidad.&rdquo;
               </blockquote>
 
-              <p className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider flex items-center justify-center md:justify-start gap-1.5">
-                <Heart className="w-3.5 h-3.5 fill-[#1A6B38]" />
-                <span>Compromiso Ético &amp; Amor Animal • VetCare</span>
+              <p className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider flex items-center justify-center md:justify-start gap-1.5 pt-1">
+                <Heart className="w-4 h-4 fill-[#1A6B38]" />
+                <span>Compromiso Deontológico &amp; Amor Animal • VetCare</span>
               </p>
             </div>
 
@@ -153,8 +207,15 @@ export function SocialProofMetricsSection() {
         </div>
       </div>
 
-      {/* 3. TESTIMONIOS REALES DE TUTORES (Open Breathable Layout, NO Box-in-Box) */}
-      <div className="py-8 sm:py-10 bg-[#FAFBF7] border-t border-slate-100">
+      {/* 5. ORGANIC FLUID WAVE DIVIDER TRANSITIONING INTO TESTIMONIALS */}
+      <div className="w-full overflow-hidden leading-none bg-white text-[#FAFBF7] pointer-events-none">
+        <svg className="relative block w-full h-6 sm:h-10" viewBox="0 0 1200 60" preserveAspectRatio="none">
+          <path d="M0,0 C250,55 550,-10 800,45 C980,85 1100,20 1200,30 L1200,60 L0,60 Z" fill="currentColor"></path>
+        </svg>
+      </div>
+
+      {/* 6. TESTIMONIOS REALES CON DISEÑO ASIMÉTRICO ORGÁNICO */}
+      <div className="py-8 sm:py-12 bg-[#FAFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <motion.div 
@@ -164,9 +225,11 @@ export function SocialProofMetricsSection() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-2xl mx-auto space-y-1"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Casos Reales</span>
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              Historias Clínicas
+            </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
-              Historias de Familias que Confían en VetCare
+              Familias que Confían en VetCare
             </h3>
           </motion.div>
 
@@ -178,9 +241,12 @@ export function SocialProofMetricsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
+                className="bg-white rounded-[32px_16px_32px_16px] p-6 shadow-xs hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between relative group hover:-translate-y-1 overflow-hidden"
               >
-                <div className="space-y-2.5">
+                {/* Organic top corner colored accent */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-emerald-100/60 to-transparent rounded-bl-full pointer-events-none" />
+
+                <div className="space-y-3 relative z-10">
                   <div className="flex text-amber-400 gap-1">
                     {[...Array(test.rating)].map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
@@ -191,13 +257,13 @@ export function SocialProofMetricsSection() {
                     &ldquo;{test.quote}&rdquo;
                   </p>
 
-                  <span className="inline-block text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  <span className="inline-block text-[10px] font-extrabold text-[#1A6B38] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
                     {test.outcome}
                   </span>
                 </div>
 
-                <div className="pt-3.5 border-t border-slate-100 mt-4 flex items-center gap-3">
-                  <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-slate-200">
+                <div className="pt-4 border-t border-slate-100 mt-4 flex items-center gap-3 relative z-10">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-emerald-200 shadow-xs">
                     <Image
                       src={test.avatar}
                       alt={test.patientName}

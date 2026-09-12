@@ -98,6 +98,13 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
             </div>
           </motion.div>
       </div>
+
+      {/* Subtle organic bottom curve into stats */}
+      <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none z-10">
+        <svg className="relative block w-full h-4 sm:h-6 text-[#0D3D20]/60" viewBox="0 0 1200 30" preserveAspectRatio="none">
+          <path d="M0,0 C300,20 650,-5 900,18 C1050,28 1150,10 1200,15 L1200,30 L0,30 Z" fill="currentColor"></path>
+        </svg>
+      </div>
     </section>
   );
 }
