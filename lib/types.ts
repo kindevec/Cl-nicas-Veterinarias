@@ -23,6 +23,7 @@ export interface VeterinaryService {
   doctorSpecialty: string;
   iconName: string;
   available247: boolean;
+  image?: string;
 }
 
 export interface PetProduct {

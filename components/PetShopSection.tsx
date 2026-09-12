@@ -120,55 +120,69 @@ export function PetShopSection({ products }: PetShopSectionProps) {
             </div>
           </div>
 
-          {/* Product Grid (Like Best Seller in PetFood reference) */}
+          {/* Product Grid (Like Best Seller in PetFood reference - ZERO Box-in-Box, Full Edge-to-Edge Imagery) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {filteredProducts.map((product) => {
               return (
                 <div
                   key={product.id}
-                  className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
+                  className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
                 >
                   <div>
-                    {/* Product Image */}
-                    <div className="relative h-44 sm:h-52 w-full bg-[#FAFBF7] rounded-2xl overflow-hidden mb-3 p-3 flex items-center justify-center">
+                    {/* Full-bleed Edge-to-Edge Image Header (ZERO padding, touches all borders like Doctor cards) */}
+                    <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-100">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 640px) 50vw, 25vw"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         referrerPolicy="no-referrer"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
                       {product.badge && (
-                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[9px] font-bold">
+                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#0D3D20] text-[10px] font-extrabold shadow-sm">
                           {product.badge}
                         </span>
                       )}
+                      <span className="absolute bottom-2.5 left-3 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold">
+                        {product.brand}
+                      </span>
                     </div>
 
-                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug line-clamp-2">
-                      {product.name}
-                    </h4>
+                    {/* Content with clean typography */}
+                    <div className="p-4 sm:p-5 space-y-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug line-clamp-2 group-hover:text-[#1A6B38] transition-colors">
+                        {product.name}
+                      </h4>
 
-                    <div className="flex items-center gap-1 text-amber-500 text-[10px] mt-1">
-                      <Star className="w-3 h-3 fill-amber-400 stroke-amber-400" />
-                      <span className="font-bold text-slate-700">{product.rating}</span>
-                      <span className="text-slate-400">({product.reviewsCount})</span>
+                      <div className="flex items-center gap-1.5 text-amber-500 text-[11px]">
+                        <Star className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
+                        <span className="font-extrabold text-slate-800">{product.rating}</span>
+                        <span className="text-slate-400 font-normal">({product.reviewsCount})</span>
+                      </div>
+
+                      <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed font-normal pt-1">
+                        {product.description}
+                      </p>
                     </div>
                   </div>
 
                   {/* Price and Direct WhatsApp Quote Link (Demo Kindev) */}
-                  <div className="pt-3 border-t border-slate-100 mt-3 flex items-center justify-between gap-2">
-                    <span className="text-sm sm:text-base font-extrabold text-[#0D3D20]">
-                      {formatUSD(product.price)}
-                    </span>
+                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block font-medium">Inversión:</span>
+                      <span className="text-base sm:text-lg font-black text-[#0D3D20]">
+                        {formatUSD(product.price)}
+                      </span>
+                    </div>
 
                     <a
                       href={buildWhatsAppUrl(`Cotizar Producto: ${product.name}`, `(Precio referencia: ${formatUSD(product.price)})`)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                       title={`Cotizar ${product.name} por WhatsApp`}
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
