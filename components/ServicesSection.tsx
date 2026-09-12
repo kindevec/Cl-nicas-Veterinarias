@@ -101,7 +101,13 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       {/* 2. INTERACTIVE FEATURED SPOTLIGHT CAROUSEL */}
       <section className="py-12 bg-white border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="flex items-center justify-between">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-between"
+          >
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                 Especialidades Destacadas
@@ -128,10 +134,16 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Carousel Card Container */}
-          <div className="relative rounded-[32px] overflow-hidden bg-[#0D3D20] text-white shadow-xl min-h-[340px] sm:min-h-[380px] flex items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-[32px] overflow-hidden bg-[#0D3D20] text-white shadow-xl min-h-[340px] sm:min-h-[380px] flex items-center"
+          >
             <AnimatePresence mode="wait">
               {featuredServices.map((feat, index) => {
                 if (index !== currentSlide) return null;
@@ -251,7 +263,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -260,7 +272,13 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           
           {/* Header & Filter Pills */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-6"
+          >
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                 Catálogo Hospitalario Completo
@@ -286,13 +304,17 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Responsive Card Grid (Full Edge-to-Edge, Zero Box-in-Box) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredServices.map((svc) => (
-              <div
+            {filteredServices.map((svc, idx) => (
+              <motion.div
                 key={svc.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: (idx % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
@@ -384,7 +406,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 

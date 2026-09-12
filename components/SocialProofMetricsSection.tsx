@@ -84,7 +84,14 @@ export function SocialProofMetricsSection() {
             {METRICS.map((metric, idx) => {
               const Icon = metric.icon;
               return (
-                <div key={idx} className="flex items-center justify-center gap-3 pt-4 sm:pt-0 sm:px-4 text-center">
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="flex items-center justify-center gap-3 pt-4 sm:pt-0 sm:px-4 text-center"
+                >
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-emerald-300 shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
@@ -96,7 +103,7 @@ export function SocialProofMetricsSection() {
                       {metric.label}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -106,7 +113,13 @@ export function SocialProofMetricsSection() {
       {/* 2. POETIC EDITORIAL SECTION WITH CUTE CORGIS (Reference PetFood Quote block) */}
       <div className="py-16 sm:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-14">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-14"
+          >
             
             {/* Adorable Happy Dogs Image */}
             <div className="relative w-64 sm:w-72 h-64 sm:h-72 shrink-0 rounded-3xl overflow-hidden shadow-xl border-4 border-[#FAFBF7]">
@@ -136,7 +149,7 @@ export function SocialProofMetricsSection() {
               </p>
             </div>
 
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -144,17 +157,27 @@ export function SocialProofMetricsSection() {
       <div className="py-12 pb-20 bg-[#FAFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           
-          <div className="text-center max-w-2xl mx-auto space-y-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto space-y-2"
+          >
             <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Casos Reales</span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
               Historias de Familias que Confían en VetCare
             </h3>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((test) => (
-              <div
+            {TESTIMONIALS.map((test, idx) => (
+              <motion.div
                 key={test.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-white rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
               >
                 <div className="space-y-3">
@@ -188,7 +211,7 @@ export function SocialProofMetricsSection() {
                     <span className="text-[11px] text-slate-500 block">{test.tutorName} • {test.service}</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 

@@ -140,7 +140,13 @@ export default function HomePage() {
               
               {/* Quick Specialties CTA Strip */}
               <div className="py-12 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100 pt-8">
+                <motion.div 
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.55 }}
+                  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100 pt-8"
+                >
                   <div className="space-y-1 text-center md:text-left">
                     <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                       Unidades Clínicas de Referencia
@@ -163,7 +169,7 @@ export default function HomePage() {
                     <span>Ver Especialidades</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           )}
@@ -270,7 +276,13 @@ export default function HomePage() {
 
               {/* 2. Complementary WSAVA Clinical Nutrition Calculator */}
               <div id="calculadora-nutricional" className="py-16 bg-white border-t border-slate-200/80">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center space-y-2">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.5 }}
+                  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center space-y-2"
+                >
                   <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                     Herramienta Médica Complementaria
                   </span>
@@ -280,7 +292,7 @@ export default function HomePage() {
                   <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
                     Conoce el requerimiento calórico e hídrico exacto de tu mascota según especie, edad y condición antes de tu consulta médica.
                   </p>
-                </div>
+                </motion.div>
                 <SmartNutritionCalculator 
                   onSelectServiceForBooking={handleSelectServiceForBooking}
                 />

@@ -92,7 +92,13 @@ export function PetShopSection({ products }: PetShopSectionProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           {/* Controls Bar: Search & Category Pills */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row items-center justify-between gap-6"
+          >
             <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1">
               {CATEGORIES.map((cat) => (
                 <button
@@ -121,14 +127,18 @@ export function PetShopSection({ products }: PetShopSectionProps) {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Product Grid (Like Best Seller in PetFood reference - ZERO Box-in-Box, Full Edge-to-Edge Imagery) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {filteredProducts.map((product) => {
+            {filteredProducts.map((product, idx) => {
               return (
-                <div
+                <motion.div
                   key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.5, delay: (idx % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
                   className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
                 >
                   <div>
@@ -142,41 +152,44 @@ export function PetShopSection({ products }: PetShopSectionProps) {
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         referrerPolicy="no-referrer"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-
-                      {product.badge && (
-                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#0D3D20] text-[10px] font-extrabold shadow-sm">
-                          {product.badge}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                      
+                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-md text-[#0D3D20] shadow-sm">
+                          {product.category}
                         </span>
-                      )}
-                      <span className="absolute bottom-2.5 left-3 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold">
-                        {product.brand}
-                      </span>
-                    </div>
-
-                    {/* Content with clean typography */}
-                    <div className="p-4 sm:p-5 space-y-2">
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug line-clamp-2 group-hover:text-[#1A6B38] transition-colors">
-                        {product.name}
-                      </h4>
-
-                      <div className="flex items-center gap-1.5 text-amber-500 text-[11px]">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
-                        <span className="font-extrabold text-slate-800">{product.rating}</span>
-                        <span className="text-slate-400 font-normal">({product.reviewsCount})</span>
+                        {product.formulaVeterinaria && (
+                          <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wider shadow-sm">
+                            Rx Médica
+                          </span>
+                        )}
                       </div>
 
-                      <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed font-normal pt-1">
+                      <div className="absolute bottom-2 left-2.5 flex items-center gap-1 text-amber-300 text-[10px] font-bold drop-shadow-sm">
+                        <Star className="w-3 h-3 fill-amber-400 stroke-amber-400" />
+                        <span>{product.rating}</span>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="p-4 sm:p-5 space-y-1.5">
+                      <span className="text-[10px] font-bold text-[#1A6B38] uppercase tracking-wider block">
+                        {product.brand}
+                      </span>
+                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#1A6B38] transition-colors line-clamp-2 leading-snug">
+                        {product.name}
+                      </h3>
+                      <p className="text-[11px] text-slate-500 line-clamp-2 leading-tight pt-0.5">
                         {product.description}
                       </p>
                     </div>
                   </div>
 
-                  {/* Price and Direct WhatsApp Quote Link (Demo Kindev) */}
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                  {/* Price & Action Section */}
+                  <div className="p-4 sm:p-5 pt-0 flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
                     <div>
-                      <span className="text-[10px] text-slate-400 block font-medium">Inversión:</span>
-                      <span className="text-base sm:text-lg font-black text-[#0D3D20]">
+                      <span className="text-[9px] text-slate-400 block font-medium">Precio:</span>
+                      <span className="text-sm sm:text-base font-black text-[#0D3D20]">
                         {formatUSD(product.price)}
                       </span>
                     </div>
@@ -192,13 +205,19 @@ export function PetShopSection({ products }: PetShopSectionProps) {
                       <span>Cotizar</span>
                     </a>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {/* 3. SPECIAL OFFER 30% OFF BANNER (Full-Bleed Image: Top, Bottom & Left Edge without borders) */}
-          <div className="rounded-[36px] bg-[#0D3D20] text-white overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-12 min-h-[360px] relative">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="rounded-[36px] bg-[#0D3D20] text-white overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-12 min-h-[360px] relative"
+          >
             
             {/* Edge-to-edge Puppy Image covering top, bottom, and left without inner borders */}
             <div className="md:col-span-5 relative min-h-[280px] md:min-h-[380px] w-full overflow-hidden">
@@ -243,10 +262,16 @@ export function PetShopSection({ products }: PetShopSectionProps) {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* 4. VALUE PILLARS BAR (From PetFood reference footer) */}
-          <div className="py-6 border-y border-slate-200 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs font-semibold text-slate-700">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="py-6 border-y border-slate-200 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs font-semibold text-slate-700"
+          >
             <div className="flex items-center justify-center gap-2">
               <Truck className="w-4 h-4 text-[#1A6B38]" />
               <span>Envíos Rápidos en Quito</span>
@@ -263,7 +288,7 @@ export function PetShopSection({ products }: PetShopSectionProps) {
               <Headphones className="w-4 h-4 text-[#1A6B38]" />
               <span>Soporte Médico 24/7</span>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { 
   Clock, 
   MapPin, 
@@ -36,7 +37,13 @@ export function Footer({ onNavigate }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-7">
         
         {/* Main Grid - Space Optimized & Well Distributed */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-7 border-b border-emerald-800/40 items-start">
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.55 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-7 border-b border-emerald-800/40 items-start"
+        >
           
           {/* Col 1: Brand & Socials (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-3">
@@ -241,10 +248,16 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
         {/* Compact Horizontal Contact Bar (Zero Empty Space) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 py-3 px-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-emerald-100/90">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 py-3 px-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-emerald-100/90"
+        >
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 text-emerald-400 shrink-0" />
             <span className="truncate">24/7 Urgencias &amp; UCI Continua</span>
@@ -265,7 +278,7 @@ export function Footer({ onNavigate }: FooterProps) {
               kindevx@gmail.com
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Credits with Kindev Official Mandate (Ultra-Slim Single Row) */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-emerald-200/60 pt-0">

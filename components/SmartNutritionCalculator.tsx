@@ -103,7 +103,13 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Header Editorial */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto space-y-4"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#1A6B38] text-xs font-bold uppercase tracking-wider shadow-sm">
             <Calculator className="w-4 h-4 text-emerald-600" />
             <span>ALGORITMO BIOMÉTRICO VETERINARIO</span>
@@ -114,13 +120,19 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
             Basada en ecuaciones clínicas oficiales WSAVA (World Small Animal Veterinary Association) para calcular la energía metabólica exacta que tu mascota necesita.
           </p>
-        </div>
+        </motion.div>
 
         {/* Dual Column Calculator Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Controls Column (lg:col-span-7) */}
-          <div className="lg:col-span-7 rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-9 shadow-md space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-9 shadow-md space-y-8"
+          >
             
             {/* 1. Species selector */}
             <div className="space-y-3">
@@ -253,10 +265,16 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Results Column (lg:col-span-5) */}
-          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white border border-emerald-200 p-6 sm:p-9 shadow-lg space-y-7">
+          <motion.div 
+            initial={{ opacity: 0, x: 25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white border border-emerald-200 p-6 sm:p-9 shadow-lg space-y-7"
+          >
             <div>
               <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider font-mono">
                 Dictamen Nutricional Calculado
@@ -350,7 +368,7 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
               </a>
             </div>
 
-          </div>
+          </motion.div>
 
         </div>
 

@@ -137,7 +137,13 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* Editorial Section Header directly on Canvas */}
-        <div className="max-w-3xl space-y-3">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl space-y-3"
+        >
           <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono block">
             Atención Médica Inmediata &amp; Turnos Programados
           </span>
@@ -147,13 +153,19 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
             Estamos disponibles las 24 horas para urgencias críticas y consultas de especialidad médica en el sector financiero de Quito.
           </p>
-        </div>
+        </motion.div>
 
         {/* 2-Column Creative Canvas: Hub de Contacto & Agendamiento Fluido (Zero Box-in-Box) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* LEFT COLUMN: Official Hospital Contact Hub & 24/7 Emergency Triage (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             
             {/* 1. Emergency Live Triage Banner Card (High-Impact Emerald) */}
             <div className="rounded-[32px] bg-[#0D3D20] text-white p-7 sm:p-9 shadow-xl relative overflow-hidden space-y-5">
@@ -275,10 +287,16 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
               </p>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* RIGHT COLUMN: Fluid Appointment Canvas (7 cols - Zero Box-in-Box) */}
-          <div className="lg:col-span-7">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
+          >
             <AnimatePresence mode="wait">
               {!confirmedAppointment ? (
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -594,7 +612,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
 
         </div>
 
