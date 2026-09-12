@@ -23,29 +23,26 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
       id="hero" 
       className="relative w-full min-h-[480px] sm:min-h-[520px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white"
     >
-      {/* Modern Photographic Canvas with Seamless Transition */}
+      {/* Modern Photographic Canvas with Seamless Transition (Zero Dividing Lines) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Crisp, Vibrant Image on the right */}
-        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[58%] h-full">
+        {/* Full-bleed Image Layer with Smooth Horizon */}
+        <div className="absolute inset-0 w-full h-full">
           <Image
             src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=1600&q=85"
             alt="Veterinaria de alta precisión y mascotas felices"
             fill
             priority
-            className="object-cover object-center"
-            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="object-cover object-center lg:object-right"
+            sizes="100vw"
             referrerPolicy="no-referrer"
           />
-          {/* Smooth Horizontal Gradient Transition into Content */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] via-[#0D3D20]/75 via-25% to-transparent hidden lg:block" />
+          {/* Silky Smooth Horizontal Gradient: 100% solid green on the left, organic dissolve to the right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] from-25% via-[#0D3D20] via-40% via-[#0D3D20]/60 via-65% to-transparent hidden lg:block" />
           {/* Vertical Gradient for Mobile Devices */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] via-[#0D3D20]/80 via-40% to-transparent lg:hidden" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] from-40% via-[#0D3D20]/80 via-70% to-transparent lg:hidden" />
           {/* Subtle Top & Bottom Cinematic Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0D3D20]/70 via-transparent to-[#0D3D20]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0D3D20]/60 via-transparent to-[#0D3D20]/80" />
         </div>
-
-        {/* Content Backdrop Fill on the Left */}
-        <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[45%] bg-[#0D3D20]" />
 
         {/* Dynamic Warm Atmospheric Light Blooms */}
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
