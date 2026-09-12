@@ -202,7 +202,7 @@ export default function HomePage() {
             </motion.div>
           )}
 
-          {/* TAB 5: CITAS & NUTRICIÓN */}
+          {/* TAB 5: CONTACTO */}
           {activeTab === 'citas' && (
             <motion.div
               key="tab-citas"
@@ -212,15 +212,15 @@ export default function HomePage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
             >
-                            {/* Standardized Unified Banner for Citas & Contacto with Modern Photographic Transition */}
-              <section className="relative w-full min-h-[480px] sm:min-h-[520px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+                            {/* Standardized Unified Banner for Contacto with Modern Photographic Transition */}
+              <section className="relative w-full min-h-[520px] sm:min-h-[580px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
                 {/* Modern Photographic Canvas with Seamless Transition (Zero Dividing Lines) */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                   {/* Full-bleed Image Layer */}
                   <div className="absolute inset-0 w-full h-full">
                     <Image
                       src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=1600&q=85"
-                      alt="Agendamiento veterinario y nutrición clínica VetCare"
+                      alt="Contacto VetCare Gourmet — Hospital Veterinario en Quito"
                       fill
                       priority
                       className="object-cover object-center lg:object-right"
@@ -236,6 +236,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -243,15 +244,35 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-2xl lg:max-w-3xl space-y-4 text-left"
+                    className="max-w-2xl lg:max-w-3xl space-y-5 text-left"
                     >
                       <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
-                        Citas Médicas &amp; <span className="text-emerald-400">Contacto Oficial 24/7</span>
+                        Contacto <span className="text-emerald-400">&amp; Urgencias</span> 24/7
                       </h1>
 
                       <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
                         Agenda tu consulta médica con especialistas certificados o comunícate de inmediato con nuestra central de guardia y triage hospitalario en Quito.
                       </p>
+
+                      {/* Quick-Access Contact Pills */}
+                      <div className="flex flex-wrap items-center gap-3 pt-2">
+                        <a
+                          href={buildWhatsAppUrl('Hola, necesito agendar una consulta médica')}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          <span>WhatsApp Directo</span>
+                        </a>
+                        <a
+                          href="tel:+593999999999"
+                          className="px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 backdrop-blur-sm"
+                        >
+                          <Phone className="w-4 h-4 text-amber-300" />
+                          <span>Llamar Ahora</span>
+                        </a>
+                      </div>
                     </motion.div>
                 </div>
               </section>

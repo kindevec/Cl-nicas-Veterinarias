@@ -37,7 +37,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
     { id: 'nosotros', label: 'La Clínica' },
     { id: 'servicios', label: 'Especialidades' },
     { id: 'petshop', label: 'Pet Shop Gourmet' },
-    { id: 'citas', label: 'Citas & Contacto' }
+    { id: 'citas', label: 'Contacto' }
   ];
 
   const isDarkHeader = true;

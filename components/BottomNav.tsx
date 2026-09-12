@@ -14,7 +14,7 @@ export function BottomNav({ activeSection, onNavigate }: BottomNavProps) {
     { id: 'nosotros', label: 'Clínica', icon: Users },
     { id: 'servicios', label: 'Servicios', icon: Stethoscope },
     { id: 'petshop', label: 'Pet Shop', icon: ShoppingBag },
-    { id: 'citas', label: 'Citas', icon: Calendar },
+    { id: 'citas', label: 'Contacto', icon: Calendar },
   ];
 
   return (
