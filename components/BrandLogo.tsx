@@ -16,15 +16,15 @@ export function BrandLogo({
   theme = 'light' 
 }: BrandLogoProps) {
   const sizeClasses = {
-    sm: { box: 'w-8 h-8', text: 'text-base', badge: 'text-[9px] px-1.5' },
-    md: { box: 'w-10 h-10', text: 'text-lg', badge: 'text-[10px] px-2 py-0.5' },
-    lg: { box: 'w-12 h-12', text: 'text-xl', badge: 'text-xs px-2.5 py-0.5' },
+    sm: { box: 'w-8 h-8', text: 'text-xl font-black' },
+    md: { box: 'w-10 h-10 sm:w-11 sm:h-11', text: 'text-2xl sm:text-3xl font-black' },
+    lg: { box: 'w-12 h-12 sm:w-14 sm:h-14', text: 'text-3xl sm:text-4xl font-black' },
   }[size];
 
   const isLight = theme === 'light';
 
   return (
-    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-2.5 sm:gap-3 select-none ${className}`}>
       {/* Official Paw Favicon Emblem as Main Logo Isotipo */}
       <div 
         className={`relative ${sizeClasses.box} shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-sm`}
@@ -117,27 +117,12 @@ export function BrandLogo({
         </svg>
       </div>
 
-      {/* Typography with Contrast Hierarchy */}
+      {/* Clean, Large & Bold Typography (Zero cluttered subtext/badges) */}
       {variant !== 'isotipo' && (
-        <div className="flex flex-col">
-          <div className="flex items-center gap-2">
-            <span className={`${sizeClasses.text} font-black tracking-tight ${isLight ? 'text-[#0D3D20]' : 'text-white'} font-sans leading-none`}>
-              Vet<span className="text-[#1A6B38]">Care</span>
-            </span>
-            <span className={`${sizeClasses.badge} font-bold rounded-full ${
-              isLight 
-                ? 'bg-amber-100/80 text-amber-800 border border-amber-200' 
-                : 'bg-amber-400/10 text-amber-300 border border-amber-400/30'
-            } tracking-wider uppercase leading-none`}>
-              PET GOURMET
-            </span>
-          </div>
-          {variant === 'full' && (
-            <span className={`text-[10px] sm:text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-emerald-200/70'} tracking-wide mt-1`}>
-              Clínica de Alta Precisión &amp; Nutrición
-            </span>
-          )}
-        </div>
+        <span className={`${sizeClasses.text} tracking-tight font-sans leading-none flex items-center`}>
+          <span className={isLight ? 'text-[#0D3D20]' : 'text-white'}>Vet</span>
+          <span className={isLight ? 'text-[#1A6B38]' : 'text-emerald-400'}>Care</span>
+        </span>
       )}
     </div>
   );
