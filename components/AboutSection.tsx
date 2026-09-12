@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { Award, HeartPulse, Stethoscope, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Award, Stethoscope, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { buildWhatsAppUrl } from '@/lib/utils';
 
 export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: () => void }) {
@@ -132,23 +132,26 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                 />
               </div>
 
-              {/* Arched Card 2: Deep Green Benefit Card */}
-              <div className="relative h-64 sm:h-80 rounded-[40px] bg-[#0D3D20] text-white p-4 sm:p-6 flex flex-col justify-between shadow-lg text-center">
-                <div className="w-10 h-10 rounded-full bg-white/10 mx-auto flex items-center justify-center text-emerald-300">
-                  <HeartPulse className="w-5 h-5" />
-                </div>
-
-                <div className="space-y-2">
-                  <h4 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+              {/* Arched Card 2: Caring Doctor with Golden Retriever */}
+              <div className="relative h-64 sm:h-80 rounded-[40px] overflow-hidden shadow-lg border-2 border-emerald-100 group">
+                <Image
+                  src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=800&q=80"
+                  alt="Doctora veterinaria en consulta de precisión con paciente"
+                  fill
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 30vw, 20vw"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20]/90 via-[#0D3D20]/30 to-transparent flex flex-col justify-end p-4 text-center text-white">
+                  <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider font-mono block">
+                    Quirófano &amp; Precisión
+                  </span>
+                  <h4 className="text-xs sm:text-sm font-extrabold text-white leading-tight mt-0.5">
                     Medicina de Precisión
                   </h4>
-                  <p className="text-[10px] sm:text-xs text-emerald-200/90 leading-snug">
-                    Cirugías guiadas por imagen y monitoreo anestésico continuo.
+                  <p className="text-[10px] text-emerald-100/90 leading-tight mt-1 hidden sm:block">
+                    Monitoreo anestésico continuo y cirugía guiada
                   </p>
-                </div>
-
-                <div className="pt-2 border-t border-emerald-800/60 text-[10px] font-bold text-amber-300">
-                  Quirófano Certificado
                 </div>
               </div>
 
