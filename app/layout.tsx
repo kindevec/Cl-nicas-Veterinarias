@@ -35,7 +35,14 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'VetCare & Pet Gourmet - Clínica Veterinaria 24/7 en Quito',
+        alt: 'VetCare & Pet Gourmet Logo Oficial',
+        type: 'image/png',
+      },
+      {
+        url: '/og-image-square.png',
+        width: 800,
+        height: 800,
+        alt: 'VetCare & Pet Gourmet Logo Cuadrado',
         type: 'image/png',
       },
     ],
@@ -57,12 +64,19 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <link rel="alternate icon" href="/icon.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="image_src" href="https://vetcaregourmet.web.app/og-image.png" />
+        <meta itemProp="name" content="VetCare & Pet Gourmet | Clínica Veterinaria 24/7" />
+        <meta itemProp="image" content="https://vetcaregourmet.web.app/og-image.png" />
         <meta property="og:image" content="https://vetcaregourmet.web.app/og-image.png" />
         <meta property="og:image:secure_url" content="https://vetcaregourmet.web.app/og-image.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="VetCare & Pet Gourmet - Clínica Veterinaria 24/7" />
+        <meta property="og:image:alt" content="VetCare & Pet Gourmet - Logo Oficial" />
+        <meta property="og:image" content="https://vetcaregourmet.web.app/og-image-square.png" />
+        <meta property="og:image:secure_url" content="https://vetcaregourmet.web.app/og-image-square.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="800" />
         <meta name="twitter:image" content="https://vetcaregourmet.web.app/og-image.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
