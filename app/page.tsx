@@ -13,6 +13,7 @@ import { PetShopSection } from '@/components/PetShopSection';
 import { SocialProofMetricsSection } from '@/components/SocialProofMetricsSection';
 import { AppointmentScheduler } from '@/components/AppointmentScheduler';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
+import { HomeExecutiveShowcase } from '@/components/HomeExecutiveShowcase';
 import { Footer } from '@/components/Footer';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { 
@@ -138,39 +139,11 @@ export default function HomePage() {
               <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
               <SocialProofMetricsSection />
               
-              {/* Quick Specialties CTA Strip */}
-              <div className="py-12 bg-white">
-                <motion.div 
-                  initial={{ opacity: 0, y: 25 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.55 }}
-                  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100 pt-8"
-                >
-                  <div className="space-y-1 text-center md:text-left">
-                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                      Unidades Clínicas de Referencia
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
-                      Quirófano estéril de alta tecnología, UCI 24 horas y diagnóstico por imagen
-                    </h3>
-                    <p className="text-slate-500 text-xs sm:text-sm max-w-xl">
-                      Descubre nuestro abanico completo de especialidades médicas avanzadas para asegurar el bienestar de tu mascota.
-                    </p>
-                  </div>
-                  <a
-                    href="#servicios"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavigate('servicios');
-                    }}
-                    className="px-6 py-3 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer shrink-0 flex items-center gap-2"
-                  >
-                    <span>Ver Especialidades</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </motion.div>
-              </div>
+              {/* Executive Summary Showcase of all other sections (La Clínica, Especialidades, Pet Shop Gourmet, Citas & Urgencias) */}
+              <HomeExecutiveShowcase 
+                onNavigate={handleNavigate}
+                onSelectServiceForBooking={handleSelectServiceForBooking}
+              />
             </motion.div>
           )}
 
