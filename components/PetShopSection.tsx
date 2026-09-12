@@ -96,13 +96,6 @@ export function PetShopSection({ products }: PetShopSectionProps) {
               </p>
             </motion.div>
         </div>
-
-        {/* Non-linear organic wave transition into #FAFBF7 section */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none z-10 text-[#FAFBF7]">
-          <svg className="relative block w-full h-5 sm:h-8" viewBox="0 0 1200 40" preserveAspectRatio="none">
-            <path d="M0,15 C300,35 600,-5 900,22 C1050,32 1150,10 1200,18 L1200,40 L0,40 Z" fill="currentColor"></path>
-          </svg>
-        </div>
       </section>
 
       {/* 2. CATALOG & BEST SELLERS (Direct PetFood Layout, Zero Box-in-Box) */}
@@ -234,7 +227,7 @@ export function PetShopSection({ products }: PetShopSectionProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6 }}
-            className="rounded-[48px_20px_48px_20px] bg-[#0D3D20] text-white overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-12 min-h-[360px] relative border border-emerald-800/50"
+            className="rounded-3xl bg-[#0D3D20] text-white overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-12 min-h-[360px] relative border border-emerald-800/50"
           >
             
             {/* Edge-to-edge Puppy Image covering top, bottom, and left without inner borders */}
