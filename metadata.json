@@ -1,0 +1,6 @@
+{
+  "name": "VetCare & Pet Gourmet",
+  "description": "Plataforma Integral de Clínica Veterinaria 24/7 y Pet Shop Gourmet Especializado con Agendamiento de Citas, Catálogo Transaccional y Backoffice Supabase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
