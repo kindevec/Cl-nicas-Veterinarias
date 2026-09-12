@@ -189,53 +189,52 @@ export function PetShopSection({ products }: PetShopSectionProps) {
             })}
           </div>
 
-          {/* 3. SPECIAL OFFER 30% OFF BANNER (Direct Reproduction from Reference Image) */}
-          <div className="rounded-[40px] bg-[#0D3D20] text-white p-6 sm:p-10 relative overflow-hidden shadow-xl">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              
-              {/* Cute Puppy & Food Bowl */}
-              <div className="md:col-span-5 flex items-center justify-center gap-4">
-                <div className="relative w-40 sm:w-48 h-40 sm:h-48 rounded-3xl overflow-hidden border-2 border-white/20 shadow-md">
-                  <Image
-                    src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=400&q=80"
-                    alt="Cachorro listo para su alimento"
-                    fill
-                    className="object-cover"
-                    sizes="200px"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              </div>
-
-              {/* Offer Headline & Action */}
-              <div className="md:col-span-7 space-y-4 text-center md:text-left">
-                <div>
-                  <span className="text-xs font-bold text-amber-300 uppercase tracking-widest block font-mono">
-                    BENEFICIO EXCLUSIVO
-                  </span>
-                  <h3 className="text-3xl sm:text-4xl font-extrabold text-white mt-1">
-                    Oferta Especial <span className="text-amber-300">30% OFF</span> en nutrición clínica
-                  </h3>
-                </div>
-
-                <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed max-w-lg">
-                  En tu primer pedido de dietas especializadas (renal, gastro o hipoalergénica) formuladas con ingredientes 100% biológicos.
-                </p>
-
-                <div className="pt-2">
-                  <a
-                    href={buildWhatsAppUrl('Solicitar 30% OFF en Nutrición Clínica')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 cursor-pointer"
-                  >
-                    <span>Comprar Ahora con Descuento</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-
+          {/* 3. SPECIAL OFFER 30% OFF BANNER (Full-Bleed Image: Top, Bottom & Left Edge without borders) */}
+          <div className="rounded-[36px] bg-[#0D3D20] text-white overflow-hidden shadow-xl grid grid-cols-1 md:grid-cols-12 min-h-[360px] relative">
+            
+            {/* Edge-to-edge Puppy Image covering top, bottom, and left without inner borders */}
+            <div className="md:col-span-5 relative min-h-[280px] md:min-h-[380px] w-full overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=80"
+                alt="Cachorro listo para su alimento"
+                fill
+                priority={false}
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 45vw"
+                referrerPolicy="no-referrer"
+              />
+              {/* Subtle edge blend gradient transitioning seamlessly into green container */}
+              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-transparent to-[#0D3D20]/90 md:to-[#0D3D20]" />
             </div>
+
+            {/* Offer Headline & Action */}
+            <div className="md:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-center space-y-4 relative z-10 text-center md:text-left">
+              <div>
+                <span className="text-xs font-bold text-amber-300 uppercase tracking-widest block font-mono">
+                  BENEFICIO EXCLUSIVO
+                </span>
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-white mt-1 leading-tight">
+                  Oferta Especial <span className="text-amber-300">30% OFF</span> en nutrición clínica
+                </h3>
+              </div>
+
+              <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed max-w-lg mx-auto md:mx-0">
+                En tu primer pedido de dietas especializadas (renal, gastro o hipoalergénica) formuladas con ingredientes 100% biológicos y certificación médica veterinaria.
+              </p>
+
+              <div className="pt-2">
+                <a
+                  href={buildWhatsAppUrl('Solicitar 30% OFF en Nutrición Clínica')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <span>Comprar Ahora con Descuento</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
           </div>
 
           {/* 4. VALUE PILLARS BAR (From PetFood reference footer) */}
