@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Database, PhoneCall, Calendar, ShieldCheck } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ShoppingBag, Database, PhoneCall, Calendar } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { buildWhatsAppUrl } from '@/lib/utils';
 
@@ -14,12 +15,23 @@ interface HeaderProps {
 }
 
 export function Header({ cartCount, onOpenCart, onOpenAdmin, activeSection, onNavigate }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          const progress = Math.min(Math.max(y / 140, 0), 1);
+          setScrollProgress(progress);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -32,27 +44,39 @@ export function Header({ cartCount, onOpenCart, onOpenAdmin, activeSection, onNa
     { id: 'citas', label: 'Citas & Contacto' }
   ];
 
+  const isScrolled = scrollProgress > 0.1;
+  const bgOpacity = scrollProgress * 0.95;
+  const blurAmount = scrollProgress * 16;
+  const borderOpacity = scrollProgress * 0.8;
+  const shadowOpacity = scrollProgress * 0.06;
+
   return (
     <header
       id="main-header"
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200/90 shadow-md shadow-slate-900/5 py-2.5'
-          : 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 py-4'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'py-3' : 'py-5'
       }`}
+      style={{
+        backgroundColor: `rgba(255, 255, 255, ${bgOpacity})`,
+        backdropFilter: blurAmount > 1 ? `blur(${blurAmount}px)` : 'none',
+        WebkitBackdropFilter: blurAmount > 1 ? `blur(${blurAmount}px)` : 'none',
+        borderBottom: borderOpacity > 0.05 ? `1px solid rgba(226, 232, 240, ${borderOpacity})` : '1px solid transparent',
+        boxShadow: shadowOpacity > 0.01 ? `0 10px 25px -5px rgba(0, 0, 0, ${shadowOpacity})` : 'none',
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
+        
+        {/* Brand Logo with Paw Identity */}
         <div 
           onClick={() => onNavigate('inicio')}
-          className="cursor-pointer group flex items-center"
+          className="cursor-pointer group flex items-center shrink-0"
           id="brand-logo-btn"
         >
           <BrandLogo variant="full" size="md" theme="light" />
         </div>
 
-        {/* Desktop 5-Tab Corporate Navigation Shell - Clean AOVET & Cielo Dental aesthetic */}
-        <nav className="hidden lg:flex items-center gap-1 bg-slate-100/90 backdrop-blur-md border border-slate-200/90 rounded-full p-1 shadow-sm">
+        {/* Center Navigation - ZERO Box-in-Box, Clean Text Links with Smooth Active Underline */}
+        <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
@@ -60,13 +84,19 @@ export function Header({ cartCount, onOpenCart, onOpenAdmin, activeSection, onNa
                 key={item.id}
                 id={`nav-${item.id}`}
                 onClick={() => onNavigate(item.id)}
-                className={`px-4 py-2 rounded-full text-xs transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? 'bg-[#1A6B38] text-white font-bold shadow-md shadow-emerald-900/20 scale-[1.02]'
-                    : 'text-slate-600 hover:text-[#0D3D20] hover:bg-white/80 font-medium'
-                }`}
+                className="relative py-1 text-xs font-semibold tracking-wide transition-colors cursor-pointer group"
               >
-                {item.label}
+                <span className={isActive ? 'text-[#0D3D20] font-bold' : 'text-slate-600 group-hover:text-[#1A6B38]'}>
+                  {item.label}
+                </span>
+
+                {isActive && (
+                  <motion.span
+                    layoutId="header-nav-indicator"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#1A6B38] rounded-full"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
               </button>
             );
           })}
@@ -74,53 +104,54 @@ export function Header({ cartCount, onOpenCart, onOpenAdmin, activeSection, onNa
 
         {/* Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Backoffice Button (Supabase) */}
+          {/* Backoffice Button */}
           <button
             id="header-admin-btn"
             onClick={onOpenAdmin}
-            title="Panel de Gestión Supabase (Citas, Órdenes, Storage RLS)"
-            className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 hover:border-emerald-300 text-xs font-semibold transition-all shadow-sm group cursor-pointer"
+            title="Panel de Gestión Supabase"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-slate-600 hover:text-slate-900 text-xs font-semibold transition-colors cursor-pointer"
           >
-            <Database className="w-3.5 h-3.5 text-emerald-600 group-hover:rotate-12 transition-transform" />
+            <Database className="w-3.5 h-3.5 text-emerald-600" />
             <span className="hidden xl:inline">Backoffice</span>
-            <span className="inline xl:hidden">Admin</span>
           </button>
 
           {/* Cart Drawer Trigger */}
           <button
             id="header-cart-btn"
             onClick={onOpenCart}
-            className="relative p-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 hover:border-amber-300 transition-all shadow-sm group cursor-pointer"
+            className="relative p-2 rounded-full text-slate-700 hover:text-[#1A6B38] hover:bg-slate-100/60 transition-colors cursor-pointer"
             aria-label="Abrir Carrito"
           >
-            <ShoppingBag className="w-4 h-4 text-amber-600 group-hover:scale-110 transition-transform" />
+            <ShoppingBag className="w-5 h-5 text-slate-700" />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-to-tr from-amber-500 to-amber-400 text-white font-black text-[10px] flex items-center justify-center shadow-md animate-pulse">
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-amber-500 text-white font-black text-[9px] flex items-center justify-center shadow-sm">
                 {cartCount}
               </span>
             )}
           </button>
 
-          {/* Direct Phone / Emergency WhatsApp Quick Action */}
+          {/* Direct WhatsApp Emergency Link */}
           <a
             id="header-emergency-call"
             href={buildWhatsAppUrl('Urgencia Médica Inmediata')}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-xs transition-all shadow-md shadow-red-600/25 active:scale-95 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold transition-all active:scale-95 cursor-pointer"
           >
-            <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-            <span>Urgencias 24/7</span>
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+            <span>24/7 Urgencias</span>
           </a>
 
+          {/* Primary Action Button */}
           <button
             onClick={() => onNavigate('citas')}
-            className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs transition-all shadow-md shadow-emerald-900/20 active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Agendar Cita</span>
           </button>
         </div>
+
       </div>
     </header>
   );

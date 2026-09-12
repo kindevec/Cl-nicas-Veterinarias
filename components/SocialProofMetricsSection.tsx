@@ -13,178 +13,168 @@ import {
   Activity,
   Clock,
   Sparkles,
-  Users
+  Users,
+  Heart
 } from 'lucide-react';
 
 const METRICS = [
   {
+    value: '18.5K+',
+    label: 'Pacientes Atendidos',
+    icon: Users,
+  },
+  {
     value: '99.4%',
     label: 'Éxito Quirúrgico',
-    detail: 'En cirugías ortopédicas AOVET, laparoscópicas y de urgencia.',
     icon: Activity,
-    color: 'text-[#1A6B38]',
-    bgIcon: 'bg-emerald-50 text-emerald-700'
   },
   {
-    value: '15 min',
-    label: 'Diagnóstico In-House',
-    detail: 'Laboratorio IDEXX automatizado y gases en sangre.',
+    value: '24/7',
+    label: 'Triage de Urgencias',
     icon: Clock,
-    color: 'text-[#0D3D20]',
-    bgIcon: 'bg-teal-50 text-teal-700'
   },
   {
-    value: '+18',
-    label: 'Especialistas Médicos',
-    detail: 'Cirujanos, intensivistas UCI, anestesiólogos y nutricionistas.',
-    icon: Users,
-    color: 'text-[#059669]',
-    bgIcon: 'bg-emerald-50 text-emerald-700'
-  },
-  {
-    value: '+18,500',
-    label: 'Mascotas Curadas',
-    detail: 'Historias clínicas digitalizadas y seguimiento post-operatorio.',
-    icon: HeartHandshake,
-    color: 'text-[#1A6B38]',
-    bgIcon: 'bg-amber-50 text-amber-700'
+    value: '4.9★',
+    label: 'Valoración Tutores',
+    icon: Star,
   },
 ];
 
 const TESTIMONIALS = [
   {
     id: 1,
-    patientName: 'Max (Golden Retriever, 5 años)',
-    tutorName: 'Mariana & Carlos Gómez',
+    patientName: 'Max (Golden Retriever)',
+    tutorName: 'Mariana Gómez',
     avatar: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=160&h=160&q=80',
-    service: 'Cirugía de Torsión Gástrica 3:00 AM',
-    quote: 'Max sufrió una dilatación volvular de madrugada. Llegamos al centro de trauma y en 10 minutos estaba en quirófano con monitoreo continuo. El profesionalismo y la calidez del equipo salvaron su vida.',
+    service: 'Cirugía de Urgencia 3:00 AM',
+    quote: 'Max sufrió una dilatación gástrica de madrugada. Llegamos al centro de trauma y en 10 minutos estaba en quirófano con monitoreo continuo. El profesionalismo y la calidez del equipo salvaron su vida.',
     rating: 5,
-    outcome: 'Recuperación al 100% en 14 días'
+    outcome: 'Recuperado al 100%'
   },
   {
     id: 2,
-    patientName: 'Luna (Gata Persa, 7 años)',
-    tutorName: 'Dra. Valentina Restrepo',
+    patientName: 'Luna (Gata Persa)',
+    tutorName: 'Dra. Valentina R.',
     avatar: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=160&h=160&q=80',
-    service: 'Manejo Renal Fear-Free & Dieta Gourmet',
-    quote: 'Luna se estresaba terriblemente con cualquier veterinario. En VetCare el consultorio felino es completamente silencioso con feromonas Feliway. La fórmula renal de Pet Gourmet estabilizó su creatinina en sangre.',
+    service: 'Manejo Renal Fear-Free',
+    quote: 'Luna se estresaba con cualquier veterinario. En VetCare el consultorio felino es completamente silencioso con feromonas Feliway. La fórmula renal estabilizó su creatinina en sangre.',
     rating: 5,
-    outcome: 'Estadío renal controlado y vital'
+    outcome: 'Salud renal óptima'
   },
   {
     id: 3,
-    patientName: 'Thor (Bulldog Francés, 3 años)',
-    tutorName: 'Felipe & Andrea Vélez',
+    patientName: 'Thor (Bulldog Francés)',
+    tutorName: 'Felipe Vélez',
     avatar: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=160&h=160&q=80',
-    service: 'Cirugía Vía Aérea Braquiocefálica',
-    quote: 'Thor tenía severa dificultad respiratoria. La corrección con láser de estenosis y paladar blando le dio una segunda vida. Ahora duerme tranquilo sin ahogos y disfruta sus paseos.',
+    service: 'Corrección Vía Aérea',
+    quote: 'Thor tenía severa dificultad respiratoria. La corrección con láser de estenosis le dio una segunda vida. Ahora duerme tranquilo sin ahogos y disfruta sus paseos al aire libre.',
     rating: 5,
-    outcome: 'Ventilación óptima sin apneas'
+    outcome: 'Respiración limpia'
   }
-];
-
-const ACCREDITATIONS = [
-  { name: 'AOVET Foundation Member', desc: 'Estándar Quirúrgico Global' },
-  { name: 'Fear-Free™ Certified Clinic', desc: 'Protocolo Cero Estrés' },
-  { name: 'IDEXX Reference Lab', desc: 'Analítica Sanguínea 24/7' },
-  { name: 'ISFM Cat Friendly Gold', desc: 'Atención Felina Especializada' },
 ];
 
 export function SocialProofMetricsSection() {
   return (
-    <section id="social-proof" className="py-16 md:py-24 relative overflow-hidden bg-white/60 border-y border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
-        
-        {/* 1. IMPACT COUNTERS WITH MOTION (4 Métricas Clave) */}
-        <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section id="social-proof" className="relative overflow-hidden">
+      
+      {/* 1. FOREST GREEN STATS RIBBON (Directly inspired by reference image) */}
+      <div className="bg-[#0D3D20] text-white py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-emerald-800/60">
             {METRICS.map((metric, idx) => {
               const Icon = metric.icon;
               return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all duration-300 group flex flex-col justify-between"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-2xl ${metric.bgIcon} flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner`}>
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <div key={idx} className="flex items-center justify-center gap-3 pt-4 sm:pt-0 sm:px-4 text-center">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-emerald-300 shrink-0">
+                    <Icon className="w-5 h-5" />
                   </div>
-
-                  <div>
-                    <div className={`text-3xl sm:text-4xl font-extrabold ${metric.color} tracking-tight font-sans`}>
+                  <div className="text-left">
+                    <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-sans">
                       {metric.value}
                     </div>
-                    <h4 className="text-base font-bold text-slate-900 mt-1">
+                    <div className="text-xs text-emerald-200/80 font-medium">
                       {metric.label}
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-1.5 leading-relaxed font-normal">
-                      {metric.detail}
-                    </p>
+                    </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
+      </div>
 
-        {/* 2. EDITORIAL TESTIMONIALS (Historias Clínicas Reales) */}
-        <div className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#1A6B38] text-xs font-bold tracking-wider uppercase shadow-sm">
-              <Quote className="w-4 h-4 text-emerald-600" />
-              <span>CASOS CLÍNICOS &amp; TESTIMONIOS VERIFICADOS</span>
+      {/* 2. POETIC EDITORIAL SECTION WITH CUTE CORGIS (Reference PetFood Quote block) */}
+      <div className="py-16 sm:py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-14">
+            
+            {/* Adorable Happy Dogs Image */}
+            <div className="relative w-64 sm:w-72 h-64 sm:h-72 shrink-0 rounded-3xl overflow-hidden shadow-xl border-4 border-[#FAFBF7]">
+              <Image
+                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80"
+                alt="Perritos felices jugando juntos"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 280px, 320px"
+                referrerPolicy="no-referrer"
+              />
             </div>
-            <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0D3D20] tracking-tight">
-              La voz de quienes confiaron la vida de su familia
+
+            {/* Poetic Inspirational Text */}
+            <div className="space-y-4 text-center md:text-left max-w-lg">
+              <div className="inline-block text-[#1A6B38]">
+                <Quote className="w-8 h-8 rotate-180 opacity-80" />
+              </div>
+
+              <blockquote className="text-lg sm:text-xl font-medium text-slate-800 italic leading-relaxed">
+                &ldquo;Desde nuestro corazón hasta su bienestar: ciencia médica de alta precisión, cuidado Fear-Free sin dolor y nutrición pura para que vivan más años llenos de vitalidad.&rdquo;
+              </blockquote>
+
+              <p className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider flex items-center justify-center md:justify-start gap-1.5">
+                <Heart className="w-3.5 h-3.5 fill-[#1A6B38]" />
+                <span>Compromiso Ético &amp; Amor Animal • VetCare</span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* 3. TESTIMONIOS REALES DE TUTORES (Open Breathable Layout, NO Box-in-Box) */}
+      <div className="py-12 pb-20 bg-[#FAFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Casos Reales</span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
+              Historias de Familias que Confían en VetCare
             </h3>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              Resultados médicos documentados y experiencias reales de tutores en nuestra clínica y boutique gourmet.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((test, idx) => (
-              <motion.div
+            {TESTIMONIALS.map((test) => (
+              <div
                 key={test.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className="rounded-3xl bg-white border border-slate-200/90 p-7 flex flex-col justify-between shadow-md hover:shadow-xl hover:border-emerald-300 transition-all group"
+                className="bg-white rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
               >
-                <div className="space-y-4">
-                  {/* Rating and Service Badge */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex text-amber-400 gap-1">
-                      {[...Array(test.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-400 stroke-amber-400" />
-                      ))}
-                    </div>
-                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                      Caso Verificado
-                    </span>
+                <div className="space-y-3">
+                  <div className="flex text-amber-400 gap-1">
+                    {[...Array(test.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 stroke-amber-400" />
+                    ))}
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic font-normal">
-                    &quot;{test.quote}&quot;
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed italic">
+                    &ldquo;{test.quote}&rdquo;
                   </p>
 
-                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-[11px] text-emerald-800 font-semibold flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>{test.outcome}</span>
-                  </div>
+                  <span className="inline-block text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                    {test.outcome}
+                  </span>
                 </div>
 
-                {/* Patient & Tutor Info */}
-                <div className="pt-5 border-t border-slate-100 mt-6 flex items-center gap-3">
-                  <div className="relative w-12 h-12 rounded-2xl overflow-hidden ring-2 ring-emerald-500/20 shrink-0 bg-slate-100 shadow-sm">
+                <div className="pt-4 border-t border-slate-100 mt-5 flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-slate-200">
                     <Image
                       src={test.avatar}
                       alt={test.patientName}
@@ -193,34 +183,18 @@ export function SocialProofMetricsSection() {
                       referrerPolicy="no-referrer"
                     />
                   </div>
-
-                  <div className="min-w-0">
-                    <h5 className="text-xs font-bold text-slate-900 truncate">{test.patientName}</h5>
-                    <span className="text-[11px] text-slate-500 block truncate">Tutor: {test.tutorName}</span>
-                    <span className="text-[10px] text-emerald-700 block font-semibold truncate">{test.service}</span>
+                  <div>
+                    <h5 className="text-xs font-bold text-slate-900">{test.patientName}</h5>
+                    <span className="text-[11px] text-slate-500 block">{test.tutorName} • {test.service}</span>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* 3. CERTIFICATION & ACCREDITATION BANNER */}
-        <div className="rounded-3xl bg-white border border-slate-200/90 p-8 shadow-sm">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-            {ACCREDITATIONS.map((acc, idx) => (
-              <div key={idx} className="space-y-1.5">
-                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 mx-auto flex items-center justify-center mb-2 shadow-inner">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-900">{acc.name}</div>
-                <div className="text-[11px] text-slate-500 font-medium">{acc.desc}</div>
               </div>
             ))}
           </div>
-        </div>
 
+        </div>
       </div>
+
     </section>
   );
 }

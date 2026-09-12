@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { Header } from '@/components/Header';
 import { BottomNav } from '@/components/BottomNav';
@@ -15,7 +16,7 @@ import { CartDrawer } from '@/components/CartDrawer';
 import { AdminBackofficeModal } from '@/components/AdminBackofficeModal';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
 import { Footer } from '@/components/Footer';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { 
   CartItem, 
   PetProduct, 
@@ -135,8 +136,8 @@ export default function HomePage() {
   const totalCartCount = cartItems.reduce((acc, it) => acc + it.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col selection:bg-emerald-100 selection:text-emerald-900 font-sans">
-      {/* 1. Desktop Header with 5-Tab Corporate Navigation */}
+    <div className="min-h-screen bg-[#FAFBF7] text-slate-900 flex flex-col selection:bg-emerald-100 selection:text-emerald-900 font-sans">
+      {/* 1. Transparent Header that Materializes Smoothly with Scroll (SmartLegal Standard) */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -145,8 +146,8 @@ export default function HomePage() {
         onNavigate={handleNavigate}
       />
 
-      {/* Main Container with Anti-Overflow and Bottom Navigation Padding Mandates (pb-20 md:pb-8) */}
-      <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1 pt-16 sm:pt-20">
+      {/* Main Container - Full-bleed top so hero banners sit seamlessly under the transparent header */}
+      <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1">
         <AnimatePresence mode="wait">
           {/* TAB 1: INICIO */}
           {activeTab === 'inicio' && (
@@ -156,24 +157,29 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="space-y-16"
             >
               <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
               <SocialProofMetricsSection />
               
-              {/* Summary Banner Especialidades */}
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div className="space-y-2 text-center md:text-left">
-                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Unidades Clínicas de Referencia</span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">Quirófano estéril AOVET, UCI 24 horas y diagnóstico por imagen</h3>
-                    <p className="text-slate-600 text-sm max-w-xl">Descubre nuestro abanico completo de especialidades médicas avanzadas diseñadas para salvar vidas y asegurar el bienestar de tu mascota.</p>
+              {/* Quick Specialties CTA Strip without Box-in-Box */}
+              <div className="py-12 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100 pt-8">
+                  <div className="space-y-1 text-center md:text-left">
+                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+                      Unidades Clínicas de Referencia
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
+                      Quirófano estéril AOVET, UCI 24 horas y diagnóstico por imagen
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm max-w-xl">
+                      Descubre nuestro abanico completo de especialidades médicas avanzadas para asegurar el bienestar de tu mascota.
+                    </p>
                   </div>
                   <button
                     onClick={() => handleNavigate('servicios')}
-                    className="px-6 py-3.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 cursor-pointer shrink-0 flex items-center gap-2"
+                    className="px-6 py-3 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer shrink-0 flex items-center gap-2"
                   >
-                    <span>Ver Especialidades Completas</span>
+                    <span>Ver Especialidades</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -202,7 +208,6 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="space-y-16"
             >
               <ServicesSection onSelectService={handleSelectServiceForBooking} />
             </motion.div>
@@ -225,7 +230,7 @@ export default function HomePage() {
             </motion.div>
           )}
 
-          {/* TAB 5: CITAS & CONTACTO */}
+          {/* TAB 5: CITAS & NUTRICIÓN */}
           {activeTab === 'citas' && (
             <motion.div
               key="tab-citas"
@@ -233,8 +238,44 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="space-y-16"
             >
+              {/* TOP HERO BANNER for Citas & Nutrición (SmartLegal Standard) */}
+              <section className="relative min-h-[380px] sm:min-h-[440px] pt-32 sm:pt-40 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+                <div className="absolute inset-0 pointer-events-none opacity-25">
+                  <Image
+                    src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=2000&q=80"
+                    alt="Agendamiento veterinario y nutrición clínica VetCare"
+                    fill
+                    priority
+                    className="object-cover object-center"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0D3D20] via-[#0D3D20]/90 to-[#0D3D20]/40" />
+
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="max-w-2xl space-y-4"
+                  >
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+                      <Calendar className="w-4 h-4 text-emerald-400" />
+                      <span>AGENDAMIENTO PRIORITARIO &amp; NUTRICIÓN CLÍNICA</span>
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                      Reserva de Turnos &amp; <span className="text-emerald-400">Nutrición WSAVA</span>
+                    </h1>
+
+                    <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal">
+                      Calcula los requerimientos calóricos exactos de tu mascota o reserva cita médica con confirmación inmediata vía WhatsApp.
+                    </p>
+                  </motion.div>
+                </div>
+              </section>
+
               <SmartNutritionCalculator 
                 onSelectServiceForBooking={handleSelectServiceForBooking}
                 onAddToCart={handleAddToCart}
