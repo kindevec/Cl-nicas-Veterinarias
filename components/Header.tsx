@@ -40,7 +40,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
     { id: 'citas', label: 'Citas & Contacto' }
   ];
 
-  const isDarkHeader = activeSection !== 'inicio';
+  const isDarkHeader = true;
   const isScrolled = scrollProgress > 0.08;
   const blurAmount = scrollProgress * 16;
 

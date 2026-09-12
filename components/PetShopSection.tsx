@@ -48,7 +48,7 @@ export function PetShopSection({ products }: PetShopSectionProps) {
   return (
     <div className="w-full">
       {/* 1. TOP HERO BANNER with Full-Bleed Background (SmartLegal Standard) */}
-      <section className="relative min-h-[380px] sm:min-h-[440px] pt-32 sm:pt-40 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+      <section className="relative w-full min-h-[460px] sm:min-h-[500px] pt-32 sm:pt-36 pb-14 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
         <div className="absolute inset-0 pointer-events-none opacity-30">
           <Image
             src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=2000&q=80"
@@ -66,13 +66,13 @@ export function PetShopSection({ products }: PetShopSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl space-y-4"
+            className="max-w-3xl space-y-4"
           >
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Nutrición de Grado Médico &amp; <span className="text-amber-300">Farmacia Especializada</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
               Fórmulas terapéuticas con respaldo clínico veterinario, nutracéuticos de alta biodisponibilidad y alimentación holística sin preservantes artificiales.
             </p>
           </motion.div>

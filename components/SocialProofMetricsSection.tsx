@@ -78,7 +78,7 @@ export function SocialProofMetricsSection() {
     <section id="social-proof" className="relative overflow-hidden">
       
       {/* 1. FOREST GREEN STATS RIBBON (Directly inspired by reference image) */}
-      <div className="bg-[#0D3D20] text-white py-6 sm:py-8">
+      <div className="bg-[#0D3D20] text-white py-6 sm:py-8 border-t border-emerald-800/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-emerald-800/60">
             {METRICS.map((metric, idx) => {

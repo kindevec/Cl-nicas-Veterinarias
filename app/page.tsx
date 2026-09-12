@@ -158,7 +158,7 @@ export default function HomePage() {
               transition={{ duration: 0.3 }}
             >
               {/* TOP HERO BANNER for Citas & Nutrición (SmartLegal Standard) */}
-              <section className="relative min-h-[380px] sm:min-h-[440px] pt-32 sm:pt-40 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+              <section className="relative w-full min-h-[460px] sm:min-h-[500px] pt-32 sm:pt-36 pb-14 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
                 <div className="absolute inset-0 pointer-events-none opacity-25">
                   <Image
                     src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=2000&q=80"
@@ -176,13 +176,13 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-2xl space-y-4"
+                    className="max-w-3xl space-y-4"
                   >
                     <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
                       Citas Médicas &amp; <span className="text-emerald-400">Contacto Oficial 24/7</span>
                     </h1>
 
-                    <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal">
+                    <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
                       Agenda tu consulta médica con especialistas certificados o comunícate de inmediato con nuestra central de guardia y triage hospitalario en Quito.
                     </p>
                   </motion.div>
