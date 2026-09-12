@@ -454,28 +454,32 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                 title: 'Triage & Signos Vitales',
                 desc: 'Evaluación rápida de saturación de O2, presión arterial Doppler, temperatura y clasificación de dolor en escala Glasgow.',
                 icon: Activity,
-                highlight: 'Atención Inmediata'
+                highlight: 'Atención Inmediata',
+                image: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=600&q=80'
               },
               {
                 step: '02',
                 title: 'Diagnóstico In-House',
                 desc: 'Bioquímica sanguínea en 15 min, Rayos X Digitales HD y ecografía Doppler para confirmar patologías con evidencia.',
                 icon: Microscope,
-                highlight: 'Tecnología IDEXX'
+                highlight: 'Tecnología IDEXX',
+                image: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80'
               },
               {
                 step: '03',
                 title: 'Tratamiento Quirúrgico',
                 desc: 'Quirófano estéril clase 10,000, anestesia Sevoflurano monitoreada continuamente y analgesia multimodal preventiva.',
                 icon: Stethoscope,
-                highlight: 'Seguridad Máxima'
+                highlight: 'Seguridad Máxima',
+                image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=600&q=80'
               },
               {
                 step: '04',
                 title: 'Recuperación & Alta',
                 desc: 'Monitoreo en mantas térmicas, plan nutricional de alta hospitalaria y seguimiento médico directo por WhatsApp 24/7.',
                 icon: ShieldCheck,
-                highlight: 'Cuidado Fear-Free'
+                highlight: 'Cuidado Fear-Free',
+                image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&q=80'
               }
             ].map((p, idx) => {
               const Icon = p.icon;
@@ -486,30 +490,43 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="p-6 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between space-y-4 relative group hover:-translate-y-1"
+                  className="rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between overflow-hidden relative group hover:-translate-y-1"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-black text-[#1A6B38] font-mono">
+                  <div className="relative h-40 w-full overflow-hidden bg-slate-100">
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      referrerPolicy="no-referrer"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 flex items-center justify-between w-[calc(100%-2rem)]">
+                      <span className="text-3xl font-black text-white/90 font-mono drop-shadow-md">
                         {p.step}
                       </span>
-                      <div className="w-10 h-10 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-xs">
+                      <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md text-white flex items-center justify-center border border-white/20 shadow-xs">
                         <Icon className="w-5 h-5" />
                       </div>
                     </div>
-                    <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
-                      {p.highlight}
-                    </span>
-                    <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
-                      {p.title}
-                    </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      {p.desc}
-                    </p>
                   </div>
-                  <div className="pt-3 border-t border-slate-200/60 flex items-center gap-1.5 text-[11px] font-semibold text-slate-600">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#1A6B38]" />
-                    <span>Protocolo Acreditado</span>
+                  
+                  <div className="p-6 space-y-4 flex flex-col flex-1">
+                    <div className="space-y-3">
+                      <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
+                        {p.highlight}
+                      </span>
+                      <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                        {p.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        {p.desc}
+                      </p>
+                    </div>
+                    <div className="pt-3 border-t border-slate-200/60 flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 mt-auto">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#1A6B38]" />
+                      <span>Protocolo Acreditado</span>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -546,22 +563,26 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
               {
                 title: 'Monitor Mindray ePM12M',
                 spec: 'ECG, SpO2, PNI, Capnografía EtCO2 y Temperatura continua.',
-                badge: 'Monitoreo Grado UCI'
+                badge: 'Monitoreo Grado UCI',
+                image: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=600&q=80'
               },
               {
                 title: 'Anestesia Sevoflurano',
                 spec: 'Inducción y despertar ultra rápido con ventilador mecánico asistido.',
-                badge: 'Mínimo Riesgo Hepático'
+                badge: 'Mínimo Riesgo Hepático',
+                image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80'
               },
               {
                 title: 'Rayos X Digital HD (DR)',
                 spec: 'Adquisición de imagen ósea y pulmonar instantánea en 3 segundos.',
-                badge: 'Baja Radiación'
+                badge: 'Baja Radiación',
+                image: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80'
               },
               {
                 title: 'Laboratorio IDEXX ProCyte',
                 spec: 'Citometría de flujo láser y bioquímica seca con validación in-house.',
-                badge: 'Resultado en 15 min'
+                badge: 'Resultado en 15 min',
+                image: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80'
               }
             ].map((eq, idx) => (
               <motion.div
@@ -570,20 +591,37 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="p-5 sm:p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition-all space-y-3"
+                className="rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition-all overflow-hidden group flex flex-col"
               >
-                <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
-                  <Cpu className="w-5 h-5" />
+                <div className="relative h-44 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src={eq.image}
+                    alt={eq.title}
+                    fill
+                    referrerPolicy="no-referrer"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20]/80 via-transparent to-transparent opacity-80" />
+                  <div className="absolute top-4 left-4">
+                    <span className="text-[10px] font-bold text-[#1A6B38] bg-emerald-50/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full inline-block border border-emerald-200/60 shadow-sm">
+                      {eq.badge}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 right-4">
+                    <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center border border-white/30 shadow-sm">
+                      <Cpu className="w-5 h-5" />
+                    </div>
+                  </div>
                 </div>
-                <span className="text-[10px] font-bold text-[#1A6B38] bg-emerald-50 px-2.5 py-0.5 rounded-full inline-block border border-emerald-200/60">
-                  {eq.badge}
-                </span>
-                <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
-                  {eq.title}
-                </h4>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  {eq.spec}
-                </p>
+                
+                <div className="p-5 sm:p-6 space-y-3 flex-1 flex flex-col">
+                  <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                    {eq.title}
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    {eq.spec}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

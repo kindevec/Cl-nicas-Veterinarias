@@ -465,52 +465,61 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
       </section>
 
       {/* 5. CERTIFICACIONES INTERNACIONALES & ESTÁNDARES */}
-      <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70 relative overflow-hidden">
+        {/* Subtle decorative circles */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-50/60 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="space-y-1 text-center max-w-3xl mx-auto"
+            className="space-y-2 text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              02 / ACREDITACIONES Y PROTOCOLOS OFICIALES
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-[10px] font-bold uppercase tracking-widest font-mono">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              02 / Acreditaciones Oficiales
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-              Avalados por Estándares de Referencia Mundial
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D3D20] tracking-tight">
+              Avalados por Estándares de <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A6B38] to-emerald-500">Referencia Mundial</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
+            <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
               Certificaciones que garantizan el bienestar físico y emocional de tu compañero en cada etapa médica.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
             {[
               {
                 icon: ShieldCheck,
                 title: 'Fear-Free™ Certified',
                 desc: 'Hospital certificado en manejo médico compasivo, reduciendo ansiedad, dolor y miedo en el paciente.',
-                badge: 'Protocolo Anti-Estrés'
+                badge: 'Protocolo Anti-Estrés',
+                image: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=400&q=80'
               },
               {
                 icon: Award,
                 title: 'ISFM Cat Friendly Gold',
                 desc: 'Máxima acreditación de la International Society of Feline Medicine para infraestructura adaptada a gatos.',
-                badge: 'Nivel Oro Felino'
+                badge: 'Nivel Oro Felino',
+                image: 'https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=400&q=80'
               },
               {
                 icon: Activity,
                 title: 'Estándares Quirúrgicos AAHA',
                 desc: 'Aplicación estricta de las directrices de la American Animal Hospital Association en analgesia y esterilidad.',
-                badge: 'Norma Quirúrgica'
+                badge: 'Norma Quirúrgica',
+                image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=400&q=80'
               },
               {
                 icon: HeartHandshake,
                 title: 'Comité Nutricional WSAVA',
                 desc: 'Evaluación y prescripción dietética formulada según el algoritmo biométrico oficial de la WSAVA.',
-                badge: 'Nutrición Clínica'
+                badge: 'Nutrición Clínica',
+                image: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=400&q=80'
               }
             ].map((cert, idx) => {
               const Icon = cert.icon;
@@ -520,22 +529,42 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="group relative bg-white rounded-3xl border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-emerald-200/80 transition-all duration-300 flex flex-col sm:flex-row overflow-hidden"
                 >
-                  <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/60 px-2.5 py-0.5 rounded-full inline-block">
-                      {cert.badge}
-                    </span>
-                    <h4 className="text-base font-bold text-slate-900 leading-snug">{cert.title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{cert.desc}</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/0 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
+                  {/* Left side: Image Strip */}
+                  <div className="relative h-48 sm:h-auto sm:w-32 lg:w-40 shrink-0 overflow-hidden">
+                    <Image 
+                      src={cert.image}
+                      alt={cert.title}
+                      fill
+                      referrerPolicy="no-referrer"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 160px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-black/20" />
                   </div>
-                  <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-semibold text-[#1A6B38]">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Verificado Activo 2026</span>
+
+                  {/* Right side: Content */}
+                  <div className="p-6 sm:p-7 flex flex-col justify-center flex-1 relative z-10">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/60 px-3 py-1 rounded-full border border-emerald-200/50 whitespace-nowrap">
+                        {cert.badge}
+                      </span>
+                    </div>
+                    
+                    <h4 className="text-lg font-bold text-slate-900 leading-tight mb-2 group-hover:text-[#1A6B38] transition-colors">{cert.title}</h4>
+                    <p className="text-sm text-slate-500 leading-relaxed mb-5">{cert.desc}</p>
+                    
+                    <div className="pt-4 border-t border-slate-100/80 flex items-center gap-1.5 text-xs font-semibold text-[#1A6B38] mt-auto">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                      <span>Verificado Activo 2026</span>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -546,69 +575,121 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
       </section>
 
       {/* 6. LOS 4 PILARES MÉDICOS ÉTICOS DE VETCARE */}
-      <section className="py-12 sm:py-16 bg-[#0D3D20] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="relative py-16 sm:py-24 overflow-hidden text-white">
+        {/* Full bleed background image with dark overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80"
+            alt="Stethoscope background"
+            fill
+            referrerPolicy="no-referrer"
+            className="object-cover"
+            sizes="100vw"
+          />
+          {/* Solid base + gradient for readability */}
+          <div className="absolute inset-0 bg-[#0D3D20]/90 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0D3D20]/95 via-[#0D3D20]/80 to-[#0D3D20]/95" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="space-y-1 text-center max-w-3xl mx-auto"
+            className="space-y-3 text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono">
-              03 / NUESTRO COMPROMISO DEONTOLÓGICO
+            <span className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-emerald-300 text-xs font-bold uppercase tracking-widest font-mono backdrop-blur-md">
+              <Sparkles className="w-4 h-4" />
+              03 / Nuestro Compromiso Deontológico
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               Los 4 Pilares Médicos de VetCare
             </h2>
-            <p className="text-xs sm:text-sm text-emerald-100/80">
-              Principios que guían cada decisión clínica, cada cirugía y cada interacción con tu familia.
+            <p className="text-sm sm:text-base text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
+              Principios inquebrantables que guían cada decisión clínica, cada cirugía y cada interacción con tu familia.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 num: '01',
                 title: 'Medicina Basada en Evidencia',
-                desc: 'Todo tratamiento está sustentado en analítica previa, imagenología y literatura veterinaria de consenso internacional.'
+                desc: 'Todo tratamiento está sustentado en analítica previa, imagenología y literatura veterinaria de consenso internacional.',
+                icon: Microscope,
+                bgImage: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80'
               },
               {
                 num: '02',
                 title: 'Cero Tolerancia al Dolor',
-                desc: 'Protocolos de analgesia multimodal preventiva y posquirúrgica. Ningún paciente sufre dolor evitable bajo nuestro cuidado.'
+                desc: 'Protocolos de analgesia multimodal preventiva y posquirúrgica. Ningún paciente sufre dolor evitable bajo nuestro cuidado.',
+                icon: ShieldCheck,
+                bgImage: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80'
               },
               {
                 num: '03',
                 title: 'Transparencia con el Tutor',
-                desc: 'Explicación diagnóstica detallada, presupuestos claros antes de cada procedimiento e informes clínicos accesibles.'
+                desc: 'Explicación diagnóstica detallada, presupuestos claros antes de cada procedimiento e informes clínicos accesibles.',
+                icon: FileText,
+                bgImage: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=600&q=80'
               },
               {
                 num: '04',
                 title: 'Nutrición como Medicina',
-                desc: 'Creemos en la dietoterapia biológica como el pilar fundamental para prevenir patologías y alargar la longevidad del animal.'
+                desc: 'Creemos en la dietoterapia biológica como el pilar fundamental para prevenir patologías y alargar la longevidad del animal.',
+                icon: Heart,
+                bgImage: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=600&q=80'
               }
-            ].map((pilar, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all space-y-3 backdrop-blur-xs"
-              >
-                <span className="text-2xl font-black text-amber-300 font-mono block">
-                  {pilar.num}
-                </span>
-                <h4 className="text-base font-bold text-white leading-snug">
-                  {pilar.title}
-                </h4>
-                <p className="text-xs text-emerald-100/80 leading-relaxed">
-                  {pilar.desc}
-                </p>
-              </motion.div>
-            ))}
+            ].map((pilar, idx) => {
+              const Icon = pilar.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  className="group relative h-full flex flex-col justify-end p-6 rounded-[2rem] overflow-hidden border border-white/10 hover:border-emerald-400/50 transition-all duration-500 shadow-2xl min-h-[320px]"
+                >
+                  {/* Background Image for Card */}
+                  <div className="absolute inset-0">
+                    <Image
+                      src={pilar.bgImage}
+                      alt={pilar.title}
+                      fill
+                      referrerPolicy="no-referrer"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-60"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
+                    {/* Gradient Overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#092B16] via-[#092B16]/80 to-transparent" />
+                    <div className="absolute inset-0 bg-[#0D3D20]/40 group-hover:bg-[#0D3D20]/20 transition-colors duration-500" />
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-emerald-300 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-amber-200/80 to-amber-500/40 font-mono tracking-tighter">
+                        {pilar.num}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-white leading-tight mb-2">
+                        {pilar.title}
+                      </h4>
+                      <p className="text-sm text-emerald-50/80 leading-relaxed font-light">
+                        {pilar.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
         </div>

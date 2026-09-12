@@ -475,20 +475,20 @@ export function PetShopSection({ products }: PetShopSectionProps) {
 
       {/* 6. MARCAS VETERINARIAS AUTORIZADAS (Showcase Partner) */}
       <section className="py-12 bg-[#FAFBF7] border-t border-slate-200/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
-          <div className="space-y-1 max-w-2xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-center">
+          <div className="space-y-2 max-w-2xl mx-auto">
             <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
               02 / ALIANZAS BIOMÉDICAS
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
               Marcas Clínicas Oficiales &amp; Laboratorios Asociados
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-sm text-slate-500">
               Distribuidores oficiales autorizados con lote verificado y cadena de frío directa desde laboratorios fabricantes.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { name: 'Royal Canin Veterinary', cat: 'Prescription Diets' },
               { name: "Hill's Prescription Diet", cat: 'Clinical Nutrition' },
@@ -497,80 +497,150 @@ export function PetShopSection({ products }: PetShopSectionProps) {
               { name: 'Feliway & Adaptil', cat: 'Feromonas Clínicas' },
               { name: 'Virbac Animal Health', cat: 'Dermatología & Vacunas' }
             ].map((brand, bIdx) => (
-              <div
+              <motion.div
                 key={bIdx}
-                className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-sm transition-all text-center space-y-1 hover:border-[#1A6B38]"
+                whileHover={{ y: -4 }}
+                className="relative p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-xl transition-all text-center space-y-4 overflow-hidden group"
               >
-                <div className="text-xs font-black text-slate-900 leading-snug">
-                  {brand.name}
+                {/* Colored Top Bar */}
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-400 opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                
+                {/* Gradient Hover Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/0 via-transparent to-teal-50/0 group-hover:from-emerald-50/50 group-hover:to-teal-50/50 transition-colors pointer-events-none"></div>
+
+                <div className="relative w-16 h-16 mx-auto rounded-full bg-emerald-100/50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+                  <Award className="w-8 h-8 text-emerald-600" />
                 </div>
-                <div className="text-[10px] text-emerald-700 font-semibold font-mono">
-                  {brand.cat}
+                
+                <div className="relative space-y-3">
+                  <div className="text-lg font-black text-slate-900 leading-tight">
+                    {brand.name}
+                  </div>
+                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-[11px] text-emerald-700 font-bold font-mono tracking-wide group-hover:bg-emerald-50 transition-colors">
+                    {brand.cat}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* 7. GARANTÍA DE CADENA DE FRÍO & SEGURIDAD FARMACÉUTICA */}
-      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="py-16 sm:py-24 bg-white border-t border-slate-200/70 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] rounded-full bg-emerald-50/50 blur-3xl" />
+          <div className="absolute -bottom-[10%] -left-[5%] w-[40%] h-[40%] rounded-full bg-teal-50/50 blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="space-y-1 text-center max-w-3xl mx-auto"
+            className="space-y-3 text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+            <span className="text-sm font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
               03 / TRAZABILIDAD Y BIOPROTECCIÓN
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D3D20] tracking-tight">
               ¿Por Qué Comprar tus Fármacos y Dietas en VetCare?
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
+            <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
               Diferencias de grado hospitalario que protegen la salud real de tu mascota frente a tiendas convencionales.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
-                <ThermometerSnowflake className="w-6 h-6" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="group rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-xl transition-all overflow-hidden flex flex-col"
+            >
+              <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                <Image
+                  src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=600&q=80"
+                  alt="Cadena de Frío Rigurosa"
+                  fill
+                  referrerPolicy="no-referrer"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center border border-white/30">
+                    <ThermometerSnowflake className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-lg font-bold text-white leading-snug flex-1">
+                    Cadena de Frío Rigurosa
+                  </h4>
+                </div>
               </div>
-              <h4 className="text-base font-bold text-slate-900 leading-snug">
-                Cadena de Frío Rigurosa (2°C a 8°C)
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Vacunas, insulinas y probióticos conservados con monitoreo térmico continuo y alarmas digitales 24 horas. Nunca pierden su potencia biológica.
-              </p>
-            </div>
+              <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Vacunas, insulinas y probióticos conservados con monitoreo térmico continuo (2°C a 8°C) y alarmas digitales 24 horas. Nunca pierden su potencia biológica.
+                </p>
+              </div>
+            </motion.div>
 
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
-                <ShieldCheck className="w-6 h-6" />
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="group rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-xl transition-all overflow-hidden flex flex-col"
+            >
+              <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                <Image
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80"
+                  alt="Validación de Receta Médica"
+                  fill
+                  referrerPolicy="no-referrer"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center border border-white/30">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-lg font-bold text-white leading-snug flex-1">
+                    Validación de Receta
+                  </h4>
+                </div>
               </div>
-              <h4 className="text-base font-bold text-slate-900 leading-snug">
-                Validación de Receta Médica
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Cada pedido de medicación o alimento medicado es revisado por un veterinario para certificar dosis correcta, posología y evitar interacciones peligrosas.
-              </p>
-            </div>
+              <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Cada pedido de medicación o alimento medicado es revisado por un veterinario para certificar dosis correcta, posología y evitar interacciones peligrosas.
+                </p>
+              </div>
+            </motion.div>
 
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
-                <Truck className="w-6 h-6" />
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="group rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-xl transition-all overflow-hidden flex flex-col"
+            >
+              <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                <Image
+                  src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=600&q=80"
+                  alt="Despacho Exprés Hospitalario"
+                  fill
+                  referrerPolicy="no-referrer"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center border border-white/30">
+                    <Truck className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-lg font-bold text-white leading-snug flex-1">
+                    Despacho Exprés
+                  </h4>
+                </div>
               </div>
-              <h4 className="text-base font-bold text-slate-900 leading-snug">
-                Despacho Exprés Hospitalario en Quito
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Entrega rápida a domicilio en Quito urbano y valles. Envíos programados mensuales para que tu mascota nunca se quede sin su tratamiento.
-              </p>
-            </div>
+              <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Entrega rápida a domicilio en Quito urbano y valles. Envíos programados mensuales para que tu mascota nunca se quede sin su tratamiento médico continuo.
+                </p>
+              </div>
+            </motion.div>
           </div>
 
         </div>
