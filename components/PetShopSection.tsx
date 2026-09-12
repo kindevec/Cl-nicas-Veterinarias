@@ -68,11 +68,6 @@ export function PetShopSection({ products }: PetShopSectionProps) {
             transition={{ duration: 0.6 }}
             className="max-w-2xl space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>BOUTIQUE CLÍNICA &amp; NUTRICIÓN GOURMET</span>
-            </div>
-
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Nutrición de Grado Médico &amp; <span className="text-amber-300">Farmacia Especializada</span>
             </h1>

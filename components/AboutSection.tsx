@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { ShieldCheck, Award, HeartPulse, Stethoscope, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Award, HeartPulse, Stethoscope, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { buildWhatsAppUrl } from '@/lib/utils';
 
 export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: () => void }) {
@@ -58,11 +58,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
             transition={{ duration: 0.6 }}
             className="max-w-2xl space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>NUESTRA CLÍNICA &amp; FILOSOFÍA MÉDICA</span>
-            </div>
-
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Ciencia médica de vanguardia con{' '}
               <span className="text-emerald-400">vocación inquebrantable.</span>

@@ -75,12 +75,6 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7 space-y-6 text-center lg:text-left"
           >
-            {/* Top Friendly Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-emerald-200/80 text-[#1A6B38] text-xs font-bold shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-              <span>Clínica de Alta Precisión &amp; Nutrición Gourmet</span>
-            </div>
-
             {/* Headline inspired directly by PetFood reference */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0D3D20] tracking-tight leading-[1.12]">
               Salud, cuidado y amor que hacen a tu{' '}

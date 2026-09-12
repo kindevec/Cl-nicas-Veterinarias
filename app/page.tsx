@@ -178,11 +178,6 @@ export default function HomePage() {
                     transition={{ duration: 0.6 }}
                     className="max-w-2xl space-y-4"
                   >
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider">
-                      <Calendar className="w-4 h-4 text-emerald-400" />
-                      <span>AGENDAMIENTO PRIORITARIO &amp; NUTRICIÓN CLÍNICA</span>
-                    </div>
-
                     <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
                       Reserva de Turnos &amp; <span className="text-emerald-400">Nutrición WSAVA</span>
                     </h1>
