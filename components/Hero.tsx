@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { 
-  Search, 
   Sparkles, 
   ShieldCheck, 
   CheckCircle2, 
   HeartHandshake, 
-  ArrowRight,
-  Clock,
-  PhoneCall
+  ArrowRight, 
+  Clock, 
+  PhoneCall,
+  Calendar
 } from 'lucide-react';
 import { buildWhatsAppUrl } from '@/lib/utils';
 
@@ -20,17 +20,6 @@ interface HeroProps {
 }
 
 export function Hero({ onSelectServiceForBooking }: HeroProps) {
-  const [query, setQuery] = useState('');
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (query) {
-      onSelectServiceForBooking(query);
-    } else {
-      onSelectServiceForBooking('Consulta General Especializada');
-    }
-  };
-
   return (
     <section 
       id="hero" 
@@ -89,28 +78,28 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
               Atención médica hospitalaria 24 horas, quirófano estéril de alta tecnología, protocolos sin estrés Fear-Free™ y nutrición biológica personalizada.
             </p>
 
-            {/* Search Bar (Zero Box-in-Box - Direct Floating Input & Button like PetFood) */}
-            <form 
-              onSubmit={handleSearchSubmit}
-              className="relative max-w-xl mx-auto lg:mx-0 bg-white rounded-full p-1.5 shadow-lg shadow-emerald-950/5 border border-slate-200/80 flex items-center gap-2 transition-all focus-within:border-[#1A6B38] focus-within:ring-2 focus-within:ring-emerald-500/20"
-            >
-              <div className="pl-4 text-slate-400">
-                <Search className="w-5 h-5 text-emerald-700" />
-              </div>
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Buscar especialidad médica, síntoma o dieta..."
-                className="w-full bg-transparent text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none py-2"
-              />
+            {/* Direct High-Conversion Action Buttons (Clean & Direct) */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-1">
               <button
-                type="submit"
-                className="px-6 py-3 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white font-bold text-xs uppercase tracking-wider transition-all shrink-0 cursor-pointer shadow-sm hover:scale-105"
+                type="button"
+                onClick={() => onSelectServiceForBooking('Consulta Médica Especializada')}
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-950/15 hover:shadow-xl hover:scale-105 active:scale-95 flex items-center justify-center gap-2.5 cursor-pointer"
               >
-                Buscar / Agendar
+                <Calendar className="w-4 h-4 text-emerald-400" />
+                <span>Agendar Cita Médica</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
               </button>
-            </form>
+
+              <a
+                href={buildWhatsAppUrl('Urgencia Médica Inmediata 24 Horas')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-7 py-4 rounded-full bg-white hover:bg-emerald-50/80 text-[#0D3D20] border border-slate-200 font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
+                <span>Urgencias 24/7 (WhatsApp)</span>
+              </a>
+            </div>
 
             {/* 3 Value Pillars under Search Bar (like PetFood) */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-2 text-xs font-semibold text-slate-700">
