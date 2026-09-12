@@ -17,7 +17,6 @@ import {
   CheckCircle2,
   HelpCircle,
   ShieldCheck,
-  Cpu,
   Stethoscope,
   Microscope,
   Zap
@@ -492,7 +491,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className="rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between overflow-hidden relative group hover:-translate-y-1"
                 >
-                  <div className="relative h-40 w-full overflow-hidden bg-slate-100">
+                  <div className="relative h-44 w-full overflow-hidden bg-slate-100">
                     <Image
                       src={p.image}
                       alt={p.title}
@@ -500,22 +499,18 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                       referrerPolicy="no-referrer"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 flex items-center justify-between w-[calc(100%-2rem)]">
-                      <span className="text-3xl font-black text-white/90 font-mono drop-shadow-md">
-                        {p.step}
-                      </span>
-                      <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md text-white flex items-center justify-center border border-white/20 shadow-xs">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                    </div>
                   </div>
                   
                   <div className="p-6 space-y-4 flex flex-col flex-1">
-                    <div className="space-y-3">
-                      <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
-                        {p.highlight}
-                      </span>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black text-[#1A6B38] font-mono tracking-wider">
+                          PASO {p.step}
+                        </span>
+                        <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
+                          {p.highlight}
+                        </span>
+                      </div>
                       <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
                         {p.title}
                       </h4>
@@ -601,16 +596,10 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     referrerPolicy="no-referrer"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20]/80 via-transparent to-transparent opacity-80" />
                   <div className="absolute top-4 left-4">
                     <span className="text-[10px] font-bold text-[#1A6B38] bg-emerald-50/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full inline-block border border-emerald-200/60 shadow-sm">
                       {eq.badge}
                     </span>
-                  </div>
-                  <div className="absolute bottom-4 right-4">
-                    <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center border border-white/30 shadow-sm">
-                      <Cpu className="w-5 h-5" />
-                    </div>
                   </div>
                 </div>
                 
