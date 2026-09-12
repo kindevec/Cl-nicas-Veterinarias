@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient: Rich Clinical Emerald AOVET -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D3D20" />
+      <stop offset="50%" stop-color="#1A6B38" />
+      <stop offset="100%" stop-color="#0A5C36" />
+    </linearGradient>
+
+    <!-- Paw Glow Gradient -->
+    <linearGradient id="pawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E6F7F0" />
+    </linearGradient>
+
+    <!-- Gold Accent for Gourmet Detail -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for Tab Clarity -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Background Squircle / Shield Badge -->
+  <rect x="24" y="24" width="464" height="464" rx="120" fill="url(#bgGrad)" stroke="#10B981" stroke-width="12" stroke-opacity="0.5" filter="url(#shadow)" />
+
+  <!-- Outer Ring Accent -->
+  <circle cx="256" cy="256" r="215" fill="none" stroke="#34D399" stroke-width="3" stroke-dasharray="16 12" stroke-opacity="0.35" />
+
+  <!-- Paw Print Group -->
+  <g id="paw-print">
+    <!-- Toe 1 (Far Left) -->
+    <ellipse cx="140" cy="230" rx="34" ry="46" transform="rotate(-30 140 230)" fill="url(#pawGrad)" />
+    <circle cx="140" cy="230" r="10" fill="url(#goldGrad)" opacity="0.85" />
+
+    <!-- Toe 2 (Center-Left) -->
+    <ellipse cx="208" cy="165" rx="38" ry="52" transform="rotate(-12 208 165)" fill="url(#pawGrad)" />
+
+    <!-- Toe 3 (Center-Right) -->
+    <ellipse cx="304" cy="165" rx="38" ry="52" transform="rotate(12 304 165)" fill="url(#pawGrad)" />
+
+    <!-- Toe 4 (Far Right) -->
+    <ellipse cx="372" cy="230" rx="34" ry="46" transform="rotate(30 372 230)" fill="url(#pawGrad)" />
+    <circle cx="372" cy="230" r="10" fill="url(#goldGrad)" opacity="0.85" />
+
+    <!-- Main Metacarpal Paw Pad -->
+    <!-- Organic 3-lobed pad path -->
+    <path d="M 256 240 
+             C 210 240 165 270 165 325 
+             C 165 375 200 405 230 405 
+             C 245 405 252 396 256 396 
+             C 260 396 267 405 282 405 
+             C 312 405 347 375 347 325 
+             C 347 270 302 240 256 240 Z" 
+          fill="url(#pawGrad)" />
+
+    <!-- Medical Veterinary Cross Inside the Central Paw Pad -->
+    <g id="vet-cross" fill="#1A6B38">
+      <rect x="244" y="285" width="24" height="68" rx="6" />
+      <rect x="222" y="307" width="68" height="24" rx="6" />
+      <!-- Tiny Center Core in Gold -->
+      <circle cx="256" cy="319" r="4.5" fill="url(#goldGrad)" />
+    </g>
+  </g>
+</svg>

@@ -12,6 +12,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Nutrición Especializada',
   description: 'Atención médica veterinaria de alta precisión, urgencias 24/7, cirugía especializada, quirófano estéril y nutrición gourmet para perros, gatos y exóticos. Desarrollado por Kindev.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Nutrición Especializada',
     description: 'Atención médica veterinaria de alta precisión, urgencias 24/7, cirugía especializada y nutrición gourmet para perros, gatos y exóticos.',
@@ -28,6 +35,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="es" className="scroll-smooth">
       <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
