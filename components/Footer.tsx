@@ -40,12 +40,17 @@ export function Footer({ onNavigate }: FooterProps) {
           
           {/* Col 1: Brand & Socials (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-3">
-            <div 
-              onClick={() => onNavigate('inicio')}
+            <a 
+              href="#inicio"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('inicio');
+              }}
               className="cursor-pointer inline-block"
+              aria-label="Ir a Inicio"
             >
               <BrandLogo variant="full" size="md" theme="dark" />
-            </div>
+            </a>
 
             <p className="text-xs text-emerald-100/75 max-w-sm leading-relaxed">
               Hospital Veterinario Quirúrgico de Referencia con atención de urgencias 24/7, quirófano estéril de alta gama y nutrición biológica de grado médico.
@@ -122,29 +127,29 @@ export function Footer({ onNavigate }: FooterProps) {
             </h4>
             <ul className="space-y-1 text-xs text-emerald-100/70">
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="#servicios" onClick={(e) => { e.preventDefault(); onNavigate('servicios'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Urgencias 24/7 &amp; Cuidados Críticos UCI
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="#servicios" onClick={(e) => { e.preventDefault(); onNavigate('servicios'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Quirófano Quirúrgico &amp; Ortopedia
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="#servicios" onClick={(e) => { e.preventDefault(); onNavigate('servicios'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Laboratorio IDEXX In-House (30 min)
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="#servicios" onClick={(e) => { e.preventDefault(); onNavigate('servicios'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Medicina Felina Fear-Free™
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <a href="#servicios" onClick={(e) => { e.preventDefault(); onNavigate('servicios'); }} className="hover:text-white transition-colors cursor-pointer text-left block">
                   Spa &amp; Grooming Médico Dermatológico
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -156,24 +161,22 @@ export function Footer({ onNavigate }: FooterProps) {
             </h4>
             <ul className="space-y-1 text-xs text-emerald-100/70">
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors cursor-pointer text-left">
+                <a href="#petshop" onClick={(e) => { e.preventDefault(); onNavigate('petshop'); }} className="hover:text-amber-300 transition-colors cursor-pointer text-left block">
                   Dietas Renales &amp; Gastro
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors cursor-pointer text-left">
+                <a href="#petshop" onClick={(e) => { e.preventDefault(); onNavigate('petshop'); }} className="hover:text-amber-300 transition-colors cursor-pointer text-left block">
                   Snacks Mono-Proteicos
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors cursor-pointer text-left">
+                <a href="#petshop" onClick={(e) => { e.preventDefault(); onNavigate('petshop'); }} className="hover:text-amber-300 transition-colors cursor-pointer text-left block">
                   Farmacia Especializada
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('citas')} className="hover:text-amber-300 transition-colors cursor-pointer text-left">
-                  Calculadora WSAVA
-                </button>
+                <a href="#calculadora" onClick={(e) => { e.preventDefault(); onNavigate('calculadora'); }} className="hover:text-amber-300 transition-colors cursor-pointer text-left block">Calculadora WSAVA</a>
               </li>
               <li>
                 <a

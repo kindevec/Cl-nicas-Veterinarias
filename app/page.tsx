@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { Header } from '@/components/Header';
@@ -17,64 +17,119 @@ import { Footer } from '@/components/Footer';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { 
   PetProduct, 
-  Appointment 
+  Appointment,
+  CorporateTab
 } from '@/lib/types';
 import { 
   getStoredAppointments, 
   getStoredProducts 
 } from '@/lib/supabaseClient';
+import { 
+  parseTabFromHash, 
+  getHashForTab, 
+  scrollToTarget 
+} from '@/lib/navigation';
 
 export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<'inicio' | 'nosotros' | 'servicios' | 'petshop' | 'citas'>('inicio');
+  const [activeTab, setActiveTab] = useState<CorporateTab>('inicio');
   const [bookingService, setBookingService] = useState<string | undefined>(undefined);
 
-  // Appointments State
+  // Appointments & Products State
   const [appointments, setAppointments] = useState<Appointment[]>(() => getStoredAppointments());
   const [products] = useState<PetProduct[]>(() => getStoredProducts());
 
-  // Navigation Handler across the 5 Corporate Tabs
-  const handleNavigate = (tabId: string) => {
-    const validTabs: Array<'inicio' | 'nosotros' | 'servicios' | 'petshop' | 'citas'> = [
-      'inicio', 'nosotros', 'servicios', 'petshop', 'citas'
-    ];
-    
-    let mapped = tabId;
-    if (tabId === 'hero') mapped = 'inicio';
-    if (tabId === 'calculadora') mapped = 'citas';
-    if (tabId === 'agendar') mapped = 'citas';
+  // Synchronize tab state with URL hash and browser history (Back / Forward buttons)
+  useEffect(() => {
+    const syncFromUrl = (isInitial = false) => {
+      const { tab, subTarget } = parseTabFromHash(window.location.hash);
+      setActiveTab((curr) => {
+        if (curr !== tab) return tab;
+        return curr;
+      });
 
-    if (validTabs.includes(mapped as any)) {
-      setActiveTab(mapped as any);
+      // Handle smooth scrolling to target or top
+      if (subTarget) {
+        setTimeout(() => {
+          scrollToTarget(subTarget);
+        }, isInitial ? 350 : 120);
+      } else if (!isInitial) {
+        scrollToTarget(undefined);
+      }
+    };
+
+    // Initial check on load
+    syncFromUrl(true);
+
+    // Listen to browser Back / Forward events
+    const handlePopState = () => {
+      syncFromUrl(false);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
+
+  // Primary Navigation Handler across the 5 Corporate Tabs
+  const handleNavigate = useCallback((tabOrHash: string, subTarget?: string) => {
+    const { tab, subTarget: parsedSub } = parseTabFromHash(tabOrHash);
+    const finalSub = subTarget || parsedSub;
+    const targetHash = getHashForTab(tab, finalSub);
+
+    if (activeTab !== tab) {
       if (typeof window !== 'undefined') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.history.pushState({ tab, subTarget: finalSub }, '', targetHash);
+      }
+      setActiveTab(tab);
+
+      if (finalSub) {
+        setTimeout(() => {
+          scrollToTarget(finalSub);
+        }, 160);
+      } else {
+        scrollToTarget(undefined);
+      }
+    } else {
+      // Same tab: push history if hash is different, then scroll
+      if (typeof window !== 'undefined') {
+        if (window.location.hash !== targetHash) {
+          window.history.pushState({ tab, subTarget: finalSub }, '', targetHash);
+        }
+      }
+      if (finalSub) {
+        scrollToTarget(finalSub);
+      } else {
+        scrollToTarget(undefined);
       }
     }
-  };
+  }, [activeTab]);
 
   // Service Selection for Booking
-  const handleSelectServiceForBooking = (serviceName: string) => {
+  const handleSelectServiceForBooking = useCallback((serviceName: string) => {
     setBookingService(serviceName);
-    setActiveTab('citas');
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+    handleNavigate('citas', 'agendar');
+  }, [handleNavigate]);
 
   return (
     <div className="min-h-screen bg-[#FAFBF7] text-slate-900 flex flex-col selection:bg-emerald-100 selection:text-emerald-900 font-sans">
-      {/* 1. Transparent Header that Materializes Smoothly with Scroll (SmartLegal Standard) */}
+      {/* 1. Header with Full Contrast & Semantic Anchors */}
       <Header
         activeSection={activeTab}
         onNavigate={handleNavigate}
       />
 
-      {/* Main Container - Full-bleed top so hero banners sit seamlessly under the transparent header */}
+      {/* Main Container - Full-bleed top so hero banners sit seamlessly under the header */}
       <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1">
         <AnimatePresence mode="wait">
           {/* TAB 1: INICIO */}
           {activeTab === 'inicio' && (
             <motion.div
               key="tab-inicio"
+              id="inicio"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
@@ -83,7 +138,7 @@ export default function HomePage() {
               <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
               <SocialProofMetricsSection />
               
-              {/* Quick Specialties CTA Strip without Box-in-Box */}
+              {/* Quick Specialties CTA Strip */}
               <div className="py-12 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-slate-100 pt-8">
                   <div className="space-y-1 text-center md:text-left">
@@ -97,13 +152,17 @@ export default function HomePage() {
                       Descubre nuestro abanico completo de especialidades médicas avanzadas para asegurar el bienestar de tu mascota.
                     </p>
                   </div>
-                  <button
-                    onClick={() => handleNavigate('servicios')}
+                  <a
+                    href="#servicios"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavigate('servicios');
+                    }}
                     className="px-6 py-3 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer shrink-0 flex items-center gap-2"
                   >
                     <span>Ver Especialidades</span>
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -113,12 +172,13 @@ export default function HomePage() {
           {activeTab === 'nosotros' && (
             <motion.div
               key="tab-nosotros"
+              id="nosotros"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
             >
-              <AboutSection onNavigateToBooking={() => handleNavigate('citas')} />
+              <AboutSection onNavigateToBooking={() => handleNavigate('citas', 'agendar')} />
             </motion.div>
           )}
 
@@ -126,6 +186,7 @@ export default function HomePage() {
           {activeTab === 'servicios' && (
             <motion.div
               key="tab-servicios"
+              id="servicios"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
@@ -139,6 +200,7 @@ export default function HomePage() {
           {activeTab === 'petshop' && (
             <motion.div
               key="tab-petshop"
+              id="petshop"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
@@ -152,12 +214,13 @@ export default function HomePage() {
           {activeTab === 'citas' && (
             <motion.div
               key="tab-citas"
+              id="citas"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
             >
-              {/* TOP HERO BANNER for Citas & Nutrición (SmartLegal Standard) */}
+              {/* Standardized Unified Banner for Citas & Contacto */}
               <section className="relative w-full min-h-[460px] sm:min-h-[500px] pt-32 sm:pt-36 pb-14 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
                 <div className="absolute inset-0 pointer-events-none opacity-25">
                   <Image
@@ -190,13 +253,15 @@ export default function HomePage() {
               </section>
 
               {/* 1. Primary Hub: Canvas Layout for Appointments & Hospital Contact */}
-              <AppointmentScheduler
-                initialService={bookingService}
-                onAppointmentCreated={(newApt) => setAppointments((prev) => [newApt, ...prev])}
-              />
+              <div id="agendar">
+                <AppointmentScheduler
+                  initialService={bookingService}
+                  onAppointmentCreated={(newApt) => setAppointments((prev) => [newApt, ...prev])}
+                />
+              </div>
 
               {/* 2. Complementary WSAVA Clinical Nutrition Calculator */}
-              <div className="py-16 bg-white border-t border-slate-200/80">
+              <div id="calculadora-nutricional" className="py-16 bg-white border-t border-slate-200/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center space-y-2">
                   <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
                     Herramienta Médica Complementaria

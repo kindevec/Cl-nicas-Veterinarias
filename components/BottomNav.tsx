@@ -27,10 +27,14 @@ export function BottomNav({ activeSection, onNavigate }: BottomNavProps) {
           const Icon = tab.icon;
           const isActive = activeSection === tab.id;
           return (
-            <button
+            <a
               key={tab.id}
+              href={`#${tab.id}`}
               id={`m-nav-${tab.id}`}
-              onClick={() => onNavigate(tab.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(tab.id);
+              }}
               className={`relative flex flex-col items-center justify-center py-1.5 px-3 rounded-2xl transition-all cursor-pointer ${
                 isActive 
                   ? 'text-[#1A6B38] bg-emerald-50 scale-105 font-bold shadow-sm' 
@@ -43,7 +47,7 @@ export function BottomNav({ activeSection, onNavigate }: BottomNavProps) {
               <span className={`text-[10px] tracking-tight ${isActive ? 'font-bold text-[#0D3D20]' : 'font-medium'}`}>
                 {tab.label}
               </span>
-            </button>
+            </a>
           );
         })}
       </div>

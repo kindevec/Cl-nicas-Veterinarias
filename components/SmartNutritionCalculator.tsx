@@ -338,12 +338,16 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
                 <span>Pedir Asesoría Nutricional por WhatsApp</span>
               </a>
 
-              <button
-                onClick={() => onSelectServiceForBooking('Consulta Nutricional y Dieta Personalizada')}
-                className="w-full py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
+              <a
+                href="#citas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectServiceForBooking('Consulta Nutricional y Dieta Personalizada');
+                }}
+                className="w-full py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer text-center block"
               >
                 Agendar Consulta con Nutricionista
-              </button>
+              </a>
             </div>
 
           </div>

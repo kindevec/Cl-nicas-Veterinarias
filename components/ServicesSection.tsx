@@ -211,13 +211,17 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                             <span className="hidden sm:inline">WhatsApp</span>
                           </a>
 
-                          <button
-                            onClick={() => onSelectService(feat.name)}
+                          <a
+                            href="#citas"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              onSelectService(feat.name);
+                            }}
                             className="px-6 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
                           >
                             <Calendar className="w-3.5 h-3.5" />
                             <span>Agendar Turno</span>
-                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -359,13 +363,17 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                       <MessageCircle className="w-4 h-4 text-emerald-600" />
                     </a>
 
-                    <button
-                      onClick={() => onSelectService(svc.name)}
+                    <a
+                      href="#citas"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onSelectService(svc.name);
+                      }}
                       className="px-4 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
                     >
                       <span>Agendar</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -214,6 +214,25 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
             ))}
           </div>
 
+          {/* Direct CTA to Book with Specialists */}
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-[#0D3D20] text-white shadow-md">
+            <div>
+              <h4 className="text-base font-bold">¿Deseas una consulta con nuestro equipo médico?</h4>
+              <p className="text-xs text-emerald-200/80">Agenda con anticipación o acude a nuestro triage de urgencias disponible las 24 horas.</p>
+            </div>
+            <a
+              href="#citas"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateToBooking?.();
+              }}
+              className="px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer shrink-0 flex items-center gap-2"
+            >
+              <span>Agendar Consulta</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
         </div>
       </section>
     </div>

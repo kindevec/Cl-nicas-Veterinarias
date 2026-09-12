@@ -71,23 +71,32 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Brand Logo with Paw Identity - Adaptive Theme */}
-        <div 
-          onClick={() => onNavigate('inicio')}
+        <a 
+          href="#inicio"
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigate('inicio');
+          }}
           className="cursor-pointer group flex items-center shrink-0"
           id="brand-logo-btn"
+          aria-label="Ir a Inicio"
         >
           <BrandLogo variant="full" size="md" theme={isDarkHeader ? 'dark' : 'light'} />
-        </div>
+        </a>
 
         {/* Center Navigation - ZERO Box-in-Box, Thicker Bolder Typography with Dynamic Section Contrast */}
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
-              <button
+              <a
                 key={item.id}
+                href={`#${item.id}`}
                 id={`nav-${item.id}`}
-                onClick={() => onNavigate(item.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(item.id);
+                }}
                 className="relative py-1 text-sm font-bold tracking-tight transition-colors cursor-pointer group"
               >
                 <span
@@ -113,15 +122,19 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
-              </button>
+              </a>
             );
           })}
         </nav>
 
         {/* Action Controls - Clear Adaptive Primary CTA */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            onClick={() => onNavigate('citas')}
+          <a
+            href="#citas"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate('citas');
+            }}
             className={`inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full font-black text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer ${
               isDarkHeader
                 ? 'bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-amber-950/20'
@@ -130,7 +143,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           >
             <Calendar className={`w-3.5 h-3.5 ${isDarkHeader ? 'text-slate-950' : 'text-white'}`} />
             <span>Agendar Cita</span>
-          </button>
+          </a>
         </div>
 
       </div>

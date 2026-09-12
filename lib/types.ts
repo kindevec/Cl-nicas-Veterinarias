@@ -1,3 +1,5 @@
+export type CorporateTab = 'inicio' | 'nosotros' | 'servicios' | 'petshop' | 'citas';
+
 export type PetType = 'perro' | 'gato' | 'exotico';
 
 export type ProductCategory = 'todos' | 'alimento' | 'snacks' | 'farmacia' | 'accesorios';

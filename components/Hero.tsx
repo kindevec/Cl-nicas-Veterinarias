@@ -67,15 +67,18 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
 
             {/* Direct Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-3.5 pt-2">
-              <button
-                type="button"
-                onClick={() => onSelectServiceForBooking('Consulta Médica Especializada')}
+              <a
+                href="#citas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectServiceForBooking('Consulta Médica Especializada');
+                }}
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0D3D20] font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-950/20 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-[#0D3D20]" />
                 <span>Agendar Cita Médica</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
-              </button>
+              </a>
 
               <a
                 href={buildWhatsAppUrl('Urgencia Médica Inmediata 24 Horas')}
