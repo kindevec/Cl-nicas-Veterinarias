@@ -66,12 +66,18 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Sede Médica Central: Av. El Poblado # 14-80, Medellín, Colombia</span>
+                <span>Sede Matriz: Av. República del Salvador y NNUU, Edif. Titanium Plaza, Quito, Ecuador</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href={buildWhatsAppUrl('Línea Telefónica')} className="hover:text-white underline">
-                  +57 310 890 1234 (Conmutador 24/7)
+                <a href={buildWhatsAppUrl('Línea Telefónica Directa')} className="hover:text-white underline">
+                  +593 99 195 2889 (Central Kindev)
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
+                <a href="mailto:kindevx@gmail.com" className="hover:text-white underline">
+                  kindevx@gmail.com
                 </a>
               </div>
             </div>

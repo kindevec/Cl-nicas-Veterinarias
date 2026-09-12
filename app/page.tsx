@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Header } from '@/components/Header';
 import { BottomNav } from '@/components/BottomNav';
 import { Hero } from '@/components/Hero';
+import { AboutSection } from '@/components/AboutSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { SmartNutritionCalculator } from '@/components/SmartNutritionCalculator';
 import { PetShopSection } from '@/components/PetShopSection';
@@ -43,7 +45,7 @@ export default function HomePage() {
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeTab, setActiveTab] = useState<'inicio' | 'nosotros' | 'servicios' | 'petshop' | 'citas'>('inicio');
   const [bookingService, setBookingService] = useState<string | undefined>(undefined);
 
   // Database / Backoffice State with lazy initialization
@@ -101,63 +103,147 @@ export default function HomePage() {
     }
   };
 
-  // Navigation Helper
-  const handleNavigate = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  // Navigation Handler across the 5 Corporate Tabs
+  const handleNavigate = (tabId: string) => {
+    const validTabs: Array<'inicio' | 'nosotros' | 'servicios' | 'petshop' | 'citas'> = [
+      'inicio', 'nosotros', 'servicios', 'petshop', 'citas'
+    ];
+    
+    // Map legacy ids if needed
+    let mapped = tabId;
+    if (tabId === 'hero') mapped = 'inicio';
+    if (tabId === 'calculadora') mapped = 'citas';
+    if (tabId === 'agendar') mapped = 'citas';
+
+    if (validTabs.includes(mapped as any)) {
+      setActiveTab(mapped as any);
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   };
 
   // Service Selection for Booking
   const handleSelectServiceForBooking = (serviceName: string) => {
     setBookingService(serviceName);
-    handleNavigate('agendar');
+    setActiveTab('citas');
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const totalCartCount = cartItems.reduce((acc, it) => acc + it.quantity, 0);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-slate-950">
-      {/* 1. Desktop Header with Blur & Bespoke Logo */}
+      {/* 1. Desktop Header with 5-Tab Corporate Navigation */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenAdmin={() => setIsAdminOpen(true)}
-        activeSection={activeSection}
+        activeSection={activeTab}
         onNavigate={handleNavigate}
       />
 
       {/* Main Container with Anti-Overflow and Bottom Padding Mandates (pb-20 md:pb-8) */}
-      <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1">
-        {/* 1. HERO CINEMÁTICO: Destellos de luz, tipografía con micro-interacciones y bento */}
-        <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
+      <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1 pt-16 sm:pt-20">
+        <AnimatePresence mode="wait">
+          {/* TAB 1: INICIO */}
+          {activeTab === 'inicio' && (
+            <motion.div
+              key="tab-inicio"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-16"
+            >
+              <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
+              <SocialProofMetricsSection />
+              {/* Resumen Especialidades Bento */}
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/60 border border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="space-y-2 text-center md:text-left">
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Unidades Clínicas de Referencia</span>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">Quirófano estéril, UCI 24 horas y diagnóstico por imagen</h3>
+                    <p className="text-slate-300 text-sm max-w-xl">Descubre nuestro abanico completo de especialidades médicas avanzadas diseñadas para salvar vidas y asegurar el bienestar de tu mascota.</p>
+                  </div>
+                  <button
+                    onClick={() => handleNavigate('servicios')}
+                    className="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/15 cursor-pointer shrink-0"
+                  >
+                    Ver Especialidades Completas →
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
-        {/* 2. SHOWCASE ASIMÉTRICO (BENTO GRID EDITORIAL): Servicios Médicos & Quirófano */}
-        <ServicesSection onSelectService={handleSelectServiceForBooking} />
+          {/* TAB 2: NOSOTROS / LA CLÍNICA */}
+          {activeTab === 'nosotros' && (
+            <motion.div
+              key="tab-nosotros"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <AboutSection onNavigateToBooking={() => handleNavigate('citas')} />
+            </motion.div>
+          )}
 
-        {/* 3. MÓDULO INTERACTIVO BESPOKE (EL DIFERENCIADOR): Calculadora Nutricional & Slider Comparador */}
-        <SmartNutritionCalculator 
-          onSelectServiceForBooking={handleSelectServiceForBooking}
-          onAddToCart={handleAddToCart}
-        />
+          {/* TAB 3: SERVICIOS / ESPECIALIDADES */}
+          {activeTab === 'servicios' && (
+            <motion.div
+              key="tab-servicios"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-16"
+            >
+              <ServicesSection onSelectService={handleSelectServiceForBooking} />
+            </motion.div>
+          )}
 
-        {/* 4. BOUTIQUE PET SHOP GOURMET & FARMACIA ESPECIALIZADA */}
-        <PetShopSection
-          products={products}
-          onAddToCart={handleAddToCart}
-          onOpenCart={() => setIsCartOpen(true)}
-        />
+          {/* TAB 4: PET SHOP GOURMET & FARMACIA */}
+          {activeTab === 'petshop' && (
+            <motion.div
+              key="tab-petshop"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+            >
+              <PetShopSection
+                products={products}
+                onAddToCart={handleAddToCart}
+                onOpenCart={() => setIsCartOpen(true)}
+              />
+            </motion.div>
+          )}
 
-        {/* 5. PRUEBA SOCIAL & MÉTRICAS DINÁMICAS: Contadores Motion, Casos Clínicos & Acreditaciones */}
-        <SocialProofMetricsSection />
-
-        {/* 6. CONVERSIÓN & FORMULARIO SANITIZADO: Agendador en Tiempo Real */}
-        <AppointmentScheduler
-          initialService={bookingService}
-          onAppointmentCreated={(newApt) => setAppointments((prev) => [newApt, ...prev])}
-        />
+          {/* TAB 5: CITAS & CONTACTO */}
+          {activeTab === 'citas' && (
+            <motion.div
+              key="tab-citas"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-16"
+            >
+              <SmartNutritionCalculator 
+                onSelectServiceForBooking={handleSelectServiceForBooking}
+                onAddToCart={handleAddToCart}
+              />
+              <AppointmentScheduler
+                initialService={bookingService}
+                onAppointmentCreated={(newApt) => setAppointments((prev) => [newApt, ...prev])}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* Slide-over Cart Drawer */}
@@ -185,15 +271,15 @@ export default function HomePage() {
       {/* Persistent Floating WhatsApp Emergency Button */}
       <WhatsAppEmergencyFloat />
 
-      {/* Fixed Mobile Bottom Navigation Bar (< 768px) with safe area */}
+      {/* Fixed Mobile Bottom Navigation Bar (< 1024px) with 5 tabs */}
       <BottomNav
-        activeSection={activeSection}
+        activeSection={activeTab}
         onNavigate={handleNavigate}
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
       />
 
-      {/* Kindev Official Footer with Required Credit */}
+      {/* Kindev Official Footer with Required Credit and Links */}
       <Footer
         onNavigate={handleNavigate}
         onOpenAdmin={() => setIsAdminOpen(true)}

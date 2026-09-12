@@ -13,10 +13,11 @@ export function formatCOP(amount: number): string {
   }).format(amount)
 }
 
-export const VETCARE_PHONE = '573108901234'
+export const KINDEV_PHONE = '593991952889'
+export const VETCARE_PHONE = '593991952889'
 
 export function buildWhatsAppUrl(service: string = 'Urgencias 24/7', extraDetails?: string): string {
-  const baseText = `Hola VetCare, necesito atención para mi mascota en el servicio de: [${service}].`
+  const baseText = `Hola Kindev / VetCare, me contacto desde la demo web para solicitar información sobre: [${service}].`
   const text = extraDetails ? `${baseText} ${extraDetails}` : baseText
-  return `https://wa.me/${VETCARE_PHONE}?text=${encodeURIComponent(text)}`
+  return `https://wa.me/${KINDEV_PHONE}?text=${encodeURIComponent(text)}`
 }
