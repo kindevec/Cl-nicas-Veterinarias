@@ -58,12 +58,11 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-8 space-y-4 text-left"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl lg:max-w-3xl space-y-4 text-left"
             >
               <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
                 Hospital Clínico &amp; <span className="text-emerald-400">Medicina Veterinaria</span> de Vanguardia
@@ -72,40 +71,7 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
               <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
                 Más de 15 años dedicados a la excelencia médica animal, combinando tecnología quirúrgica de última generación con un trato compasivo, ético y sin estrés (Fear-Free™).
               </p>
-
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
-                  🏛️ Infraestructura Nivel III
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
-                  🔬 Certificación Fear-Free™
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
-                  ⭐ 99.4% Éxito Quirúrgico
-                </span>
-              </div>
             </motion.div>
-
-            {/* Floating Glassmorphism Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="hidden lg:flex lg:col-span-4 justify-end"
-            >
-              <div className="p-5 rounded-3xl bg-[#0D3D20]/75 backdrop-blur-xl border border-white/20 text-white max-w-xs space-y-3 shadow-2xl">
-                <div className="text-xs font-bold uppercase tracking-wider text-emerald-300 font-mono">
-                  Quirófano de Precisión
-                </div>
-                <p className="text-xs text-emerald-100/85 leading-relaxed">
-                  Cirugías guiadas por videoendoscopía, electrobisturí bipolar y monitoreo multiparamétrico continuo.
-                </p>
-                <div className="pt-2 border-t border-white/10 text-[11px] text-amber-300 font-bold">
-                  Dra. Valentina Morales • Jefa de Cirugía
-                </div>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 

@@ -54,14 +54,11 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
 
       {/* Foreground Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Left Column: Text & Primary CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-4 text-left"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl lg:max-w-3xl space-y-4 text-left"
           >
             {/* Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
@@ -102,60 +99,7 @@ export function Hero({ onSelectServiceForBooking }: HeroProps) {
                 <span>Urgencias 24/7 (WhatsApp)</span>
               </a>
             </div>
-
-            {/* 3 Value Pillars */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-3 text-xs font-semibold text-emerald-200/90">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>100% Fear-Free™ (Sin Estrés)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Especialistas Certificados</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
-                <span>Nutrición Holística &amp; Gourmet</span>
-              </div>
-            </div>
           </motion.div>
-
-          {/* Right Column: Floating Modern Glassmorphic Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="hidden lg:flex lg:col-span-5 justify-end"
-          >
-            <div className="relative p-6 rounded-3xl bg-[#0D3D20]/75 backdrop-blur-xl border border-white/20 text-white max-w-sm space-y-3.5 shadow-2xl">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-emerald-500/25 border border-emerald-400/30 flex items-center justify-center text-emerald-300">
-                    <HeartHandshake className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-white uppercase tracking-wider font-mono">Triage Hospitalario</div>
-                    <div className="text-xs text-emerald-300 font-semibold flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      Guardia Activa 24H
-                    </div>
-                  </div>
-                </div>
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
-                  Sin Cita Previa
-                </span>
-              </div>
-              <p className="text-xs text-emerald-100/85 leading-relaxed">
-                Médicos intensivistas, laboratorio IDEXX y quirófano estéril listos las 24 horas para salvar la vida de tu consentido.
-              </p>
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-emerald-200 font-medium">
-                <span>⭐ 4.9 (1.4K+ tutores)</span>
-                <span className="text-amber-300 font-bold">18.5K+ Pacientes</span>
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
       </div>
     </section>
   );

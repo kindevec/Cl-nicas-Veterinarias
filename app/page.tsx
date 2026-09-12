@@ -243,12 +243,11 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6 }}
-                      className="lg:col-span-8 space-y-4 text-left"
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="max-w-2xl lg:max-w-3xl space-y-4 text-left"
                     >
                       <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
                         Citas Médicas &amp; <span className="text-emerald-400">Contacto Oficial 24/7</span>
@@ -257,40 +256,7 @@ export default function HomePage() {
                       <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
                         Agenda tu consulta médica con especialistas certificados o comunícate de inmediato con nuestra central de guardia y triage hospitalario en Quito.
                       </p>
-
-                      <div className="flex flex-wrap items-center gap-3 pt-2">
-                        <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
-                          📅 Confirmación Inmediata
-                        </span>
-                        <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
-                          🚑 Pet Taxi &amp; Ambulancia
-                        </span>
-                        <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-emerald-200">
-                          💬 Asesoría WhatsApp 24 Horas
-                        </span>
-                      </div>
                     </motion.div>
-
-                    {/* Floating Glassmorphism Badge */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.7, delay: 0.2 }}
-                      className="hidden lg:flex lg:col-span-4 justify-end"
-                    >
-                      <div className="p-5 rounded-3xl bg-[#0D3D20]/75 backdrop-blur-xl border border-white/20 text-white max-w-xs space-y-3 shadow-2xl">
-                        <div className="text-xs font-bold uppercase tracking-wider text-emerald-300 font-mono">
-                          Atención Inmediata
-                        </div>
-                        <p className="text-xs text-emerald-100/85 leading-relaxed">
-                          Sin filas ni esperas para urgencias. Nuestro equipo de triage recibe a tu mascota al ingresar.
-                        </p>
-                        <div className="pt-2 border-t border-white/10 text-[11px] text-amber-300 font-bold">
-                          Central Telefónica: +593 99 195 2889
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
                 </div>
               </section>
 

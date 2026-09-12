@@ -70,12 +70,11 @@ export function PetShopSection({ products }: PetShopSectionProps) {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-8 space-y-4 text-left"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl lg:max-w-3xl space-y-4 text-left"
             >
               <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
                 Nutrición Médica, <span className="text-emerald-400">Dietas Prescritas</span> &amp; Pet Shop Gourmet
@@ -84,40 +83,7 @@ export function PetShopSection({ products }: PetShopSectionProps) {
               <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
                 Alimentación biológica super premium, fármacos veterinarios regulados, nutracéuticos y accesorios ergonómicos certificados para el bienestar integral.
               </p>
-
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-amber-300">
-                  🥩 Proteína Hidrolizada Grado A
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-amber-300">
-                  🌾 Cero Gluten &amp; Colorantes
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold text-amber-300">
-                  🚚 Envío Express a Domicilio
-                </span>
-              </div>
             </motion.div>
-
-            {/* Floating Glassmorphism Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="hidden lg:flex lg:col-span-4 justify-end"
-            >
-              <div className="p-5 rounded-3xl bg-[#0D3D20]/75 backdrop-blur-xl border border-white/20 text-white max-w-xs space-y-3 shadow-2xl">
-                <div className="text-xs font-bold uppercase tracking-wider text-amber-300 font-mono">
-                  Garantía Nutricional
-                </div>
-                <p className="text-xs text-emerald-100/85 leading-relaxed">
-                  Fórmulas avaladas por dietistas veterinarios con palatabilidad superior comprobada para pacientes exigentes.
-                </p>
-                <div className="pt-2 border-t border-white/10 text-[11px] text-emerald-300 font-bold">
-                  Dra. Sofía Rueda • Nutrición Clínica
-                </div>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 
