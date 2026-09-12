@@ -25,50 +25,95 @@ export function BrandLogo({
 
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
-      {/* Bespoke Geometric SVG Isotipo */}
+      {/* Official Paw Favicon Emblem as Main Logo Isotipo */}
       <div 
-        className={`relative ${sizeClasses.box} rounded-2xl ${
-          isLight 
-            ? 'bg-gradient-to-br from-emerald-50 via-white to-teal-50 border border-emerald-200/80 shadow-md shadow-emerald-900/5' 
-            : 'bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950/80 border border-emerald-500/30 shadow-lg'
-        } p-0.5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300`}
+        className={`relative ${sizeClasses.box} shrink-0 group-hover:scale-105 transition-transform duration-300 drop-shadow-sm`}
       >
-        <svg
-          viewBox="0 0 40 40"
-          fill="none"
+        <svg 
+          viewBox="0 0 512 512" 
+          width="100%" 
+          height="100%"
+          className="w-full h-full block"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full p-1.5 relative z-10"
         >
           <defs>
-            <linearGradient id="kindevVetCross" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1A6B38" />
-              <stop offset="100%" stopColor="#059669" />
+            <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0D3D20" />
+              <stop offset="50%" stopColor="#1A6B38" />
+              <stop offset="100%" stopColor="#0A5C36" />
             </linearGradient>
-            <linearGradient id="kindevPetGourmet" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#D97706" />
+
+            <linearGradient id="logoPawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="100%" stopColor="#E6F7F0" />
             </linearGradient>
-            <radialGradient id="pawGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#34D399" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#34D399" stopOpacity="0" />
-            </radialGradient>
+
+            <linearGradient id="logoGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FCD34D" />
+              <stop offset="100%" stopColor="#F59E0B" />
+            </linearGradient>
           </defs>
 
-          {/* Glowing Backing */}
-          <circle cx="20" cy="20" r="16" fill="url(#pawGlow)" />
+          {/* Background Squircle Badge */}
+          <rect 
+            x="24" 
+            y="24" 
+            width="464" 
+            height="464" 
+            rx="120" 
+            fill="url(#logoBgGrad)" 
+            stroke="#10B981" 
+            strokeWidth="14" 
+            strokeOpacity="0.55" 
+          />
 
-          {/* Minimalist Veterinary Medical Cross */}
-          <rect x="16.5" y="7" width="7" height="26" rx="3.5" fill="url(#kindevVetCross)" />
-          <rect x="7" y="16.5" width="26" height="7" rx="3.5" fill="url(#kindevVetCross)" />
+          {/* Outer Dashed Accent Ring */}
+          <circle 
+            cx="256" 
+            cy="256" 
+            r="215" 
+            fill="none" 
+            stroke="#34D399" 
+            strokeWidth="4" 
+            strokeDasharray="18 12" 
+            strokeOpacity="0.4" 
+          />
 
-          {/* Organic Intersecting Paw Pad Detail */}
-          <circle cx="20" cy="20" r="3.2" fill={isLight ? "#FFFFFF" : "#020617"} />
-          
-          {/* Golden Gourmet Pet Accent Nodes */}
-          <circle cx="13" cy="13" r="2.2" fill="url(#kindevPetGourmet)" />
-          <circle cx="27" cy="13" r="2.2" fill="url(#kindevPetGourmet)" />
-          <circle cx="13" cy="27" r="1.8" fill="#10B981" />
-          <circle cx="27" cy="27" r="1.8" fill="#10B981" />
+          {/* Paw Print Group */}
+          <g id="logo-paw-print">
+            {/* Toe 1 (Far Left) */}
+            <ellipse cx="140" cy="230" rx="34" ry="46" transform="rotate(-30 140 230)" fill="url(#logoPawGrad)" />
+            <circle cx="140" cy="230" r="10" fill="url(#logoGoldGrad)" opacity="0.9" />
+
+            {/* Toe 2 (Center-Left) */}
+            <ellipse cx="208" cy="165" rx="38" ry="52" transform="rotate(-12 208 165)" fill="url(#logoPawGrad)" />
+
+            {/* Toe 3 (Center-Right) */}
+            <ellipse cx="304" cy="165" rx="38" ry="52" transform="rotate(12 304 165)" fill="url(#logoPawGrad)" />
+
+            {/* Toe 4 (Far Right) */}
+            <ellipse cx="372" cy="230" rx="34" ry="46" transform="rotate(30 372 230)" fill="url(#logoPawGrad)" />
+            <circle cx="372" cy="230" r="10" fill="url(#logoGoldGrad)" opacity="0.9" />
+
+            {/* Main Metacarpal Paw Pad */}
+            <path 
+              d="M 256 240 
+                 C 210 240 165 270 165 325 
+                 C 165 375 200 405 230 405 
+                 C 245 405 252 396 256 396 
+                 C 260 396 267 405 282 405 
+                 C 312 405 347 375 347 325 
+                 C 347 270 302 240 256 240 Z" 
+              fill="url(#logoPawGrad)" 
+            />
+
+            {/* Medical Veterinary Cross Inside the Central Paw Pad */}
+            <g id="logo-vet-cross" fill="#1A6B38">
+              <rect x="244" y="285" width="24" height="68" rx="6" />
+              <rect x="222" y="307" width="68" height="24" rx="6" />
+              <circle cx="256" cy="319" r="4.5" fill="url(#logoGoldGrad)" />
+            </g>
+          </g>
         </svg>
       </div>
 
@@ -77,7 +122,7 @@ export function BrandLogo({
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
             <span className={`${sizeClasses.text} font-black tracking-tight ${isLight ? 'text-[#0D3D20]' : 'text-white'} font-sans leading-none`}>
-              Vet<span className="text-[#059669]">Care</span>
+              Vet<span className="text-[#1A6B38]">Care</span>
             </span>
             <span className={`${sizeClasses.badge} font-bold rounded-full ${
               isLight 
@@ -88,8 +133,8 @@ export function BrandLogo({
             </span>
           </div>
           {variant === 'full' && (
-            <span className={`text-[10px] sm:text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-slate-400'} tracking-wide mt-1`}>
-              Clínica de Alta Complejidad &amp; Nutrición
+            <span className={`text-[10px] sm:text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-emerald-200/70'} tracking-wide mt-1`}>
+              Clínica de Alta Precisión &amp; Nutrición
             </span>
           )}
         </div>
