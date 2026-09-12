@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
+@theme {
+  --color-vet-primary: #1A6B38;
+  --color-vet-dark: #0D3D20;
+  --color-vet-accent: #10B981;
+  --color-vet-mint: #E6F7F0;
+  --color-vet-gold: #F59E0B;
+  --color-vet-danger: #EF4444;
+  --color-vet-bg: #F8FAFC;
+  --color-vet-surface: #FFFFFF;
+}
+
 @layer utilities {
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom, 1rem);
   }
+
+  .glass-card-light {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(226, 232, 240, 0.85);
+  }
+
+  .glass-header-light {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  }
+
+  .glow-emerald-soft {
+    box-shadow: 0 10px 35px -10px rgba(16, 185, 129, 0.2);
+  }
+
+  .glow-gold-soft {
+    box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.22);
+  }
 }
 
-/* Custom scrollbar for drawer and bento grids */
+/* Custom scrollbar clean medical aesthetic */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(2, 6, 23, 0.6);
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.5);
+  background: #10B981;
 }

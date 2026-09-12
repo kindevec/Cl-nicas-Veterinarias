@@ -2,7 +2,7 @@ import type {Metadata, Viewport} from 'next';
 import './globals.css';
 
 export const viewport: Viewport = {
-  themeColor: '#020617',
+  themeColor: '#1A6B38',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -10,24 +10,29 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Pet Shop Especializado',
-  description: 'Atención médica veterinaria integral de urgencias 24/7, cirugía especializada, farmacia y nutrición gourmet para perros, gatos y exóticos. Desarrollado por Kindev.',
+  title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Nutrición Especializada',
+  description: 'Atención médica veterinaria de alta precisión, urgencias 24/7, cirugía especializada, quirófano estéril y nutrición gourmet para perros, gatos y exóticos. Desarrollado por Kindev.',
   openGraph: {
-    title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Pet Shop Especializado',
-    description: 'Atención médica veterinaria integral de urgencias 24/7, cirugía especializada, farmacia y nutrición gourmet para perros, gatos y exóticos.',
+    title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Nutrición Especializada',
+    description: 'Atención médica veterinaria de alta precisión, urgencias 24/7, cirugía especializada y nutrición gourmet para perros, gatos y exóticos.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Pet Shop Especializado',
+    title: 'VetCare & Pet Gourmet | Clínica Veterinaria 24/7 & Nutrición Especializada',
     description: 'Atención médica veterinaria de urgencias 24/7 y pet shop gourmet especializado.',
   },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="es" className="dark scroll-smooth">
-      <body className="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-300 min-h-screen" suppressHydrationWarning>
+    <html lang="es" className="scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      </head>
+      <body className="bg-[#F8FAFC] text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900 min-h-screen" suppressHydrationWarning>
         {children}
       </body>
     </html>

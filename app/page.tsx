@@ -15,6 +15,7 @@ import { CartDrawer } from '@/components/CartDrawer';
 import { AdminBackofficeModal } from '@/components/AdminBackofficeModal';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
 import { Footer } from '@/components/Footer';
+import { ArrowRight } from 'lucide-react';
 import { 
   CartItem, 
   PetProduct, 
@@ -109,7 +110,6 @@ export default function HomePage() {
       'inicio', 'nosotros', 'servicios', 'petshop', 'citas'
     ];
     
-    // Map legacy ids if needed
     let mapped = tabId;
     if (tabId === 'hero') mapped = 'inicio';
     if (tabId === 'calculadora') mapped = 'citas';
@@ -135,7 +135,7 @@ export default function HomePage() {
   const totalCartCount = cartItems.reduce((acc, it) => acc + it.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-slate-950">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col selection:bg-emerald-100 selection:text-emerald-900 font-sans">
       {/* 1. Desktop Header with 5-Tab Corporate Navigation */}
       <Header
         cartCount={totalCartCount}
@@ -145,7 +145,7 @@ export default function HomePage() {
         onNavigate={handleNavigate}
       />
 
-      {/* Main Container with Anti-Overflow and Bottom Padding Mandates (pb-20 md:pb-8) */}
+      {/* Main Container with Anti-Overflow and Bottom Navigation Padding Mandates (pb-20 md:pb-8) */}
       <main className="overflow-x-hidden w-full pb-20 md:pb-8 flex-1 pt-16 sm:pt-20">
         <AnimatePresence mode="wait">
           {/* TAB 1: INICIO */}
@@ -160,19 +160,21 @@ export default function HomePage() {
             >
               <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
               <SocialProofMetricsSection />
-              {/* Resumen Especialidades Bento */}
+              
+              {/* Summary Banner Especialidades */}
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="p-8 sm:p-12 rounded-3xl bg-slate-900/60 border border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
                   <div className="space-y-2 text-center md:text-left">
-                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Unidades Clínicas de Referencia</span>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white">Quirófano estéril, UCI 24 horas y diagnóstico por imagen</h3>
-                    <p className="text-slate-300 text-sm max-w-xl">Descubre nuestro abanico completo de especialidades médicas avanzadas diseñadas para salvar vidas y asegurar el bienestar de tu mascota.</p>
+                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Unidades Clínicas de Referencia</span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">Quirófano estéril AOVET, UCI 24 horas y diagnóstico por imagen</h3>
+                    <p className="text-slate-600 text-sm max-w-xl">Descubre nuestro abanico completo de especialidades médicas avanzadas diseñadas para salvar vidas y asegurar el bienestar de tu mascota.</p>
                   </div>
                   <button
                     onClick={() => handleNavigate('servicios')}
-                    className="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/15 cursor-pointer shrink-0"
+                    className="px-6 py-3.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 cursor-pointer shrink-0 flex items-center gap-2"
                   >
-                    Ver Especialidades Completas →
+                    <span>Ver Especialidades Completas</span>
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -256,7 +258,7 @@ export default function HomePage() {
         onClearCart={handleClearCart}
       />
 
-      {/* Supabase Backoffice Administration Modal with RLS & Realtime */}
+      {/* Supabase Backoffice Administration Modal */}
       <AdminBackofficeModal
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
@@ -279,7 +281,7 @@ export default function HomePage() {
         onOpenCart={() => setIsCartOpen(true)}
       />
 
-      {/* Kindev Official Footer with Required Credit and Links */}
+      {/* Kindev Official Footer */}
       <Footer
         onNavigate={handleNavigate}
         onOpenAdmin={() => setIsAdminOpen(true)}

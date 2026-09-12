@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { 
@@ -9,15 +9,13 @@ import {
   Activity, 
   Sparkles, 
   PhoneCall, 
-  CalendarClock, 
+  Calendar, 
   ShieldCheck, 
   Clock, 
-  ChevronRight,
+  CheckCircle2, 
+  AlertTriangle,
   HeartPulse,
-  Award,
-  Star,
-  CheckCircle2,
-  Zap
+  Award
 } from 'lucide-react';
 import { buildWhatsAppUrl } from '@/lib/utils';
 
@@ -25,307 +23,183 @@ interface HeroProps {
   onSelectServiceForBooking: (serviceName: string) => void;
 }
 
-const QUICK_SERVICES = [
-  { id: 'consulta', name: 'Consulta Especializada', icon: Stethoscope, tag: 'Medicina Interna' },
-  { id: 'vacunacion', name: 'Vacunación & Chip', icon: Syringe, tag: 'Biológicos ISO' },
-  { id: 'cirugia', name: 'Cirugía & UCI 24/7', icon: Activity, tag: 'Quirófano Estéril' },
-  { id: 'grooming', name: 'Spa & Grooming', icon: Sparkles, tag: 'Fear-Free™' },
-];
-
-const TUTOR_AVATARS = [
-  { name: 'Dra. Carolina M.', src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80' },
-  { name: 'Dr. Santiago R.', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80' },
-  { name: 'Mariana G.', src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80' },
-  { name: 'Felipe V.', src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80' },
-];
-
 export function Hero({ onSelectServiceForBooking }: HeroProps) {
-  const [selectedQuickService, setSelectedQuickService] = useState('Urgencia Veterinaria Inmediata');
+  const emergencyWaUrl = buildWhatsAppUrl('🚨 URGENCIAS VETERINARIAS 24/7 - Solicito ingreso prioritario para mi mascota');
 
   return (
-    <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-      
-      {/* 1. ATMOSPHERIC MULTI-LAYERED BACKGROUND */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        {/* Cinematic Backdrop Image with High Resolution */}
-        <div className="absolute inset-0 opacity-25 mix-blend-luminosity">
-          <Image
-            src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=2000&q=80"
-            alt="Clínica Veterinaria Quirúrgica VetCare"
-            fill
-            priority
-            className="object-cover object-center"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-
-        {/* Deep Gradient Overlays (Zero Flat Backgrounds) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/95 to-slate-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(2,6,23,0.95))]" />
-
-        {/* Ambient Glow Orbs */}
-        <div className="absolute -top-32 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-48 right-10 w-[420px] h-[420px] bg-amber-500/12 rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 left-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
-      </div>
+    <section 
+      id="hero" 
+      className="relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-100/60 via-[#F8FAFC] to-[#F8FAFC] pt-12 pb-16 md:pt-20 md:pb-24"
+    >
+      {/* Ambient background glow orbs */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-40 -right-20 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-10 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Main Editorial Left Column (lg:col-span-7) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 24 }}
+          {/* Left Text & Actions Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="lg:col-span-7 space-y-7"
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 space-y-6 text-center lg:text-left"
           >
-            
-            {/* Status Beacon Badge */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.04] border border-emerald-500/30 text-emerald-300 text-xs font-semibold backdrop-blur-xl shadow-lg shadow-emerald-950/50">
+            {/* Top Status Beacon Pill */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#1A6B38] text-xs font-bold uppercase tracking-wider shadow-sm">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
               </span>
-              <span className="font-bold text-white tracking-wide">Triage Quirúrgico 24/7 Activo</span>
-              <span className="text-slate-600">•</span>
-              <span className="text-emerald-300 flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-emerald-400" /> Ingreso Prioritario &lt; 5 min
+              <span>Triage Quirúrgico 24/7 Activo</span>
+              <span className="text-emerald-300">•</span>
+              <span className="text-emerald-700 flex items-center gap-1 font-semibold">
+                <Clock className="w-3.5 h-3.5 text-emerald-600" /> Ingreso Prioritario &lt; 5 min
               </span>
             </div>
 
-            {/* Impactful Clamp Headline with Typography Contrast */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
-              Medicina Animal de{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-200">
-                Alta Complejidad
+            {/* Main H1 Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0D3D20] tracking-tight leading-[1.12]">
+              Medicina veterinaria de{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A6B38] via-[#059669] to-[#10B981]">
+                alta precisión
               </span>{' '}
-              &amp; Boutique{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">
-                Pet Gourmet
-              </span>
+              y cuidado empático.
             </h1>
 
-            {/* Editorial Lead Paragraph */}
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
-              Hospitalización continua, quirófano estéril clase A, diagnóstico de laboratorio IDEXX en 20 minutos y farmacia de nutrición especializada para la longevidad de tu mascota.
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+              En <strong className="text-[#0D3D20] font-bold">VetCare &amp; Pet Gourmet</strong> combinamos quirófanos estériles de presión positiva, diagnóstico ecográfico Doppler y protocolos <strong className="text-[#1A6B38]">Fear-Free™</strong> para garantizar tratamientos indoloros en un ambiente libre de ansiedad.
             </p>
 
-            {/* Social Proof Quick Strip (Integrated into Hero) */}
-            <div className="flex flex-wrap items-center gap-4 pt-1">
-              <div className="flex -space-x-2.5 overflow-hidden">
-                {TUTOR_AVATARS.map((avatar, idx) => (
-                  <div key={idx} className="inline-block relative w-9 h-9 rounded-full ring-2 ring-slate-950 overflow-hidden bg-slate-800">
-                    <Image
-                      src={avatar.src}
-                      alt={avatar.name}
-                      fill
-                      className="object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                ))}
+            {/* Feature Highlights Grid (Clean White Glass Pills - Cielo Dental Style) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 max-w-xl mx-auto lg:mx-0">
+              <div className="flex items-center gap-2 p-2.5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-xs font-semibold text-slate-800">Quirófano Estéril ISO</span>
               </div>
-
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1 text-amber-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
-                  ))}
-                  <span className="text-white font-extrabold text-xs ml-1">4.9 / 5.0</span>
-                </div>
-                <span className="text-[11px] text-slate-400 font-medium">
-                  +4,800 familias y pacientes asistidos con éxito
-                </span>
+              <div className="flex items-center gap-2 p-2.5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-xs font-semibold text-slate-800">Ecografía Doppler 3D</span>
+              </div>
+              <div className="flex items-center gap-2 p-2.5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-xs font-semibold text-slate-800">UCI 24/7 Monitoreada</span>
+              </div>
+              <div className="flex items-center gap-2 p-2.5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-xs font-semibold text-slate-800">Manejo Fear-Free™</span>
+              </div>
+              <div className="flex items-center gap-2 p-2.5 rounded-2xl bg-white border border-emerald-100 shadow-sm col-span-2 sm:col-span-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-xs font-semibold text-slate-800">Nutrición &amp; Dietas de Prescripción</span>
               </div>
             </div>
 
-            {/* Interactive Quick Service Triage Selector */}
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Zap className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Selecciona la especialidad de atención requerida:</span>
-                </label>
-              </div>
+            {/* Dual Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-3">
+              {/* Primary Solid Button: Agendar Cita */}
+              <button
+                onClick={() => onSelectServiceForBooking('Consulta Médica Especializada')}
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/20 hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2.5 cursor-pointer group"
+              >
+                <Calendar className="w-5 h-5 text-emerald-300 group-hover:scale-110 transition-transform" />
+                <span>Agendar Cita Médica</span>
+              </button>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                {QUICK_SERVICES.map((svc) => {
-                  const Icon = svc.icon;
-                  const isSelected = selectedQuickService === svc.name;
-                  return (
-                    <button
-                      key={svc.id}
-                      type="button"
-                      id={`quick-svc-${svc.id}`}
-                      onClick={() => setSelectedQuickService(svc.name)}
-                      className={`p-3.5 rounded-2xl text-left border transition-all flex flex-col justify-between h-28 relative overflow-hidden group cursor-pointer ${
-                        isSelected
-                          ? 'bg-emerald-500/15 border-emerald-400/60 text-white shadow-xl shadow-emerald-950/40'
-                          : 'bg-white/[0.03] hover:bg-white/[0.07] border-white/10 text-slate-300 hover:text-white hover:border-white/20'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between w-full relative z-10">
-                        <div className={`p-2 rounded-xl ${isSelected ? 'bg-emerald-500/20 text-emerald-300' : 'bg-white/5 text-slate-400 group-hover:text-white'}`}>
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400 font-medium">
-                          {svc.tag}
-                        </span>
-                      </div>
-                      <span className="text-xs font-bold leading-snug relative z-10">{svc.name}</span>
-                      
-                      {isSelected && (
-                        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-400" />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* CTAs with Micro-Interactions */}
-            <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
+              {/* Secondary Red Button: Servicios de Urgencia 24/7 */}
               <a
-                id="hero-whatsapp-emergency-cta"
-                href={buildWhatsAppUrl(selectedQuickService)}
+                href={emergencyWaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm tracking-wide shadow-xl shadow-emerald-500/25 hover:scale-105 active:scale-95 transition-all group"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full border-2 border-red-500 text-red-600 hover:bg-red-50 font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 cursor-pointer group hover:border-red-600"
               >
-                <PhoneCall className="w-4 h-4 text-slate-950 stroke-[2.5]" />
-                <span>Contactar Urgencia WhatsApp</span>
-                <ChevronRight className="w-4 h-4 text-slate-950 group-hover:translate-x-1 transition-transform" />
+                <AlertTriangle className="w-5 h-5 text-red-500 group-hover:scale-110 transition-transform animate-pulse" />
+                <span>Urgencias 24 Horas</span>
               </a>
+            </div>
 
-              <button
-                type="button"
-                id="hero-book-appointment-cta"
-                onClick={() => onSelectServiceForBooking(selectedQuickService)}
-                className="flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] text-white font-bold text-sm border border-white/15 hover:border-emerald-400/40 backdrop-blur-md shadow-lg shadow-black/40 hover:scale-105 active:scale-95 transition-all"
+            {/* Direct Phone Call Context */}
+            <div className="pt-2 flex items-center justify-center lg:justify-start gap-2 text-xs text-slate-500">
+              <Clock className="w-3.5 h-3.5 text-emerald-600" />
+              <span>¿Emergencia en camino? Triage telefónico inmediato:</span>
+              <a
+                href="tel:+593991952889"
+                className="font-bold text-[#1A6B38] underline hover:text-[#0D3D20]"
               >
-                <CalendarClock className="w-4 h-4 text-emerald-400" />
-                <span>Agendar Consulta Médica</span>
-              </button>
+                +593 99 195 2889
+              </a>
             </div>
-
-            {/* Trust Badges Strip */}
-            <div className="flex flex-wrap items-center gap-5 sm:gap-7 pt-4 text-xs text-slate-400 border-t border-white/10">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span className="text-slate-300">Staff MVZ Acreditado</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <HeartPulse className="w-4 h-4 text-rose-400" />
-                <span className="text-slate-300">Monitoreo Multiparámetro</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Award className="w-4 h-4 text-amber-400" />
-                <span className="text-slate-300">Nutrición Certificada AAFCO</span>
-              </div>
-            </div>
-
           </motion.div>
 
-          {/* Right Showcase Column (lg:col-span-5) - Cinematic Asymmetric Bento Layout */}
-          <motion.div 
+          {/* Right Image & Floating Visual Cards (Clean Cielo Dental Style) */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5 space-y-4"
+            className="lg:col-span-5 relative"
           >
-            {/* Featured Hero Card: Quirófano Inteligente */}
-            <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-slate-900/80 backdrop-blur-xl p-6 sm:p-7 shadow-2xl shadow-black/60 group hover:border-emerald-500/40 transition-all">
-              
-              {/* Image Preview Window */}
-              <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-5 bg-slate-950">
+            {/* Main Clinical Doctor & Pet Container */}
+            <div className="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-emerald-50 to-teal-50 group">
+              <div className="relative w-full h-[420px] sm:h-[480px]">
                 <Image
-                  src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=1200&q=80"
-                  alt="Quirófano Veterinario de Alta Complejidad"
+                  src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1200&q=85"
+                  alt="Doctora veterinaria examinando con amor a una mascota en clínica moderna"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  priority
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 500px"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
-                
-                <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[11px] font-bold backdrop-blur-md">
-                  Quirófano Clase A ISO
-                </div>
-
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
-                  <span className="font-semibold flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Quirófano en Guardia Activa
-                  </span>
-                  <span className="font-mono text-emerald-300 bg-black/50 px-2 py-0.5 rounded text-[10px]">
-                    24/7 STANDBY
-                  </span>
-                </div>
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
-                Unidad Quirúrgica &amp; Cuidado Crítico
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed mb-5">
-                Monitor multiparámetro, anestesia inhalatoria isoflurano computarizada y generador de oxígeno criogénico autónomo.
-              </p>
+              {/* Gradient Overlay at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20]/80 via-transparent to-transparent opacity-80" />
 
-              {/* Metrics Bar */}
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <div className="text-2xl font-black text-emerald-400">99.4%</div>
-                  <div className="text-[11px] text-slate-400 font-medium">Éxito en Intervenciones</div>
-                </div>
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <div className="text-2xl font-black text-amber-400">20 min</div>
-                  <div className="text-[11px] text-slate-400 font-medium">Hemograma IDEXX In-House</div>
-                </div>
+              {/* Bottom Caption inside Image */}
+              <div className="absolute bottom-4 left-4 right-4 text-white p-3.5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/20">
+                <p className="text-xs font-bold flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  Dra. Carolina Martínez &amp; Equipo Quirúrgico
+                </p>
+                <p className="text-[11px] text-emerald-100 opacity-90 mt-0.5">
+                  Especialistas certificados por AOVET en cirugía ortopédica y UCI felina/canina.
+                </p>
               </div>
             </div>
 
-            {/* Split Bottom Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
-              {/* Pet Gourmet Capsule */}
-              <div className="rounded-3xl border border-white/15 bg-slate-900/80 backdrop-blur-xl p-5 hover:border-amber-400/50 transition-all flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30 tracking-wider">
-                      PET GOURMET
-                    </span>
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                  </div>
-                  <h4 className="text-sm font-bold text-white mb-1">Nutrición Clínica</h4>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Dietas renales, gastroentéricas y snacks 100% monoproteicos.
-                  </p>
-                </div>
-                <div className="text-xs font-bold text-amber-400 mt-4 flex items-center gap-1">
-                  <span>+250 Referencias</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </div>
+            {/* Floating Card 1: Fear-Free™ Certificado (Top Left) */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="absolute -top-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl shadow-xl border border-emerald-200/80 hidden sm:flex items-center gap-3 z-20"
+            >
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#1A6B38] flex items-center justify-center font-bold text-lg shrink-0">
+                <Sparkles className="w-5 h-5 text-[#1A6B38]" />
               </div>
-
-              {/* Fear Free Protocol Capsule */}
-              <div className="rounded-3xl border border-white/15 bg-slate-900/80 backdrop-blur-xl p-5 hover:border-teal-400/50 transition-all flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-teal-400/15 text-teal-300 border border-teal-400/30 tracking-wider">
-                      FEAR-FREE™
-                    </span>
-                    <ShieldCheck className="w-4 h-4 text-teal-400" />
-                  </div>
-                  <h4 className="text-sm font-bold text-white mb-1">Salas Cat-Friendly</h4>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Aislamiento acústico y feromonas ambientales relajantes.
-                  </p>
-                </div>
-                <div className="text-xs font-bold text-teal-400 mt-4 flex items-center gap-1">
-                  <span>Cero Estrés Animal</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </div>
+              <div>
+                <p className="text-xs font-bold text-[#0D3D20]">Fear-Free™ Certificado</p>
+                <p className="text-[10px] text-slate-500">Manejo sin estrés ni dolor</p>
               </div>
+            </motion.div>
 
-            </div>
-
+            {/* Floating Card 2: Respuesta Inmediata WhatsApp (Bottom Right) */}
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-emerald-200/80 flex items-center gap-3 z-20"
+            >
+              <div className="p-2.5 rounded-xl bg-[#1A6B38] text-white shrink-0 shadow-md">
+                <PhoneCall className="w-4 h-4" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-[#0D3D20]">Triage Inmediato</p>
+                <p className="text-[10px] text-slate-500">WhatsApp Médico &lt; 3 min</p>
+              </div>
+            </motion.div>
           </motion.div>
 
         </div>

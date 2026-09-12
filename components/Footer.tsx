@@ -13,6 +13,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { VETCARE_PHONE, buildWhatsAppUrl } from '@/lib/utils';
+import { BrandLogo } from './BrandLogo';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -33,45 +34,38 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
   };
 
   return (
-    <footer id="main-footer" className="bg-slate-950 border-t border-white/10 pt-16 pb-12 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <footer id="main-footer" className="bg-[#0D3D20] text-slate-200 border-t border-emerald-900/60 pt-16 pb-12 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-emerald-800/40">
           
           {/* Brand Col (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center border border-emerald-400/30">
-                <HeartPulse className="w-5 h-5 text-slate-950 stroke-[2.5]" />
-              </div>
-              <div>
-                <span className="text-xl font-bold tracking-tight text-white">
-                  Vet<span className="text-emerald-400">Care</span>
-                </span>
-                <span className="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30">
-                  PET GOURMET
-                </span>
-              </div>
+            <div 
+              onClick={() => onNavigate('inicio')}
+              className="cursor-pointer inline-block"
+            >
+              <BrandLogo variant="full" size="md" theme="dark" />
             </div>
 
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Centro hospitalario veterinario de referencia médica de alta complejidad con servicio de urgencias 24/7, unidad de cuidados intensivos, quirófano estéril y boutique de nutrición gourmet especializada.
+            <p className="text-xs text-emerald-100/80 max-w-sm leading-relaxed">
+              Hospital Veterinario Quirúrgico de Referencia con atención ininterrumpida de urgencias 24/7, unidad de cuidados intensivos, quirófano estéril AOVET y nutrición biológica de grado médico.
             </p>
 
-            <div className="space-y-2 text-xs text-slate-300 pt-2">
+            <div className="space-y-2 text-xs text-emerald-100/90 pt-2">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Urgencias &amp; Hospitalización: Abierto 24 Horas / 365 Días</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Sede Matriz: Av. República del Salvador y NNUU, Edif. Titanium Plaza, Quito, Ecuador</span>
+                <span>Av. República del Salvador y NNUU, Edif. Titanium Plaza, Quito, Ecuador</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a href={buildWhatsAppUrl('Línea Telefónica Directa')} className="hover:text-white underline">
-                  +593 99 195 2889 (Central Kindev)
+                  +593 99 195 2889 (Central Oficial Kindev)
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -85,32 +79,32 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
 
           {/* Nav Services Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Servicios Clínicos
+            <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-300 font-mono">
+              Especialidades Clínicas
             </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
+            <ul className="space-y-2 text-xs text-emerald-100/70">
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-emerald-400 transition-colors">
+                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer">
                   Urgencias 24/7 &amp; UCI
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-emerald-400 transition-colors">
-                  Quirófano &amp; Traumatología
+                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer">
+                  Quirófano AOVET &amp; Ortopedia
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-emerald-400 transition-colors">
-                  Laboratorio IDEXX 20 min
+                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer">
+                  Laboratorio IDEXX In-House
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-emerald-400 transition-colors">
+                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer">
                   Medicina Felina Fear-Free
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('servicios')} className="hover:text-emerald-400 transition-colors">
+                <button onClick={() => onNavigate('servicios')} className="hover:text-white transition-colors cursor-pointer">
                   Spa &amp; Grooming Médico
                 </button>
               </li>
@@ -119,32 +113,32 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
 
           {/* Pet Gourmet Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300">
-              Pet Shop Especializado
+            <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 font-mono">
+              Pet Gourmet &amp; Farmacia
             </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
+            <ul className="space-y-2 text-xs text-emerald-100/70">
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors">
-                  Alimento Renal &amp; Gastro
+                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors cursor-pointer">
+                  Dietas Renales &amp; Gastro
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors">
-                  Snacks 100% Salmón &amp; Pavo
+                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors cursor-pointer">
+                  Snacks Mono-Proteicos
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors">
+                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors cursor-pointer">
                   Antipulgas &amp; Condroprotectores
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('petshop')} className="hover:text-amber-300 transition-colors">
-                  Dietas para Exóticos
+                <button onClick={() => onNavigate('citas')} className="hover:text-amber-300 transition-colors cursor-pointer">
+                  Calculadora Nutricional WSAVA
                 </button>
               </li>
               <li>
-                <button onClick={onOpenAdmin} className="hover:text-white flex items-center gap-1">
+                <button onClick={onOpenAdmin} className="hover:text-white flex items-center gap-1 cursor-pointer">
                   <span>Acceso Backoffice Supabase</span>
                   <ExternalLink className="w-3 h-3 text-emerald-400" />
                 </button>
@@ -154,15 +148,14 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
 
           {/* Newsletter Sanitized Form with Honeypot */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Recordatorios Preventivos
+            <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-300 font-mono">
+              Salud Preventiva
             </h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Recibe avisos de refuerzo vacunal, desparasitación estacional y promociones de nutrición gourmet.
+            <p className="text-xs text-emerald-100/70 leading-relaxed">
+              Recibe avisos de refuerzo vacunal, desparasitación estacional y tips de nutrición clínica.
             </p>
 
             <form onSubmit={handleSubscribe} className="space-y-2">
-              {/* Honeypot field (anti-bot Kindev standard) */}
               <input 
                 type="text" 
                 name="_gotcha" 
@@ -178,25 +171,25 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
                   placeholder="tucorreo@ejemplo.com"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs placeholder-slate-400 focus:outline-none focus:border-emerald-400/50 pr-9"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white text-xs placeholder:text-emerald-200/50 focus:outline-none focus:border-emerald-400 pr-9"
                 />
                 <button
                   type="submit"
                   aria-label="Suscribirme"
-                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-all cursor-pointer"
                 >
-                  <Send className="w-3 h-3" />
+                  <Send className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {subscribed && (
-                <span className="text-[11px] text-emerald-400 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> ¡Suscrito al boletín de salud preventiva!
+                <span className="text-[11px] text-emerald-300 flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> ¡Suscrito al boletín de salud!
                 </span>
               )}
             </form>
 
-            <div className="pt-2 text-[11px] text-slate-400 flex items-center gap-1.5">
+            <div className="pt-2 text-[11px] text-emerald-200/80 flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>Privacidad médica y datos 100% protegidos.</span>
             </div>
@@ -204,25 +197,24 @@ export function Footer({ onNavigate, onOpenAdmin }: FooterProps) {
 
         </div>
 
-        {/* Bottom Credits with Kindev Official Branding Mandate */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        {/* Bottom Credits with Kindev Official Mandate */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-200/70">
           <div className="flex items-center gap-2">
-            <span>Resolución Sanitaria ICA N° 00482-COL</span>
+            <span>Resolución Sanitaria Agrocalidad / ICA N° 00482</span>
             <span>•</span>
-            <span>Certificación Acreditación Veterinaria Acreditada</span>
+            <span>Hospital Veterinario Certificado</span>
           </div>
 
-          {/* REQUIRED KINDEV OFFICIAL FOOTER CREDIT */}
-          <div className="text-slate-400 text-center sm:text-right">
+          <div className="text-center sm:text-right">
             <span>© 2026 Todos los derechos reservados. Desarrollado por </span>
             <a
               id="kindev-official-credit-link"
               href="https://www.kindevsas.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-400 hover:text-emerald-300 font-semibold underline underline-offset-2 transition-colors inline-flex items-center gap-1"
+              className="text-emerald-400 hover:text-emerald-300 font-bold underline underline-offset-2 transition-colors inline-flex items-center gap-1"
             >
-              <span>Kindev</span>
+              <span>Kindev S.A.S.</span>
               <ExternalLink className="w-3 h-3" />
             </a>
           </div>

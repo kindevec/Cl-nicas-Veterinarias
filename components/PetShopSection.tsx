@@ -14,10 +14,11 @@ import {
   Star,
   PackageCheck,
   Flame,
-  ChevronRight
+  ChevronRight,
+  ArrowRight
 } from 'lucide-react';
 import { PetProduct, ProductCategory, PetType } from '@/lib/types';
-import { formatCOP, buildWhatsAppUrl } from '@/lib/utils';
+import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 
 interface PetShopSectionProps {
   products: PetProduct[];
@@ -70,281 +71,180 @@ export function PetShopSection({ products, onAddToCart, onOpenCart }: PetShopSec
     }, 1200);
   };
 
-  const flagshipProduct = filteredProducts[0] || products[0];
-  const secondaryProducts = filteredProducts.filter((p) => p.id !== flagshipProduct?.id);
-
   return (
-    <section id="petshop" className="py-20 md:py-28 relative bg-slate-950/70 border-y border-white/10 overflow-hidden">
-      
-      {/* Background Ambient Glow */}
-      <div 
-        aria-hidden="true" 
-        className="pointer-events-none absolute bottom-10 left-10 w-[450px] h-[450px] bg-amber-500/10 rounded-full blur-3xl" 
-      />
-
+    <section id="petshop" className="py-16 md:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Section Editorial Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-slate-200 pb-8">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wider uppercase">
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>BOUTIQUE CLÍNICA &amp; PET GOURMET</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold tracking-wider uppercase shadow-sm">
+              <Sparkles className="w-4 h-4 text-amber-600" />
+              <span>BOUTIQUE CLÍNICA &amp; NUTRICIÓN GOURMET</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0D3D20] tracking-tight">
               Nutrición de Grado Médico &amp; Farmacia Especializada
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base max-w-2xl font-normal leading-relaxed">
-              Fórmulas terapéuticas con respaldo clínico internacional, nutracéuticos de absorción biológica y snacks naturales sin preservantes artificiales.
+            <p className="text-slate-600 text-sm sm:text-base max-w-2xl leading-relaxed">
+              Fórmulas terapéuticas con respaldo clínico veterinario, nutracéuticos de alta biodisponibilidad y alimentación holística sin preservantes artificiales.
             </p>
           </div>
 
-          {/* Cart Status Button */}
           <button
-            type="button"
-            id="petshop-view-cart-btn"
             onClick={onOpenCart}
-            className="self-start lg:self-auto flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/30 text-amber-300 text-xs font-bold transition-all shadow-lg shadow-black/40 group hover:scale-105 active:scale-95 cursor-pointer"
+            className="self-start lg:self-auto inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white border border-slate-200 hover:border-emerald-300 text-slate-800 text-xs font-bold shadow-sm hover:shadow-md transition-all cursor-pointer"
           >
-            <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <ShoppingBag className="w-4 h-4 text-emerald-700" />
             <span>Ver Carrito de Compras</span>
           </button>
         </div>
 
-        {/* Dynamic Filters Bar */}
+        {/* Filters & Search Control Bar */}
         <div className="space-y-4">
-          
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
             {/* Search Input */}
-            <div className="relative flex-1">
+            <div className="relative flex-1 max-w-md">
               <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                id="petshop-search-input"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar por fórmula clínica, marca médica o ingrediente..."
-                className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/[0.03] border border-white/10 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-amber-400/60 focus:bg-white/[0.06] transition-all"
+                placeholder="Buscar por alimento, marca o necesidad médica..."
+                className="w-full pl-11 pr-4 py-3 rounded-full bg-white border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 shadow-sm transition-colors"
               />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white"
-                >
-                  ✕
-                </button>
-              )}
             </div>
 
-            {/* Species Selector */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-              {PET_TYPES.map((type) => {
-                const isActive = selectedPetType === type.id;
-                return (
-                  <button
-                    key={type.id}
-                    type="button"
-                    id={`filter-pet-${type.id}`}
-                    onClick={() => setSelectedPetType(type.id)}
-                    className={`px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                      isActive
-                        ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-950'
-                        : 'bg-white/[0.03] hover:bg-white/[0.06] text-slate-300 border border-white/10'
-                    }`}
-                  >
-                    {type.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Category Capsule Tabs (Pill Tabs - Kindev Signature) */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-            {CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat.id;
-              return (
+            {/* Species Selector Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
+              {PET_TYPES.map((pt) => (
                 <button
-                  key={cat.id}
-                  type="button"
-                  id={`filter-cat-${cat.id}`}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-lg shadow-amber-950/50'
-                      : 'bg-white/[0.03] hover:bg-white/[0.08] text-slate-300 border border-white/10 hover:text-white'
+                  key={pt.id}
+                  onClick={() => setSelectedPetType(pt.id)}
+                  className={`px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    selectedPetType === pt.id
+                      ? 'bg-[#0D3D20] text-white shadow-sm font-bold'
+                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
                   }`}
                 >
-                  {cat.label}
+                  {pt.label}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
+          {/* Category Selector Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 rounded-full text-xs transition-all whitespace-nowrap cursor-pointer ${
+                  selectedCategory === cat.id
+                    ? 'bg-[#1A6B38] text-white font-bold shadow-md shadow-emerald-900/20'
+                    : 'bg-white border border-slate-200/90 text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* ASYMMETRIC BENTO PRODUCT SHOWCASE */}
-        {filteredProducts.length === 0 ? (
-          <div className="text-center py-16 px-4 rounded-3xl bg-slate-900/40 border border-white/5">
-            <PackageCheck className="w-12 h-12 text-slate-500 mx-auto mb-3" />
-            <h3 className="text-base font-semibold text-white">No encontramos productos con ese filtro</h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
-              Prueba cambiando el término de búsqueda o seleccionando otra categoría.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedCategory('todos');
-                setSelectedPetType('todos');
-                setSearchQuery('');
-              }}
-              className="mt-4 px-5 py-2.5 rounded-2xl bg-white/[0.05] text-xs font-bold text-amber-300 border border-white/10"
-            >
-              Restablecer Filtros
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
-            {/* FLAGSHIP BENTO HIGHLIGHT (col-span-12 lg:col-span-6) */}
-            {flagshipProduct && (
-              <div className="lg:col-span-6 rounded-3xl bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-amber-950/30 border border-amber-400/40 p-7 sm:p-9 flex flex-col justify-between backdrop-blur-xl shadow-2xl shadow-black/80 relative overflow-hidden group">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-black tracking-wider uppercase">
-                      ⭐ FÓRMULA DESTACADA DEL MES
-                    </span>
-                    <span className="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-                      Disponibilidad Inmediata ({flagshipProduct.stock} uds)
-                    </span>
-                  </div>
+        {/* Product Catalog Grid (Clean Light Boutique Cards) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredProducts.map((product) => {
+            const isAdded = addedProductId === product.id;
+            return (
+              <motion.div
+                key={product.id}
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-3xl bg-white border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div>
+                  {/* Product Image Stage */}
+                  <div className="relative h-56 w-full bg-slate-50 overflow-hidden p-4 flex items-center justify-center">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      referrerPolicy="no-referrer"
+                    />
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                    <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-950 border border-white/10">
-                      <Image
-                        src={flagshipProduct.image}
-                        alt={flagshipProduct.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-
-                    <div className="space-y-3">
-                      <span className="text-xs font-extrabold text-amber-400 uppercase tracking-wider block">
-                        {flagshipProduct.brand}
-                      </span>
-                      <h3 className="text-xl font-extrabold text-white leading-tight">
-                        {flagshipProduct.name}
-                      </h3>
-                      <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold">
-                        <Star className="w-4 h-4 fill-amber-400" />
-                        <span>{flagshipProduct.rating} / 5.0 (Valoración Médica)</span>
-                      </div>
-                      <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                        {flagshipProduct.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Precio Boutique</span>
-                    <span className="text-2xl font-black text-white">{formatCOP(flagshipProduct.price)}</span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={buildWhatsAppUrl(`Pedido de ${flagshipProduct.name} (${flagshipProduct.brand})`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-xs font-bold text-slate-200 border border-white/10 transition-all"
-                    >
-                      Pedir por WhatsApp
-                    </a>
-
-                    <button
-                      type="button"
-                      onClick={() => handleAdd(flagshipProduct)}
-                      className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/25 flex items-center gap-2 active:scale-95 transition-all cursor-pointer"
-                    >
-                      {addedProductId === flagshipProduct.id ? (
-                        <>
-                          <Check className="w-4 h-4 stroke-[3]" />
-                          <span>¡Agregado!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Plus className="w-4 h-4 stroke-[3]" />
-                          <span>Añadir al Carrito</span>
-                        </>
+                    {/* Product Badges */}
+                    <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                      {product.badge && (
+                        <span className="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-bold shadow-sm">
+                          {product.badge}
+                        </span>
                       )}
-                    </button>
+                      {product.formulaVeterinaria && (
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold shadow-sm">
+                          Fórmula Clínica
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Product Content Details */}
+                  <div className="p-5 space-y-2.5">
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                      <span>{product.brand}</span>
+                      <div className="flex items-center gap-1 text-amber-500">
+                        <Star className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
+                        <span className="font-bold text-slate-700">{product.rating}</span>
+                        <span className="text-[10px] text-slate-400">({product.reviewsCount})</span>
+                      </div>
+                    </div>
+
+                    <h4 className="text-sm font-bold text-slate-900 leading-snug line-clamp-2">
+                      {product.name}
+                    </h4>
+
+                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                      {product.description}
+                    </p>
                   </div>
                 </div>
-              </div>
-            )}
 
-            {/* SECONDARY BENTO PRODUCTS (col-span-12 lg:col-span-6) */}
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {secondaryProducts.slice(0, 4).map((product) => {
-                const isAdded = addedProductId === product.id;
-                return (
-                  <div
-                    key={product.id}
-                    id={`product-card-${product.id}`}
-                    className="rounded-2xl bg-slate-900/70 border border-white/10 hover:border-amber-400/40 p-4 flex flex-col justify-between backdrop-blur-xl group transition-all"
-                  >
-                    <div>
-                      <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-950 mb-3 border border-white/5">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          referrerPolicy="no-referrer"
-                        />
-                        {product.badge && (
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[9px] font-black bg-amber-400 text-slate-950">
-                            {product.badge}
-                          </span>
-                        )}
-                      </div>
-
-                      <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">
-                        {product.brand}
-                      </span>
-                      <h4 className="text-xs font-bold text-white leading-snug line-clamp-2 mt-0.5">
-                        {product.name}
-                      </h4>
-                      <p className="text-[11px] text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                        {product.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-white/5 mt-3 flex items-center justify-between">
-                      <span className="text-xs font-black text-white">{formatCOP(product.price)}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleAdd(product)}
-                        className={`p-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                          isAdded
-                            ? 'bg-emerald-500 text-slate-950'
-                            : 'bg-white/[0.05] hover:bg-amber-400 hover:text-slate-950 text-white border border-white/10'
-                        }`}
-                      >
-                        {isAdded ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : <Plus className="w-3.5 h-3.5 stroke-[3]" />}
-                      </button>
-                    </div>
+                {/* Price & Action Bottom Bar */}
+                <div className="p-5 pt-0 border-t border-slate-100 mt-4 flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] text-slate-400 block font-medium">Inversión:</span>
+                    <span className="text-base font-extrabold text-[#0D3D20]">
+                      {formatUSD(product.price)}
+                    </span>
                   </div>
-                );
-              })}
-            </div>
 
-          </div>
-        )}
+                  <button
+                    onClick={() => handleAdd(product)}
+                    className={`px-4 py-2.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm ${
+                      isAdded
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-[#1A6B38] hover:bg-[#14532D] text-white hover:scale-105'
+                    }`}
+                  >
+                    {isAdded ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" />
+                        <span>¡Agregado!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Añadir</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
 
       </div>
     </section>
