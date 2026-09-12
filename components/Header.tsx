@@ -40,11 +40,9 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
     { id: 'citas', label: 'Citas & Contacto' }
   ];
 
-  const isScrolled = scrollProgress > 0.1;
-  const bgOpacity = scrollProgress * 0.95;
+  const isDarkHeader = activeSection !== 'inicio';
+  const isScrolled = scrollProgress > 0.08;
   const blurAmount = scrollProgress * 16;
-  const borderOpacity = scrollProgress * 0.8;
-  const shadowOpacity = scrollProgress * 0.06;
 
   return (
     <header
@@ -53,25 +51,35 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
         isScrolled ? 'py-3' : 'py-5'
       }`}
       style={{
-        backgroundColor: `rgba(255, 255, 255, ${bgOpacity})`,
+        backgroundColor: isDarkHeader
+          ? `rgba(13, 61, 32, ${Math.min(scrollProgress * 1.2, 0.94)})`
+          : `rgba(255, 255, 255, ${Math.min(scrollProgress * 1.2, 0.95)})`,
         backdropFilter: blurAmount > 1 ? `blur(${blurAmount}px)` : 'none',
         WebkitBackdropFilter: blurAmount > 1 ? `blur(${blurAmount}px)` : 'none',
-        borderBottom: borderOpacity > 0.05 ? `1px solid rgba(226, 232, 240, ${borderOpacity})` : '1px solid transparent',
-        boxShadow: shadowOpacity > 0.01 ? `0 10px 25px -5px rgba(0, 0, 0, ${shadowOpacity})` : 'none',
+        borderBottom: isScrolled
+          ? isDarkHeader
+            ? '1px solid rgba(16, 185, 129, 0.25)'
+            : '1px solid rgba(226, 232, 240, 0.8)'
+          : '1px solid transparent',
+        boxShadow: isScrolled
+          ? isDarkHeader
+            ? '0 10px 30px -5px rgba(0, 0, 0, 0.35)'
+            : '0 10px 25px -5px rgba(0, 0, 0, 0.06)'
+          : 'none',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Brand Logo with Paw Identity */}
+        {/* Brand Logo with Paw Identity - Adaptive Theme */}
         <div 
           onClick={() => onNavigate('inicio')}
           className="cursor-pointer group flex items-center shrink-0"
           id="brand-logo-btn"
         >
-          <BrandLogo variant="full" size="md" theme="light" />
+          <BrandLogo variant="full" size="md" theme={isDarkHeader ? 'dark' : 'light'} />
         </div>
 
-        {/* Center Navigation - ZERO Box-in-Box, Clean Text Links with Smooth Active Underline */}
+        {/* Center Navigation - ZERO Box-in-Box, Thicker Bolder Typography with Dynamic Section Contrast */}
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
@@ -80,16 +88,28 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
                 key={item.id}
                 id={`nav-${item.id}`}
                 onClick={() => onNavigate(item.id)}
-                className="relative py-1 text-xs font-semibold tracking-wide transition-colors cursor-pointer group"
+                className="relative py-1 text-sm font-bold tracking-tight transition-colors cursor-pointer group"
               >
-                <span className={isActive ? 'text-[#0D3D20] font-bold' : 'text-slate-600 group-hover:text-[#1A6B38]'}>
+                <span
+                  className={
+                    isDarkHeader
+                      ? isActive
+                        ? 'text-white font-black drop-shadow-xs'
+                        : 'text-white/85 hover:text-white font-bold transition-colors'
+                      : isActive
+                      ? 'text-[#0D3D20] font-black'
+                      : 'text-slate-800 hover:text-[#1A6B38] font-bold transition-colors'
+                  }
+                >
                   {item.label}
                 </span>
 
                 {isActive && (
                   <motion.span
                     layoutId="header-nav-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#1A6B38] rounded-full"
+                    className={`absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full ${
+                      isDarkHeader ? 'bg-amber-400 shadow-xs' : 'bg-[#1A6B38]'
+                    }`}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -98,13 +118,17 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           })}
         </nav>
 
-        {/* Action Controls - Solo CTA principal despejado */}
+        {/* Action Controls - Clear Adaptive Primary CTA */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={() => onNavigate('citas')}
-            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+            className={`inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full font-black text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer ${
+              isDarkHeader
+                ? 'bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-amber-950/20'
+                : 'bg-[#1A6B38] hover:bg-[#14532D] text-white'
+            }`}
           >
-            <Calendar className="w-3.5 h-3.5" />
+            <Calendar className={`w-3.5 h-3.5 ${isDarkHeader ? 'text-slate-950' : 'text-white'}`} />
             <span>Agendar Cita</span>
           </button>
         </div>
