@@ -179,23 +179,39 @@ export default function HomePage() {
                     className="max-w-2xl space-y-4"
                   >
                     <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                      Reserva de Turnos &amp; <span className="text-emerald-400">Nutrición WSAVA</span>
+                      Citas Médicas &amp; <span className="text-emerald-400">Contacto Oficial 24/7</span>
                     </h1>
 
                     <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed font-normal">
-                      Calcula los requerimientos calóricos exactos de tu mascota o reserva cita médica con confirmación inmediata vía WhatsApp.
+                      Agenda tu consulta médica con especialistas certificados o comunícate de inmediato con nuestra central de guardia y triage hospitalario en Quito.
                     </p>
                   </motion.div>
                 </div>
               </section>
 
-              <SmartNutritionCalculator 
-                onSelectServiceForBooking={handleSelectServiceForBooking}
-              />
+              {/* 1. Primary Hub: Canvas Layout for Appointments & Hospital Contact */}
               <AppointmentScheduler
                 initialService={bookingService}
                 onAppointmentCreated={(newApt) => setAppointments((prev) => [newApt, ...prev])}
               />
+
+              {/* 2. Complementary WSAVA Clinical Nutrition Calculator */}
+              <div className="py-16 bg-white border-t border-slate-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center space-y-2">
+                  <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+                    Herramienta Médica Complementaria
+                  </span>
+                  <h3 className="text-2xl sm:text-4xl font-extrabold text-[#0D3D20]">
+                    Calculadora Nutricional WSAVA
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+                    Conoce el requerimiento calórico e hídrico exacto de tu mascota según especie, edad y condición antes de tu consulta médica.
+                  </p>
+                </div>
+                <SmartNutritionCalculator 
+                  onSelectServiceForBooking={handleSelectServiceForBooking}
+                />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
