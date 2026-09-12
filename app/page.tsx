@@ -15,7 +15,20 @@ import { AppointmentScheduler } from '@/components/AppointmentScheduler';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
 import { HomeExecutiveShowcase } from '@/components/HomeExecutiveShowcase';
 import { Footer } from '@/components/Footer';
-import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Calendar, 
+  Sparkles,
+  FileText,
+  CheckCircle2,
+  Clock,
+  MapPin,
+  Car,
+  ShieldCheck,
+  MessageCircle,
+  Phone
+} from 'lucide-react';
+import { buildWhatsAppUrl } from '@/lib/utils';
 import { 
   PetProduct, 
   Appointment,
@@ -274,6 +287,159 @@ export default function HomePage() {
                   onSelectServiceForBooking={handleSelectServiceForBooking}
                 />
               </div>
+
+              {/* 3. Guía de Preparación Previa para tu Consulta Médica */}
+              <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-1 text-center max-w-3xl mx-auto"
+                  >
+                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+                      01 / INDICACIONES PREVIAS
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+                      Preparación para tu Cita Médica
+                    </h2>
+                    <p className="text-xs sm:text-sm text-slate-500">
+                      Recomendaciones sencillas para que la atención de tu mascota sea precisa, segura y libre de estrés.
+                    </p>
+                  </motion.div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                        <FileText className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 leading-snug">
+                        Documentación &amp; Historial
+                      </h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        Trae su carnet de vacunación vigente, desparasitaciones y exámenes de laboratorio o ecografías previas para enriquecer la historia clínica.
+                      </p>
+                      <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-semibold text-[#1A6B38]">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Historial Digital Centralizado</span>
+                      </div>
+                    </div>
+
+                    <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                        <Clock className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 leading-snug">
+                        Protocolo de Ayuno
+                      </h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        Si tu mascota tiene programada ecografía abdominal, analítica de sangre o sedación, requiere de 8 a 12 horas de ayuno sólido. Mantén siempre agua a libre disposición.
+                      </p>
+                      <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-semibold text-[#1A6B38]">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Agua Fresca Permitida</span>
+                      </div>
+                    </div>
+
+                    <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                        <ShieldCheck className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 leading-snug">
+                        Transporte Seguro Fear-Free
+                      </h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        Perros con collar/arnés seguro y correa corta. Gatos siempre en transportadora rígida cubierta con una toalla para evitar sobreestimulación visual.
+                      </p>
+                      <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-semibold text-[#1A6B38]">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Protocolo Anti-Estrés</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </section>
+
+              {/* 4. Sede Hospitalaria, Horarios & Acceso */}
+              <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-1 text-center max-w-3xl mx-auto"
+                  >
+                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+                      02 / SEDE HOSPITALARIA &amp; ACCESIBILIDAD
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+                      Ubicación, Horarios &amp; Facilidades
+                    </h2>
+                    <p className="text-xs sm:text-sm text-slate-500">
+                      Instalaciones céntricas con parqueadero privado vigilado y rampa de acceso directo para camillas y emergencias.
+                    </p>
+                  </motion.div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-xs">
+                        <Clock className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 leading-snug">
+                        Horarios Hospitalarios
+                      </h4>
+                      <div className="space-y-1.5 text-xs text-slate-600">
+                        <p><strong className="text-slate-900">Consultas Externas:</strong> Lunes a Sábado de 08:00 a 20:00</p>
+                        <p><strong className="text-slate-900">Domingos y Feriados:</strong> 09:00 a 18:00</p>
+                        <p className="text-[#1A6B38] font-bold pt-1">Urgencias, Quirófano &amp; UCI: Abierto 24/7 los 365 días</p>
+                      </div>
+                    </div>
+
+                    <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
+                      <div className="w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-xs">
+                        <Car className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 leading-snug">
+                        Parqueadero &amp; Movilidad
+                      </h4>
+                      <div className="space-y-1.5 text-xs text-slate-600">
+                        <p>12 plazas de parqueo privado vigilado exclusivo para tutores y clientes.</p>
+                        <p>Rampa accesible directa para camillas de urgencia y mascotas con movilidad reducida.</p>
+                        <p className="text-slate-900 font-semibold pt-1">Zona segura y monitoreada por cámaras</p>
+                      </div>
+                    </div>
+
+                    <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3 flex flex-col justify-between">
+                      <div className="space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-xs">
+                          <Phone className="w-6 h-6" />
+                        </div>
+                        <h4 className="text-base font-bold text-slate-900 leading-snug">
+                          Central de Urgencias 24/7
+                        </h4>
+                        <p className="text-xs text-slate-600">
+                          Si tu mascota presenta síntomas agudos, comunícate de inmediato para preparar la estación de trauma antes de tu arribo.
+                        </p>
+                      </div>
+                      <a
+                        href={buildWhatsAppUrl('URGENCIA MÉDICA 24 HORAS')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 px-4 rounded-2xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mt-3"
+                      >
+                        <MessageCircle className="w-4 h-4 text-emerald-400" />
+                        <span>Línea Directa de Urgencias</span>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </section>
             </motion.div>
           )}
         </AnimatePresence>

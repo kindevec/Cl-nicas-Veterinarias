@@ -7,13 +7,20 @@ import {
   Activity, 
   ChevronLeft, 
   ChevronRight, 
+  ChevronDown,
   MessageSquare, 
   ArrowRight,
   MessageCircle,
   Clock,
   Sparkles,
   Calendar,
-  CheckCircle2
+  CheckCircle2,
+  HelpCircle,
+  ShieldCheck,
+  Cpu,
+  Stethoscope,
+  Microscope,
+  Zap
 } from 'lucide-react';
 import { VETERINARY_SERVICES } from '@/lib/mockData';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
@@ -33,6 +40,7 @@ const CATEGORY_FILTERS = [
 export function ServicesSection({ onSelectService }: ServicesSectionProps) {
   const [activeCategory, setActiveCategory] = useState('todos');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   // Featured 3 services for interactive showcase slider
   const featuredServices = VETERINARY_SERVICES.slice(0, 3);
@@ -416,6 +424,300 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
 
         </div>
       </section>
+
+      {/* 4. RUTA CLÍNICA DEL PACIENTE (Paso a Paso Interactivo) */}
+      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              01 / PROTOCOLO HOSPITALARIO
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              La Ruta de Atención de tu Mascota
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Un flujo estandarizado paso a paso para garantizar diagnóstico certero, cero dolor y tranquilidad absoluta para ti.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {[
+              {
+                step: '01',
+                title: 'Triage & Signos Vitales',
+                desc: 'Evaluación rápida de saturación de O2, presión arterial Doppler, temperatura y clasificación de dolor en escala Glasgow.',
+                icon: Activity,
+                highlight: 'Atención Inmediata'
+              },
+              {
+                step: '02',
+                title: 'Diagnóstico In-House',
+                desc: 'Bioquímica sanguínea en 15 min, Rayos X Digitales HD y ecografía Doppler para confirmar patologías con evidencia.',
+                icon: Microscope,
+                highlight: 'Tecnología IDEXX'
+              },
+              {
+                step: '03',
+                title: 'Tratamiento Quirúrgico',
+                desc: 'Quirófano estéril clase 10,000, anestesia Sevoflurano monitoreada continuamente y analgesia multimodal preventiva.',
+                icon: Stethoscope,
+                highlight: 'Seguridad Máxima'
+              },
+              {
+                step: '04',
+                title: 'Recuperación & Alta',
+                desc: 'Monitoreo en mantas térmicas, plan nutricional de alta hospitalaria y seguimiento médico directo por WhatsApp 24/7.',
+                icon: ShieldCheck,
+                highlight: 'Cuidado Fear-Free'
+              }
+            ].map((p, idx) => {
+              const Icon = p.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="p-6 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between space-y-4 relative group hover:-translate-y-1"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-black text-[#1A6B38] font-mono">
+                        {p.step}
+                      </span>
+                      <div className="w-10 h-10 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-xs">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                    </div>
+                    <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
+                      {p.highlight}
+                    </span>
+                    <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                      {p.title}
+                    </h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      {p.desc}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-slate-200/60 flex items-center gap-1.5 text-[11px] font-semibold text-slate-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#1A6B38]" />
+                    <span>Protocolo Acreditado</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. TECNOLOGÍA & EQUIPAMIENTO HOSPITALARIO */}
+      <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              02 / INFRAESTRUCTURA BIOMÉDICA
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              Equipamiento Quirúrgico de Precisión
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Invertimos continuamente en tecnología médica para reducir los tiempos anestésicos y aumentar el éxito quirúrgico al 99.4%.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {[
+              {
+                title: 'Monitor Mindray ePM12M',
+                spec: 'ECG, SpO2, PNI, Capnografía EtCO2 y Temperatura continua.',
+                badge: 'Monitoreo Grado UCI'
+              },
+              {
+                title: 'Anestesia Sevoflurano',
+                spec: 'Inducción y despertar ultra rápido con ventilador mecánico asistido.',
+                badge: 'Mínimo Riesgo Hepático'
+              },
+              {
+                title: 'Rayos X Digital HD (DR)',
+                spec: 'Adquisición de imagen ósea y pulmonar instantánea en 3 segundos.',
+                badge: 'Baja Radiación'
+              },
+              {
+                title: 'Laboratorio IDEXX ProCyte',
+                spec: 'Citometría de flujo láser y bioquímica seca con validación in-house.',
+                badge: 'Resultado en 15 min'
+              }
+            ].map((eq, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="p-5 sm:p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition-all space-y-3"
+              >
+                <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                  <Cpu className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-bold text-[#1A6B38] bg-emerald-50 px-2.5 py-0.5 rounded-full inline-block border border-emerald-200/60">
+                  {eq.badge}
+                </span>
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                  {eq.title}
+                </h4>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  {eq.spec}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. PREGUNTAS FRECUENTES MÉDICAS (Interactive FAQ Accordion) */}
+      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              03 / RESOLUCIÓN DE DUDAS MÉDICAS
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              Preguntas Frecuentes sobre Especialidades
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Información clara y transparente para que tomes la mejor decisión de salud para tu mascota.
+            </p>
+          </motion.div>
+
+          <div className="space-y-3">
+            {[
+              {
+                q: '¿Cómo manejan el riesgo en cirugías de animales mayores o braquicéfalos?',
+                a: 'Utilizamos protocolos de anestesia balanceada con Sevoflurano (el gas anestésico más seguro del mundo veterinario), intubación asistida y monitoreo multiparamétrico constante de capnografía (EtCO2), presión arterial y electrocardiograma. Cada paciente de alto riesgo cuenta con un médico anestesiólogo dedicado exclusivamente durante toda la intervención.'
+              },
+              {
+                q: '¿Qué preparación previa requiere una cirugía o procedimiento programado?',
+                a: 'Se requiere un perfil prequirúrgico completo (hematología, química renal y hepática, y pruebas de coagulación) realizado máximo 7 días antes. El paciente debe guardar entre 6 y 8 horas de ayuno sólido (en cachorros o razas miniaturas el ayuno es menor) y agua disponible hasta 2 horas antes de ingresar.'
+              },
+              {
+                q: '¿Cómo sé si la condición de mi mascota es una urgencia vital que requiere atención inmediata?',
+                a: 'Son emergencias inmediatas: dificultad respiratoria evidente (respira con la boca abierta o abdomen hundido), convulsiones de más de 2 minutos, intentos de vomitar sin éxito con abdomen distendido (posible dilatación gástrica), hemorragias activas, ingestión de tóxicos o atropellamientos. Nuestro triage hospitalario 24/7 atiende sin cita previa.'
+              },
+              {
+                q: '¿Ofrecen facilidades de pago o diferidos con tarjetas para procedimientos de alta complejidad?',
+                a: 'Sí. Aceptamos todas las tarjetas de crédito nacionales e internacionales con planes de diferido de 3, 6, 9 y 12 meses (con y sin intereses según la entidad bancaria). También emitimos presupuestos médicos desglosados para reclamos ante aseguradoras veterinarias.'
+              }
+            ].map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-20px' }}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className="rounded-2xl border border-slate-200/90 overflow-hidden bg-[#FAFBF7] transition-all"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-900 hover:text-[#1A6B38] transition-colors cursor-pointer"
+                  >
+                    <span className="flex items-center gap-3">
+                      <HelpCircle className="w-5 h-5 text-[#1A6B38] shrink-0" />
+                      <span>{faq.q}</span>
+                    </span>
+                    <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180 text-[#1A6B38]' : ''}`} />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="px-5 pb-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/50 mt-1 pt-3">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 7. BANNER FINAL DE GUARDIA & CITAS */}
+      <section className="py-10 bg-[#0D3D20] text-white border-t border-emerald-900/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-7 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-amber-300 uppercase tracking-widest font-mono">
+                DISPONIBILIDAD HOSPITALARIA INMEDIATA
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">
+                ¿Tu mascota necesita evaluación médica especializada?
+              </h3>
+              <p className="text-xs text-emerald-100/80">
+                Agenda con nuestros especialistas de turno o comunícate directamente con la guardia de urgencias.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
+              <a
+                href="#citas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectService('Consulta Médica Especializada');
+                }}
+                className="w-full sm:w-auto px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Agendar Consulta</span>
+              </a>
+              <a
+                href={buildWhatsAppUrl('Consulta con Especialista Médico')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <span>Guardia WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

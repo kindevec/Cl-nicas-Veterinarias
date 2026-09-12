@@ -12,7 +12,14 @@ import {
   RotateCcw,
   Headphones,
   ArrowRight,
-  MessageCircle
+  MessageCircle,
+  CheckCircle2,
+  HeartPulse,
+  Activity,
+  Award,
+  ShieldCheck,
+  ThermometerSnowflake,
+  Heart
 } from 'lucide-react';
 import { PetProduct, ProductCategory } from '@/lib/types';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
@@ -32,6 +39,7 @@ const CATEGORIES: { id: ProductCategory; label: string }[] = [
 export function PetShopSection({ products }: PetShopSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('todos');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPathology, setSelectedPathology] = useState(0);
 
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
@@ -296,6 +304,278 @@ export function PetShopSection({ products }: PetShopSectionProps) {
 
         </div>
       </section>
+
+      {/* 5. GUÍA INTERACTIVA DE NUTRICIÓN CLÍNICA POR PATOLOGÍA */}
+      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              01 / ASESORÍA CLÍNICA DE PRESCRIPCIÓN
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              Guía Terapéutica por Condición Médica
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Selecciona la patología de tu mascota para conocer los nutrientes clínicos recomendados y las fórmulas certificadas por nuestros especialistas.
+            </p>
+          </motion.div>
+
+          {/* Pathology Selector Pills */}
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {[
+              { label: 'Salud Renal & Urinaria', icon: '💧' },
+              { label: 'Sensibilidad Digestiva (IBD)', icon: '🌿' },
+              { label: 'Alergias & Dermatología', icon: '✨' },
+              { label: 'Control de Peso & Saciedad', icon: '⚖️' },
+              { label: 'Condroprotección Articular', icon: '🦴' },
+            ].map((pathology, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setSelectedPathology(idx)}
+                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                  selectedPathology === idx
+                    ? 'bg-[#0D3D20] text-white shadow-md scale-105'
+                    : 'bg-[#FAFBF7] border border-slate-200/90 text-slate-700 hover:bg-slate-100'
+                }`}
+              >
+                <span>{pathology.icon}</span>
+                <span>{pathology.label}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Detailed Pathology Card Showcase */}
+          {(() => {
+            const PATHOLOGY_DETAILS = [
+              {
+                condition: 'Insuficiencia Renal Crónica & Síndrome FLUTD',
+                spec: 'Dietas formuladas con bajo fósforo quelado para frenar la progresión glomerular, citrato de potasio para regular el pH urinario y niveles altos de ácidos grasos EPA/DHA que estimulan la perfusión renal.',
+                doctorNote: 'Dra. Sofía Rueda: "En pacientes renales, la nutrición representa el 70% del éxito en el control de la creatinina y la urea."',
+                keyNutrients: ['Fósforo restringido (<0.4%)', 'Proteína de alta digestibilidad', 'Complejo Omega-3 marino', 'Antioxidantes celulares'],
+                recommendedDiet: "Royal Canin Renal Feline / Canine o Hill's k/d Prescription Diet",
+                quoteText: 'Cotizar Dieta Renal Especializada'
+              },
+              {
+                condition: 'Sensibilidad Gastrointestinal, Vómito & Colitis (IBD)',
+                spec: 'Fórmulas basadas en proteínas hidrolizadas de bajo peso molecular (Daltons reducidos) que evitan la reacción inmune entérica, adicionadas con prebióticos FOS/MOS y electrolitos para restablecer la microbiota.',
+                doctorNote: 'Dra. Sofía Rueda: "Una dieta gastrointestinal adecuada corta la inflamación del epitelio intestinal en menos de 72 horas."',
+                keyNutrients: ['Proteína hidrolizada', 'Prebióticos FOS & MOS', 'Alta densidad energética', 'Fibra de psyllium soluble'],
+                recommendedDiet: "Hill's i/d Gastrointestinal o Royal Canin Gastrointestinal Low Fat",
+                quoteText: 'Cotizar Dieta Digestiva'
+              },
+              {
+                condition: 'Dermatología Atópica & Alergias Alimentarias',
+                spec: 'Dietas monoproteicas con fuentes proteicas no convencionales (salmón biológico o proteína purificada de soya) enriquecidas con ácido gamma-linolénico (GLA) y ceramidas para sellar la barrera epidérmica.',
+                doctorNote: 'Dra. Valentina Morales: "El prurito crónico suele erradicarse mediante dietas de eliminación estricta durante 8 semanas."',
+                keyNutrients: ['Fuente monoproteica pura', 'Ratio Omega 6:3 (5:1)', 'Vitamina E & Zinc quelado', 'Cero trigo y cero soya cruda'],
+                recommendedDiet: "Royal Canin Hypoallergenic o Pro Plan Veterinary Diets HA",
+                quoteText: 'Cotizar Dieta Hipoalergénica'
+              },
+              {
+                condition: 'Control de Peso, Obesidad & Manejo de Glucosa',
+                spec: 'Fórmulas con elevado contenido de proteína magra y fibras voluminosas de baja fermentación que promueven la saciedad gástrica, combinadas con L-carnitina para estimular la beta-oxidación de grasas.',
+                doctorNote: 'Dr. Carlos Mendoza: "Reducir un 10% de sobrepeso alivia la carga cardíaca y la presión sobre discos intervertebrales."',
+                keyNutrients: ['L-Carnitina 300 mg/kg', 'Alto volumen de saciedad', 'Bajo índice glucémico', 'Condroprotectores integrados'],
+                recommendedDiet: "Hill's Metabolic Weight Management o Royal Canin Satiety Support",
+                quoteText: 'Cotizar Dieta de Control de Peso'
+              },
+              {
+                condition: 'Soporte Articular, Displasia & Osteoartritis Geriátrica',
+                spec: 'Suplementación de grado farmacéutico con glucosamina HCl, sulfato de condroitina de origen marino y colágeno hidrolizado tipo II no desnaturalizado (UC-II®) que frenan la degradación del cartílago hialino.',
+                doctorNote: 'Dra. Valentina Morales: "La condroprotección continua devuelve la movilidad y las ganas de jugar a pacientes con artrosis."',
+                keyNutrients: ['Glucosamina 1000 mg/kg', 'Sulfato de Condroitina', 'Colágeno no desnaturalizado UC-II', 'Mejillón de labio verde'],
+                recommendedDiet: "Hill's j/d Joint Care o Suplemento Cosequin Maximum Strength",
+                quoteText: 'Cotizar Dieta Articular'
+              }
+            ];
+
+            const current = PATHOLOGY_DETAILS[selectedPathology];
+
+            return (
+              <motion.div
+                key={selectedPathology}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35 }}
+                className="p-6 sm:p-8 rounded-3xl bg-[#FAFBF7] border border-slate-200/90 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
+              >
+                <div className="lg:col-span-8 space-y-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+                      PROTOCOLO CLÍNICO SELECCIONADO
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
+                      {current.condition}
+                    </h3>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {current.spec}
+                  </p>
+
+                  <div className="p-4 rounded-2xl bg-white border border-emerald-100 space-y-2">
+                    <div className="text-xs font-bold text-[#1A6B38] flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#1A6B38]" />
+                      <span>Nutrientes Clave de Alta Precisión:</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-medium">
+                      {current.keyNutrients.map((nutr, nIdx) => (
+                        <div key={nIdx} className="flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                          <span>{nutr}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <blockquote className="text-xs italic text-slate-500 border-l-2 border-[#1A6B38] pl-3 py-0.5">
+                    {current.doctorNote}
+                  </blockquote>
+                </div>
+
+                <div className="lg:col-span-4 p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-4 text-center flex flex-col justify-between h-full">
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                      Prescripción Recomendada
+                    </span>
+                    <h4 className="text-sm font-bold text-[#0D3D20] leading-snug">
+                      {current.recommendedDiet}
+                    </h4>
+                    <span className="inline-block text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase">
+                      Fórmula Regulada Rx
+                    </span>
+                  </div>
+
+                  <div className="pt-2">
+                    <a
+                      href={buildWhatsAppUrl(current.quoteText, `(Condición: ${current.condition})`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-3 px-4 rounded-2xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4 text-emerald-400" />
+                      <span>Consultar con Especialista</span>
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })()}
+
+        </div>
+      </section>
+
+      {/* 6. MARCAS VETERINARIAS AUTORIZADAS (Showcase Partner) */}
+      <section className="py-12 bg-[#FAFBF7] border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
+          <div className="space-y-1 max-w-2xl mx-auto">
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              02 / ALIANZAS BIOMÉDICAS
+            </span>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
+              Marcas Clínicas Oficiales &amp; Laboratorios Asociados
+            </h3>
+            <p className="text-xs text-slate-500">
+              Distribuidores oficiales autorizados con lote verificado y cadena de frío directa desde laboratorios fabricantes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
+            {[
+              { name: 'Royal Canin Veterinary', cat: 'Prescription Diets' },
+              { name: "Hill's Prescription Diet", cat: 'Clinical Nutrition' },
+              { name: 'Purina Pro Plan HA', cat: 'Veterinary Diets' },
+              { name: 'Bravecto & Simparica', cat: 'Fármacos Regulados' },
+              { name: 'Feliway & Adaptil', cat: 'Feromonas Clínicas' },
+              { name: 'Virbac Animal Health', cat: 'Dermatología & Vacunas' }
+            ].map((brand, bIdx) => (
+              <div
+                key={bIdx}
+                className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-sm transition-all text-center space-y-1 hover:border-[#1A6B38]"
+              >
+                <div className="text-xs font-black text-slate-900 leading-snug">
+                  {brand.name}
+                </div>
+                <div className="text-[10px] text-emerald-700 font-semibold font-mono">
+                  {brand.cat}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. GARANTÍA DE CADENA DE FRÍO & SEGURIDAD FARMACÉUTICA */}
+      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              03 / TRAZABILIDAD Y BIOPROTECCIÓN
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              ¿Por Qué Comprar tus Fármacos y Dietas en VetCare?
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Diferencias de grado hospitalario que protegen la salud real de tu mascota frente a tiendas convencionales.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                <ThermometerSnowflake className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-bold text-slate-900 leading-snug">
+                Cadena de Frío Rigurosa (2°C a 8°C)
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Vacunas, insulinas y probióticos conservados con monitoreo térmico continuo y alarmas digitales 24 horas. Nunca pierden su potencia biológica.
+              </p>
+            </div>
+
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-bold text-slate-900 leading-snug">
+                Validación de Receta Médica
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Cada pedido de medicación o alimento medicado es revisado por un veterinario para certificar dosis correcta, posología y evitar interacciones peligrosas.
+              </p>
+            </div>
+
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                <Truck className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-bold text-slate-900 leading-snug">
+                Despacho Exprés Hospitalario en Quito
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Entrega rápida a domicilio en Quito urbano y valles. Envíos programados mensuales para que tu mascota nunca se quede sin su tratamiento.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }

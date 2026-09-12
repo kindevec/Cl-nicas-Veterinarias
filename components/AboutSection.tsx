@@ -3,8 +3,22 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { Award, Stethoscope, Microscope, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
-import { buildWhatsAppUrl } from '@/lib/utils';
+import { 
+  Award, 
+  Stethoscope, 
+  Microscope, 
+  Sparkles, 
+  CheckCircle2, 
+  ArrowRight,
+  ShieldCheck,
+  HeartHandshake,
+  Activity,
+  Clock,
+  Heart,
+  FileText,
+  Shield,
+  Zap
+} from 'lucide-react';
 
 export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: () => void }) {
   const doctors = [
@@ -273,6 +287,333 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
 
         </div>
       </section>
+
+      {/* 4. INFRAESTRUCTURA & INSTALACIONES HOSPITALARIAS DE ALTA COMPLEJIDAD */}
+      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              01 / INFRAESTRUCTURA QUIRÚRGICA &amp; HOSPITALARIA
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              Tecnología Médica Diseñada para Salvar Vidas
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Instalaciones especializadas con flujo laminar estéril, monitoreo hemodinámico continuo y áreas libres de estrés.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {/* Card 1: Quirófano */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+                    alt="Quirófano estéril con flujo laminar VetCare"
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#0D3D20]/90 text-white text-[10px] font-bold">
+                    Estéril Clase 10,000
+                  </div>
+                </div>
+                <div className="p-5 space-y-2">
+                  <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                    Quirófano de Presión Positiva
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Flujo de aire estéril laminar que previene infecciones intrahospitalarias. Anestesia inhalatoria con Sevoflurano y electrobisturí bipolar.
+                  </p>
+                </div>
+              </div>
+              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                <span>Monitoreo Multiparamétrico Mindray</span>
+              </div>
+            </motion.div>
+
+            {/* Card 2: UCI */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=800&q=80"
+                    alt="Unidad de Cuidados Intensivos UCI veterinaria"
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                    Guardia 24/7
+                  </div>
+                </div>
+                <div className="p-5 space-y-2">
+                  <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                    Unidad de Terapia Intensiva (UCI)
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Incubadoras de oxigenoterapia con control de temperatura, bombas de infusión volumétrica y soporte hemodinámico crítico continuo.
+                  </p>
+                </div>
+              </div>
+              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
+                <Clock className="w-3.5 h-3.5 shrink-0" />
+                <span>Atención Médica Nocturna Activa</span>
+              </div>
+            </motion.div>
+
+            {/* Card 3: Laboratorio IDEXX */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80"
+                    alt="Laboratorio automatizado IDEXX"
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#1A6B38] text-white text-[10px] font-bold">
+                    In-House 15 Min
+                  </div>
+                </div>
+                <div className="p-5 space-y-2">
+                  <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                    Laboratorio Clínico IDEXX
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Bioquímica sérica integral, hemograma automatizado por impedancia y citología diagnóstica inmediata sin necesidad de enviar muestras fuera.
+                  </p>
+                </div>
+              </div>
+              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
+                <Microscope className="w-3.5 h-3.5 shrink-0" />
+                <span>Resultados en Tiempo Real</span>
+              </div>
+            </motion.div>
+
+            {/* Card 4: Área Felina */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-[#FAFBF7] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between hover:-translate-y-1"
+            >
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80"
+                    alt="Área felina Cat-Friendly sin estrés"
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+                    ISFM Gold Certified
+                  </div>
+                </div>
+                <div className="p-5 space-y-2">
+                  <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                    Espacio Felino Cat-Friendly
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Consultorio y hospitalización exclusivos 100% aislados de ladridos u olores caninos. Difusión permanente de feromonas apaciguantes Feliway®.
+                  </p>
+                </div>
+              </div>
+              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
+                <Heart className="w-3.5 h-3.5 shrink-0" />
+                <span>Zero-Stress Felino Garantizado</span>
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. CERTIFICACIONES INTERNACIONALES & ESTÁNDARES */}
+      <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
+              02 / ACREDITACIONES Y PROTOCOLOS OFICIALES
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
+              Avalados por Estándares de Referencia Mundial
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Certificaciones que garantizan el bienestar físico y emocional de tu compañero en cada etapa médica.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {[
+              {
+                icon: ShieldCheck,
+                title: 'Fear-Free™ Certified',
+                desc: 'Hospital certificado en manejo médico compasivo, reduciendo ansiedad, dolor y miedo en el paciente.',
+                badge: 'Protocolo Anti-Estrés'
+              },
+              {
+                icon: Award,
+                title: 'ISFM Cat Friendly Gold',
+                desc: 'Máxima acreditación de la International Society of Feline Medicine para infraestructura adaptada a gatos.',
+                badge: 'Nivel Oro Felino'
+              },
+              {
+                icon: Activity,
+                title: 'Estándares Quirúrgicos AAHA',
+                desc: 'Aplicación estricta de las directrices de la American Animal Hospital Association en analgesia y esterilidad.',
+                badge: 'Norma Quirúrgica'
+              },
+              {
+                icon: HeartHandshake,
+                title: 'Comité Nutricional WSAVA',
+                desc: 'Evaluación y prescripción dietética formulada según el algoritmo biométrico oficial de la WSAVA.',
+                badge: 'Nutrición Clínica'
+              }
+            ].map((cert, idx) => {
+              const Icon = cert.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+                >
+                  <div className="space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1A6B38] flex items-center justify-center border border-emerald-100">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/60 px-2.5 py-0.5 rounded-full inline-block">
+                      {cert.badge}
+                    </span>
+                    <h4 className="text-base font-bold text-slate-900 leading-snug">{cert.title}</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">{cert.desc}</p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 flex items-center gap-1 text-[11px] font-semibold text-[#1A6B38]">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>Verificado Activo 2026</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. LOS 4 PILARES MÉDICOS ÉTICOS DE VETCARE */}
+      <section className="py-12 sm:py-16 bg-[#0D3D20] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 text-center max-w-3xl mx-auto"
+          >
+            <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono">
+              03 / NUESTRO COMPROMISO DEONTOLÓGICO
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
+              Los 4 Pilares Médicos de VetCare
+            </h2>
+            <p className="text-xs sm:text-sm text-emerald-100/80">
+              Principios que guían cada decisión clínica, cada cirugía y cada interacción con tu familia.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {[
+              {
+                num: '01',
+                title: 'Medicina Basada en Evidencia',
+                desc: 'Todo tratamiento está sustentado en analítica previa, imagenología y literatura veterinaria de consenso internacional.'
+              },
+              {
+                num: '02',
+                title: 'Cero Tolerancia al Dolor',
+                desc: 'Protocolos de analgesia multimodal preventiva y posquirúrgica. Ningún paciente sufre dolor evitable bajo nuestro cuidado.'
+              },
+              {
+                num: '03',
+                title: 'Transparencia con el Tutor',
+                desc: 'Explicación diagnóstica detallada, presupuestos claros antes de cada procedimiento e informes clínicos accesibles.'
+              },
+              {
+                num: '04',
+                title: 'Nutrición como Medicina',
+                desc: 'Creemos en la dietoterapia biológica como el pilar fundamental para prevenir patologías y alargar la longevidad del animal.'
+              }
+            ].map((pilar, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all space-y-3 backdrop-blur-xs"
+              >
+                <span className="text-2xl font-black text-amber-300 font-mono block">
+                  {pilar.num}
+                </span>
+                <h4 className="text-base font-bold text-white leading-snug">
+                  {pilar.title}
+                </h4>
+                <p className="text-xs text-emerald-100/80 leading-relaxed">
+                  {pilar.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }
