@@ -10,7 +10,6 @@ import { AboutSection } from '@/components/AboutSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { SmartNutritionCalculator } from '@/components/SmartNutritionCalculator';
 import { PetShopSection } from '@/components/PetShopSection';
-import { SocialProofMetricsSection } from '@/components/SocialProofMetricsSection';
 import { AppointmentScheduler } from '@/components/AppointmentScheduler';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
 import { HomeExecutiveShowcase } from '@/components/HomeExecutiveShowcase';
@@ -149,10 +148,12 @@ export default function HomePage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
             >
-              <Hero onSelectServiceForBooking={handleSelectServiceForBooking} />
-              <SocialProofMetricsSection />
+              <Hero 
+                onSelectServiceForBooking={handleSelectServiceForBooking} 
+                onNavigate={handleNavigate}
+              />
               
-              {/* Executive Summary Showcase of all other sections (La Clínica, Especialidades, Pet Shop Gourmet, Citas & Urgencias) */}
+              {/* Executive Summary Showcase of all other sections (La Clínica, Especialidades, Pet Shop Gourmet, Casos Reales & Citas) */}
               <HomeExecutiveShowcase 
                 onNavigate={handleNavigate}
                 onSelectServiceForBooking={handleSelectServiceForBooking}

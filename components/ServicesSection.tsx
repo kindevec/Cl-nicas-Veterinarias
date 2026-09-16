@@ -39,17 +39,19 @@ const CATEGORY_FILTERS = [
 export function ServicesSection({ onSelectService }: ServicesSectionProps) {
   const [activeCategory, setActiveCategory] = useState('todos');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   // Featured 3 services for interactive showcase slider
   const featuredServices = VETERINARY_SERVICES.slice(0, 3);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % featuredServices.length);
-    }, 6000);
+    }, 5500);
     return () => clearInterval(timer);
-  }, [featuredServices.length]);
+  }, [isPaused, featuredServices.length]);
 
   const filteredServices = VETERINARY_SERVICES.filter((svc) => {
     if (activeCategory === 'todos') return true;
@@ -128,43 +130,55 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
               </h3>
             </div>
 
-            {/* Slider Controls */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={prevSlide}
-                aria-label="Especialidad anterior"
-                className="w-9 h-9 rounded-full bg-slate-100 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={nextSlide}
-                aria-label="Siguiente especialidad"
-                className="w-9 h-9 rounded-full bg-slate-100 hover:bg-[#0D3D20] hover:text-white text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+            {/* Subtítulo o indicador de auto-reproducción */}
+            <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500 font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Reproducción automática • Desliza para explorar</span>
             </div>
           </motion.div>
 
-          {/* Carousel Card Container */}
+          {/* Carousel Card Container con Controles Flanqueados en los Costados */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-[32px] overflow-hidden bg-[#0D3D20] text-white shadow-xl min-h-[340px] sm:min-h-[380px] flex items-center"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            className="relative rounded-[32px] overflow-hidden bg-[#0D3D20] text-white shadow-xl min-h-[340px] sm:min-h-[380px] flex items-center group"
           >
-            <AnimatePresence mode="wait">
+            {/* Botón Lateral Izquierdo (Ergonomía Kindev) */}
+            <button
+              type="button"
+              onClick={prevSlide}
+              aria-label="Especialidad anterior"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-amber-400 text-slate-900 shadow-2xl border border-white/40 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+            </button>
+
+            {/* Botón Lateral Derecho (Ergonomía Kindev) */}
+            <button
+              type="button"
+              onClick={nextSlide}
+              aria-label="Siguiente especialidad"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-amber-400 text-slate-900 shadow-2xl border border-white/40 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+            </button>
+
+            <AnimatePresence mode="popLayout">
               {featuredServices.map((feat, index) => {
                 if (index !== currentSlide) return null;
                 return (
                   <motion.div
                     key={feat.id}
-                    initial={{ opacity: 0, x: 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -40 }}
-                    transition={{ duration: 0.45 }}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.4 }}
                     className="grid grid-cols-1 lg:grid-cols-12 w-full min-h-full"
                   >
                     {/* Image side (edge-to-edge, zero box-in-box) */}
@@ -181,7 +195,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                         />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] lg:bg-gradient-to-r lg:from-transparent lg:to-[#0D3D20]" />
-                      <div className="absolute top-4 left-4 flex gap-2">
+                      <div className="absolute top-4 left-4 sm:left-16 flex gap-2">
                         <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0D3D20] text-xs font-black shadow-sm">
                           {feat.badge || feat.category}
                         </span>
@@ -195,7 +209,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     </div>
 
                     {/* Content side */}
-                    <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between space-y-6">
+                    <div className="lg:col-span-6 p-6 sm:p-10 lg:pr-16 flex flex-col justify-between space-y-6">
                       <div className="space-y-3">
                         <div className="flex items-center gap-2 text-xs text-amber-300 font-mono font-bold uppercase tracking-wider">
                           <Sparkles className="w-3.5 h-3.5" />
@@ -262,13 +276,13 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
             </AnimatePresence>
 
             {/* Slide Dots */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20">
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
               {featuredServices.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentSlide(i)}
                   className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                    i === currentSlide ? 'w-6 bg-amber-400' : 'w-2 bg-white/40 hover:bg-white/70'
+                    i === currentSlide ? 'w-7 bg-amber-400' : 'w-2 bg-white/40 hover:bg-white/70'
                   }`}
                   aria-label={`Ir al slide ${i + 1}`}
                 />

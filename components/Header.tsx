@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 export function Header({ activeSection, onNavigate }: HeaderProps) {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -19,8 +19,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const y = window.scrollY;
-          const progress = Math.min(Math.max(y / 140, 0), 1);
-          setScrollProgress(progress);
+          setIsScrolled(y > 15);
           ticking = false;
         });
         ticking = true;
@@ -40,31 +39,32 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
     { id: 'citas', label: 'Contacto' }
   ];
 
-  const isDarkHeader = true;
-  const isScrolled = scrollProgress > 0.08;
-  const blurAmount = scrollProgress * 16;
+  // El header es claro exclusivamente en 'inicio' y retoma su tema oscuro corporativo en las demás pestañas
+  const isDarkHeader = activeSection !== 'inicio';
 
   return (
     <header
       id="main-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3' : 'py-5'
+        isScrolled ? 'py-3' : 'py-4 sm:py-5'
       }`}
       style={{
-        backgroundColor: isDarkHeader
-          ? `rgba(13, 61, 32, ${Math.min(scrollProgress * 1.2, 0.94)})`
-          : `rgba(255, 255, 255, ${Math.min(scrollProgress * 1.2, 0.95)})`,
-        backdropFilter: blurAmount > 1 ? `blur(${blurAmount}px)` : 'none',
-        WebkitBackdropFilter: blurAmount > 1 ? `blur(${blurAmount}px)` : 'none',
+        backgroundColor: isScrolled
+          ? isDarkHeader
+            ? 'rgba(13, 61, 32, 0.94)'
+            : 'rgba(255, 255, 255, 0.92)'
+          : 'transparent',
+        backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
         borderBottom: isScrolled
           ? isDarkHeader
             ? '1px solid rgba(16, 185, 129, 0.25)'
-            : '1px solid rgba(226, 232, 240, 0.8)'
-          : '1px solid transparent',
+            : '1px solid rgba(226, 232, 240, 0.85)'
+          : 'none',
         boxShadow: isScrolled
           ? isDarkHeader
-            ? '0 10px 30px -5px rgba(0, 0, 0, 0.35)'
-            : '0 10px 25px -5px rgba(0, 0, 0, 0.06)'
+            ? '0 10px 25px -5px rgba(0, 0, 0, 0.35)'
+            : '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03)'
           : 'none',
       }}
     >
