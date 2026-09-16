@@ -129,7 +129,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
   };
 
   return (
-    <section id="agendar" className="py-16 sm:py-24 bg-[#FAFBF7] relative overflow-hidden">
+    <section id="agendar" className="py-10 sm:py-14 bg-[#FAFBF7] relative overflow-hidden">
       {/* Soft Ambient Shapes on Canvas */}
       <div className="absolute top-10 right-0 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl pointer-events-none -z-0" />
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl pointer-events-none -z-0" />

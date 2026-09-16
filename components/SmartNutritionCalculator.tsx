@@ -99,8 +99,8 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
   const shareText = `Hola VetCare, realicé el cálculo nutricional para mi ${petType} (${weightKg} kg, ${ageStage}, condición: ${healthCondition}). Requerimiento: ${dailyKcal} kcal/día (${dailyGrams} g/día). Quisiera asesoría para adquirir: ${currentRec.name}.`;
 
   return (
-    <section id="nutricion-calculator" className="py-16 md:py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+    <section id="nutricion-calculator" className="py-10 md:py-14 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
         
         {/* Header Editorial */}
         <motion.div 

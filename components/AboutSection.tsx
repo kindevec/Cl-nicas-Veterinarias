@@ -289,7 +289,7 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
       </section>
 
       {/* 4. INFRAESTRUCTURA & INSTALACIONES HOSPITALARIAS DE ALTA COMPLEJIDAD */}
-      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+      <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           <motion.div 
@@ -465,7 +465,7 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
       </section>
 
       {/* 5. CERTIFICACIONES INTERNACIONALES & ESTÁNDARES */}
-      <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70 relative overflow-hidden">
+      <section className="py-8 sm:py-10 bg-[#FAFBF7] relative overflow-hidden">
         {/* Subtle decorative circles */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-50/60 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" />

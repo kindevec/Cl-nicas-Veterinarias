@@ -13,6 +13,9 @@ import { PetShopSection } from '@/components/PetShopSection';
 import { AppointmentScheduler } from '@/components/AppointmentScheduler';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
 import { HomeExecutiveShowcase } from '@/components/HomeExecutiveShowcase';
+import { ProductCategoryCarousel } from '@/components/ProductCategoryCarousel';
+import { FeaturedServicesBanner } from '@/components/FeaturedServicesBanner';
+import { PromoBundleBanner } from '@/components/PromoBundleBanner';
 import { Footer } from '@/components/Footer';
 import { 
   ArrowRight, 
@@ -31,7 +34,8 @@ import { buildWhatsAppUrl } from '@/lib/utils';
 import { 
   PetProduct, 
   Appointment,
-  CorporateTab
+  CorporateTab,
+  ProductCategory
 } from '@/lib/types';
 import { 
   getStoredAppointments, 
@@ -46,6 +50,8 @@ import {
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<CorporateTab>('inicio');
   const [bookingService, setBookingService] = useState<string | undefined>(undefined);
+  const [petShopCategory, setPetShopCategory] = useState<ProductCategory>('todos');
+  const [petShopSearch, setPetShopSearch] = useState<string>('');
 
   // Appointments & Products State
   const [appointments, setAppointments] = useState<Appointment[]>(() => getStoredAppointments());
@@ -92,6 +98,17 @@ export default function HomePage() {
     const { tab, subTarget: parsedSub } = parseTabFromHash(tabOrHash);
     const finalSub = subTarget || parsedSub;
     const targetHash = getHashForTab(tab, finalSub);
+
+    if (tab === 'petshop' && finalSub) {
+      const validCategories: ProductCategory[] = ['alimento', 'farmacia', 'snacks', 'accesorios'];
+      if (validCategories.includes(finalSub as ProductCategory)) {
+        setPetShopCategory(finalSub as ProductCategory);
+        setPetShopSearch('');
+      } else {
+        setPetShopSearch(finalSub);
+        setPetShopCategory('todos');
+      }
+    }
 
     if (activeTab !== tab) {
       if (typeof window !== 'undefined') {
@@ -143,16 +160,32 @@ export default function HomePage() {
             <motion.div
               key="tab-inicio"
               id="inicio"
-              initial={{ opacity: 0, y: 15 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
             >
               <Hero 
                 onSelectServiceForBooking={handleSelectServiceForBooking} 
                 onNavigate={handleNavigate}
               />
               
+              {/* Carrusel de Productos en Círculos — Se mueve únicamente con las flechas */}
+              <ProductCategoryCarousel 
+                onNavigate={handleNavigate}
+              />
+
+              {/* Sección Destacada de Servicios — Tarjetas pastel con imágenes y botón Explorar */}
+              <FeaturedServicesBanner
+                onNavigate={handleNavigate}
+                onSelectServiceForBooking={handleSelectServiceForBooking}
+              />
+
+              {/* Banner de Ofertas — Kit de Inicio / Starter Bundle con 20% OFF */}
+              <PromoBundleBanner
+                onNavigate={handleNavigate}
+              />
+
               {/* Executive Summary Showcase of all other sections (La Clínica, Especialidades, Pet Shop Gourmet, Casos Reales & Citas) */}
               <HomeExecutiveShowcase 
                 onNavigate={handleNavigate}
@@ -199,7 +232,11 @@ export default function HomePage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
             >
-              <PetShopSection products={products} />
+              <PetShopSection 
+                products={products} 
+                initialCategory={petShopCategory}
+                initialSearch={petShopSearch}
+              />
             </motion.div>
           )}
 

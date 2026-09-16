@@ -19,7 +19,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const y = window.scrollY;
-          setIsScrolled(y > 15);
+          setIsScrolled(y > 20);
           ticking = false;
         });
         ticking = true;
@@ -40,33 +40,16 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
   ];
 
   // El header es claro exclusivamente en 'inicio' y retoma su tema oscuro corporativo en las demás pestañas
-  const isDarkHeader = activeSection !== 'inicio';
+  const isDarkHeader = activeSection !== 'inicio' && !isScrolled;
 
   return (
     <header
       id="main-header"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3' : 'py-4 sm:py-5'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
+        isScrolled
+          ? 'py-2.5 sm:py-3 bg-white/95 backdrop-blur-md shadow-md shadow-stone-900/5 border-b border-stone-200/50'
+          : 'py-4 sm:py-5 bg-transparent'
       }`}
-      style={{
-        backgroundColor: isScrolled
-          ? isDarkHeader
-            ? 'rgba(13, 61, 32, 0.94)'
-            : 'rgba(255, 255, 255, 0.92)'
-          : 'transparent',
-        backdropFilter: isScrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
-        borderBottom: isScrolled
-          ? isDarkHeader
-            ? '1px solid rgba(16, 185, 129, 0.25)'
-            : '1px solid rgba(226, 232, 240, 0.85)'
-          : 'none',
-        boxShadow: isScrolled
-          ? isDarkHeader
-            ? '0 10px 25px -5px rgba(0, 0, 0, 0.35)'
-            : '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03)'
-          : 'none',
-      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
@@ -84,8 +67,8 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           <BrandLogo variant="full" size="md" theme={isDarkHeader ? 'dark' : 'light'} />
         </a>
 
-        {/* Center Navigation - ZERO Box-in-Box, Thicker Bolder Typography with Dynamic Section Contrast */}
-        <nav className="hidden lg:flex items-center gap-8">
+        {/* Center Navigation (Desktop) - ZERO Box-in-Box, Thicker Bolder Typography */}
+        <nav className="hidden md:flex items-center gap-5 lg:gap-8">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
@@ -97,17 +80,17 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
                   e.preventDefault();
                   onNavigate(item.id);
                 }}
-                className="relative py-1 text-sm font-bold tracking-tight transition-colors cursor-pointer group"
+                className="relative py-1 text-xs sm:text-sm font-bold tracking-tight transition-colors cursor-pointer group"
               >
                 <span
                   className={
                     isDarkHeader
                       ? isActive
-                        ? 'text-white font-black drop-shadow-xs'
-                        : 'text-white/85 hover:text-white font-bold transition-colors'
+                        ? 'text-amber-400 font-black'
+                        : 'text-white/90 hover:text-white font-semibold transition-colors'
                       : isActive
                       ? 'text-[#0D3D20] font-black'
-                      : 'text-slate-800 hover:text-[#1A6B38] font-bold transition-colors'
+                      : 'text-slate-700 hover:text-[#1A6B38] font-semibold transition-colors'
                   }
                 >
                   {item.label}
@@ -117,7 +100,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
                   <motion.span
                     layoutId="header-nav-indicator"
                     className={`absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full ${
-                      isDarkHeader ? 'bg-amber-400 shadow-xs' : 'bg-[#1A6B38]'
+                      isDarkHeader ? 'bg-amber-400' : 'bg-[#1A6B38]'
                     }`}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
@@ -127,7 +110,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           })}
         </nav>
 
-        {/* Action Controls - Clear Adaptive Primary CTA */}
+        {/* Action Controls - Primary CTA (Agendar Cita) */}
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href="#citas"
@@ -135,7 +118,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
               e.preventDefault();
               onNavigate('citas');
             }}
-            className={`inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full font-black text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2 rounded-full font-black text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer ${
               isDarkHeader
                 ? 'bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-amber-950/20'
                 : 'bg-[#1A6B38] hover:bg-[#14532D] text-white'

@@ -112,7 +112,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 2. INTERACTIVE FEATURED SPOTLIGHT CAROUSEL */}
-      <section className="py-12 bg-white border-b border-slate-200/80">
+      <section className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -439,7 +439,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 4. RUTA CLÍNICA DEL PACIENTE (Paso a Paso Interactivo) */}
-      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+      <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           <motion.div 
@@ -546,7 +546,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 5. TECNOLOGÍA & EQUIPAMIENTO HOSPITALARIO */}
-      <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70">
+      <section className="py-8 sm:py-10 bg-[#FAFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           <motion.div 
@@ -633,7 +633,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 6. PREGUNTAS FRECUENTES MÉDICAS (Interactive FAQ Accordion) */}
-      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+      <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           <motion.div 
@@ -718,7 +718,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 7. BANNER FINAL DE GUARDIA & CITAS */}
-      <section className="py-10 bg-[#0D3D20] text-white border-t border-emerald-900/60">
+      <section className="py-8 bg-[#0D3D20] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-7 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
             <div className="space-y-1">

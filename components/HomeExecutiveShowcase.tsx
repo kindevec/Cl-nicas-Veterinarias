@@ -7,24 +7,19 @@ import {
   ArrowRight, 
   ChevronLeft, 
   ChevronRight, 
-  Stethoscope, 
   ShieldCheck, 
-  HeartPulse, 
   Clock, 
   Sparkles, 
   MessageCircle, 
   Star, 
-  Calendar, 
   CheckCircle2, 
   Award, 
-  ShoppingBag,
   Calculator,
   Phone,
   ArrowUpRight
 } from 'lucide-react';
 import { VETERINARY_SERVICES, PET_PRODUCTS } from '@/lib/mockData';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
-import { SocialProofMetricsSection } from '@/components/SocialProofMetricsSection';
 
 interface HomeExecutiveShowcaseProps {
   onNavigate: (sectionId: string, subTarget?: string) => void;
@@ -129,27 +124,17 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 1: LA CLÍNICA & ESPECIALISTAS (Orden 1 después de Inicio - #nosotros)
           ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-white relative overflow-hidden">
+      <section className="py-6 sm:py-8 bg-[#FAFBF7] relative overflow-hidden">
         {/* Subtle Ambient Light */}
         <div className="absolute top-0 right-1/4 w-80 h-80 bg-emerald-50/50 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
           {/* Header de la sección */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6"
-          >
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6">
             <div className="space-y-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/70 text-xs font-bold text-[#1A6B38] tracking-wide shadow-2xs">
-                <Stethoscope className="w-3.5 h-3.5 text-emerald-600" />
-                Equipo Médico &amp; Hospital de Referencia
-              </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
-                Conoce la Clínica <span className="font-serif italic font-normal text-[#E05A47]">VetCare</span>
+                Conoce la Clínica <span className="text-[#E05A47] font-extrabold">VetCare</span>
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
                 Quirófano estéril de flujo laminar con presión positiva, unidad de cuidados intensivos continua y equipo médico certificado en centros de referencia internacional.
@@ -167,17 +152,13 @@ export function HomeExecutiveShowcase({
               <span>Explorar La Clínica</span>
               <ArrowRight className="w-4 h-4 text-[#1A6B38] group-hover:text-white" />
             </a>
-          </motion.div>
+          </div>
 
           {/* Grid de 3 Especialistas Médicos Principales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {LEADING_DOCTORS.map((doc, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-[#FAFBF7] rounded-[32px] overflow-hidden shadow-xs hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2"
               >
                 <div>
@@ -221,7 +202,7 @@ export function HomeExecutiveShowcase({
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -231,27 +212,17 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 2: ESPECIALIDADES MÉDICAS & QUIRÚRGICAS (Orden 2 - #servicios)
           ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-[#FAFBF7] relative overflow-hidden">
+      <section className="py-6 sm:py-8 bg-[#FAFBF7] relative overflow-hidden">
         {/* Ambient glow */}
         <div className="absolute top-1/4 left-5 w-72 h-72 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
           {/* Header con Enlace de Navegación */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6"
-          >
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6">
             <div className="space-y-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/70 text-xs font-bold text-[#1A6B38] tracking-wide shadow-2xs">
-                <HeartPulse className="w-3.5 h-3.5 text-emerald-600" />
-                Procedimientos de Vanguardia
-              </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
-                Especialidades <span className="font-serif italic font-normal text-[#E05A47]">Médicas &amp; Quirúrgicas</span>
+                Especialidades <span className="text-[#E05A47] font-extrabold">Médicas &amp; Quirúrgicas</span>
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
                 Desliza para conocer los procedimientos de referencia de alta complejidad disponibles en nuestro hospital veterinario.
@@ -269,7 +240,7 @@ export function HomeExecutiveShowcase({
               <span>Ver Todas las Especialidades</span>
               <ArrowRight className="w-4 h-4" />
             </a>
-          </motion.div>
+          </div>
 
           {/* Carrusel Horizontal de Especialidades */}
           <div 
@@ -279,12 +250,12 @@ export function HomeExecutiveShowcase({
             onTouchStart={() => setIsServicesHovered(true)}
             onTouchEnd={() => setIsServicesHovered(false)}
           >
-            {/* Botón Lateral Izquierdo */}
+            {/* Botón Lateral Izquierdo (visible en pantallas medianas y grandes) */}
             <button
               type="button"
               onClick={() => scrollCarousel(servicesScrollRef, 'left')}
               aria-label="Anterior especialidad"
-              className="absolute -left-3 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+              className="hidden sm:flex absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
             </button>
@@ -369,34 +340,57 @@ export function HomeExecutiveShowcase({
               ))}
             </div>
 
-            {/* Botón Lateral Derecho */}
+            {/* Botón Lateral Derecho (visible en pantallas medianas y grandes) */}
             <button
               type="button"
               onClick={() => scrollCarousel(servicesScrollRef, 'right')}
               aria-label="Siguiente especialidad"
-              className="absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+              className="hidden sm:flex absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
             </button>
 
-            {/* Indicadores de Reproducción / Dots */}
-            <div className="flex items-center justify-center gap-1.5 pt-4">
-              {VETERINARY_SERVICES.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    if (servicesScrollRef.current) {
-                      const firstCard = servicesScrollRef.current.querySelector(':scope > div') as HTMLElement | null;
-                      const step = firstCard ? firstCard.offsetWidth + 24 : 364;
-                      servicesScrollRef.current.scrollTo({ left: idx * step, behavior: 'smooth' });
-                    }
-                  }}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === activeServiceIndex ? 'w-7 bg-[#1A6B38]' : 'w-2 bg-slate-300 hover:bg-slate-400'
-                  }`}
-                  aria-label={`Ir al servicio ${idx + 1}`}
-                />
-              ))}
+            {/* Controles Inferiores: Flechas en Móvil + Indicadores de Reproducción / Dots */}
+            <div className="flex items-center justify-between sm:justify-center gap-3 pt-4 px-2">
+              {/* Flecha Anterior (solo móvil para no tapar las cards) */}
+              <button
+                type="button"
+                onClick={() => scrollCarousel(servicesScrollRef, 'left')}
+                aria-label="Anterior especialidad"
+                className="sm:hidden w-8 h-8 rounded-full bg-white border border-slate-200 shadow-xs flex items-center justify-center text-[#0D3D20] active:scale-95 cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" strokeWidth={2.5} />
+              </button>
+
+              {/* Dots */}
+              <div className="flex items-center gap-1.5">
+                {VETERINARY_SERVICES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      if (servicesScrollRef.current) {
+                        const firstCard = servicesScrollRef.current.querySelector(':scope > div') as HTMLElement | null;
+                        const step = firstCard ? firstCard.offsetWidth + 24 : 364;
+                        servicesScrollRef.current.scrollTo({ left: idx * step, behavior: 'smooth' });
+                      }
+                    }}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      idx === activeServiceIndex ? 'w-7 bg-[#1A6B38]' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                    aria-label={`Ir al servicio ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Flecha Siguiente (solo móvil para no tapar las cards) */}
+              <button
+                type="button"
+                onClick={() => scrollCarousel(servicesScrollRef, 'right')}
+                aria-label="Siguiente especialidad"
+                className="sm:hidden w-8 h-8 rounded-full bg-white border border-slate-200 shadow-xs flex items-center justify-center text-[#0D3D20] active:scale-95 cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+              </button>
             </div>
           </div>
 
@@ -406,27 +400,17 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 3: PET SHOP GOURMET & NUTRICIÓN (Orden 3 - #petshop)
           ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-white relative overflow-hidden">
+      <section className="py-6 sm:py-8 bg-[#FAFBF7] relative overflow-hidden">
         {/* Ambient glow */}
         <div className="absolute top-1/3 right-5 w-80 h-80 bg-amber-50/60 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
           {/* Header con Enlace a Pet Shop */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6"
-          >
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6">
             <div className="space-y-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50/90 border border-amber-200/70 text-xs font-bold text-amber-800 tracking-wide shadow-2xs">
-                <ShoppingBag className="w-3.5 h-3.5 text-amber-600" />
-                Nutrición Biológica &amp; Farmacia Especializada
-              </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
-                Pet Shop Gourmet &amp; <span className="font-serif italic font-normal text-[#E05A47]">Dietas Clínicas</span>
+                Pet Shop Gourmet &amp; <span className="text-[#E05A47] font-extrabold">Dietas Clínicas</span>
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
                 Alimentos biológicos super premium, dietas veterinarias formuladas WSAVA y nutracéuticos de grado hospitalario.
@@ -444,7 +428,7 @@ export function HomeExecutiveShowcase({
               <span>Ver Catálogo Gourmet</span>
               <ArrowRight className="w-4 h-4" />
             </a>
-          </motion.div>
+          </div>
 
           {/* Carrusel Horizontal de Productos */}
           <div 
@@ -454,12 +438,12 @@ export function HomeExecutiveShowcase({
             onTouchStart={() => setIsProductsHovered(true)}
             onTouchEnd={() => setIsProductsHovered(false)}
           >
-            {/* Botón Lateral Izquierdo */}
+            {/* Botón Lateral Izquierdo (visible en pantallas medianas y grandes) */}
             <button
               type="button"
               onClick={() => scrollCarousel(productsScrollRef, 'left')}
               aria-label="Anterior producto"
-              className="absolute -left-3 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+              className="hidden sm:flex absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
             </button>
@@ -538,34 +522,57 @@ export function HomeExecutiveShowcase({
               ))}
             </div>
 
-            {/* Botón Lateral Derecho */}
+            {/* Botón Lateral Derecho (visible en pantallas medianas y grandes) */}
             <button
               type="button"
               onClick={() => scrollCarousel(productsScrollRef, 'right')}
               aria-label="Siguiente producto"
-              className="absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
+              className="hidden sm:flex absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-[#0D3D20] text-[#0D3D20] hover:text-white shadow-xl border border-slate-200/90 items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 backdrop-blur-md hover:scale-110"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
             </button>
 
-            {/* Indicadores de Reproducción / Dots */}
-            <div className="flex items-center justify-center gap-1.5 pt-4">
-              {PET_PRODUCTS.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    if (productsScrollRef.current) {
-                      const firstCard = productsScrollRef.current.querySelector(':scope > div') as HTMLElement | null;
-                      const step = firstCard ? firstCard.offsetWidth + 24 : 304;
-                      productsScrollRef.current.scrollTo({ left: idx * step, behavior: 'smooth' });
-                    }
-                  }}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === activeProductIndex ? 'w-7 bg-[#1A6B38]' : 'w-2 bg-slate-300 hover:bg-slate-400'
-                  }`}
-                  aria-label={`Ir al producto ${idx + 1}`}
-                />
-              ))}
+            {/* Controles Inferiores: Flechas en Móvil + Indicadores de Reproducción / Dots */}
+            <div className="flex items-center justify-between sm:justify-center gap-3 pt-4 px-2">
+              {/* Flecha Anterior (solo móvil para no tapar las cards) */}
+              <button
+                type="button"
+                onClick={() => scrollCarousel(productsScrollRef, 'left')}
+                aria-label="Anterior producto"
+                className="sm:hidden w-8 h-8 rounded-full bg-white border border-slate-200 shadow-xs flex items-center justify-center text-[#0D3D20] active:scale-95 cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" strokeWidth={2.5} />
+              </button>
+
+              {/* Dots */}
+              <div className="flex items-center gap-1.5">
+                {PET_PRODUCTS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      if (productsScrollRef.current) {
+                        const firstCard = productsScrollRef.current.querySelector(':scope > div') as HTMLElement | null;
+                        const step = firstCard ? firstCard.offsetWidth + 24 : 304;
+                        productsScrollRef.current.scrollTo({ left: idx * step, behavior: 'smooth' });
+                      }
+                    }}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      idx === activeProductIndex ? 'w-7 bg-[#1A6B38]' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                    aria-label={`Ir al producto ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Flecha Siguiente (solo móvil para no tapar las cards) */}
+              <button
+                type="button"
+                onClick={() => scrollCarousel(productsScrollRef, 'right')}
+                aria-label="Siguiente producto"
+                className="sm:hidden w-8 h-8 rounded-full bg-white border border-slate-200 shadow-xs flex items-center justify-center text-[#0D3D20] active:scale-95 cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+              </button>
             </div>
           </div>
 
@@ -573,53 +580,28 @@ export function HomeExecutiveShowcase({
       </section>
 
       {/* =========================================================================
-          BLOQUE 4: HISTORIAS CLÍNICAS & AMOR ANIMAL (Social Proof & Testimonios)
-          ========================================================================= */}
-      <SocialProofMetricsSection />
-
-      {/* =========================================================================
           BLOQUE 5: RESERVA DE CONSULTAS & CUIDADO INTEGRAL (Orden 5 - #citas)
           ========================================================================= */}
-      <section className="py-12 sm:py-20 bg-[#FAFBF7] relative overflow-hidden">
+      <section className="py-6 sm:py-9 bg-[#FAFBF7] relative overflow-hidden">
         {/* Ambient Lighting */}
         <div className="absolute top-10 left-1/3 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-5 right-10 w-80 h-80 bg-orange-100/30 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="space-y-2.5 text-center max-w-3xl mx-auto"
-          >
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/70 text-xs font-bold text-[#1A6B38] tracking-wide shadow-2xs">
-              <Calendar className="w-3.5 h-3.5 text-emerald-600" />
-              Tu Mascota en las Mejores Manos
-            </span>
+          <div className="space-y-2.5 text-center max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
-              Reserva de Consultas &amp; <span className="font-serif italic font-normal text-[#E05A47]">Cuidado Integral</span>
+              Reserva de Consultas &amp; <span className="text-[#E05A47] font-extrabold">Cuidado Integral</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
               Elige entre agendamiento programado con nuestros especialistas, el cálculo de nutrición biológica WSAVA o el protocolo libre de estrés.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Card 1: Agendamiento en Línea */}
             <div className="p-7 sm:p-8 rounded-[32px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-[#E05A47] text-[10px] font-extrabold tracking-wider border border-orange-200/80">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>TURNOS PROGRAMADOS</span>
-                </div>
                 <h3 className="text-xl font-bold text-slate-900 leading-snug group-hover:text-[#0D3D20] transition-colors">
                   Agenda tu Consulta Médica
                 </h3>
@@ -660,10 +642,6 @@ export function HomeExecutiveShowcase({
             {/* Card 2: Calculadora WSAVA */}
             <div className="p-7 sm:p-8 rounded-[32px] bg-gradient-to-br from-emerald-50/90 to-teal-50/50 border border-emerald-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-emerald-800 text-[10px] font-extrabold tracking-wider border border-emerald-200 shadow-2xs">
-                  <Calculator className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>ALGORITMO BIOMÉTRICO WSAVA</span>
-                </div>
                 <h3 className="text-xl font-bold text-[#0D3D20] leading-snug">
                   Calculadora Nutricional
                 </h3>
@@ -704,10 +682,6 @@ export function HomeExecutiveShowcase({
             {/* Card 3: Protocolos Fear-Free™ en Consulta */}
             <div className="p-7 sm:p-8 rounded-[32px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-[#1A6B38] text-[10px] font-extrabold tracking-wider border border-emerald-200">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>MANEJO AMABLE CERTIFICADO</span>
-                </div>
                 <h3 className="text-xl font-bold text-slate-900 leading-snug group-hover:text-[#0D3D20] transition-colors">
                   Entorno Amable &amp; Sin Estrés
                 </h3>
@@ -744,7 +718,7 @@ export function HomeExecutiveShowcase({
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </section>

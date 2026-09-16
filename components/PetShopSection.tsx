@@ -25,6 +25,8 @@ import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 
 interface PetShopSectionProps {
   products: PetProduct[];
+  initialCategory?: ProductCategory;
+  initialSearch?: string;
 }
 
 const CATEGORIES: { id: ProductCategory; label: string }[] = [
@@ -35,10 +37,22 @@ const CATEGORIES: { id: ProductCategory; label: string }[] = [
   { id: 'accesorios', label: 'Accesorios Médicos' },
 ];
 
-export function PetShopSection({ products }: PetShopSectionProps) {
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('todos');
-  const [searchQuery, setSearchQuery] = useState('');
+export function PetShopSection({ products, initialCategory, initialSearch }: PetShopSectionProps) {
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>(initialCategory || 'todos');
+  const [searchQuery, setSearchQuery] = useState(initialSearch || '');
   const [selectedPathology, setSelectedPathology] = useState(0);
+
+  React.useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [initialCategory]);
+
+  React.useEffect(() => {
+    if (initialSearch !== undefined) {
+      setSearchQuery(initialSearch);
+    }
+  }, [initialSearch]);
 
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
@@ -305,7 +319,7 @@ export function PetShopSection({ products }: PetShopSectionProps) {
       </section>
 
       {/* 5. GUÍA INTERACTIVA DE NUTRICIÓN CLÍNICA POR PATOLOGÍA */}
-      <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
+      <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           <motion.div 
@@ -473,7 +487,7 @@ export function PetShopSection({ products }: PetShopSectionProps) {
       </section>
 
       {/* 6. GARANTÍA DE CADENA DE FRÍO & SEGURIDAD FARMACÉUTICA */}
-      <section className="py-16 sm:py-24 bg-white border-t border-slate-200/70 relative overflow-hidden">
+      <section className="py-8 sm:py-12 bg-white relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] rounded-full bg-emerald-50/50 blur-3xl" />

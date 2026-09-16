@@ -52,7 +52,7 @@ const TESTIMONIALS = [
 
 export function SocialProofMetricsSection() {
   return (
-    <section id="social-proof" className="relative py-12 sm:py-20 bg-gradient-to-b from-[#FAF9F5] via-white to-[#FAF9F5] overflow-hidden">
+    <section id="social-proof" className="relative py-8 sm:py-12 bg-gradient-to-b from-[#FAF9F5] via-white to-[#FAF9F5] overflow-hidden">
       
       {/* Dynamic Warm Ambient Glows */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -60,22 +60,16 @@ export function SocialProofMetricsSection() {
         <div className="absolute bottom-10 right-10 w-[420px] h-[420px] bg-orange-100/30 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         
         {/* =========================================================================
             1. POETIC EDITORIAL SECTION WITH ELEGANT ARCHED PET PORTRAIT
             ========================================================================= */}
         <div className="max-w-5xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.55 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-14 bg-white/90 backdrop-blur-xs p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] border border-slate-200/70 shadow-xs"
-          >
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-10 bg-white/90 backdrop-blur-xs p-5 sm:p-8 rounded-[28px] sm:rounded-[36px] border border-slate-200/70 shadow-xs">
             
             {/* Elegant Arched Frame for Happy Dogs */}
-            <div className="relative w-60 sm:w-72 h-64 sm:h-76 shrink-0">
+            <div className="relative w-52 sm:w-64 h-52 sm:h-60 shrink-0">
               <div className="w-full h-full rounded-t-[90px] rounded-b-3xl overflow-hidden shadow-xl border-4 border-white relative bg-slate-100 ring-1 ring-slate-200/60">
                 <Image
                   src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80"
@@ -110,7 +104,7 @@ export function SocialProofMetricsSection() {
               </p>
             </div>
 
-          </motion.div>
+          </div>
         </div>
 
         {/* =========================================================================
@@ -118,13 +112,7 @@ export function SocialProofMetricsSection() {
             ========================================================================= */}
         <div className="space-y-8 sm:space-y-10">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto space-y-2.5"
-          >
+          <div className="text-center max-w-2xl mx-auto space-y-2.5">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/70 text-xs font-bold text-[#1A6B38] tracking-wide shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
               Historias Clínicas de Éxito
@@ -136,16 +124,12 @@ export function SocialProofMetricsSection() {
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
               Casos reales atendidos en nuestro hospital por el equipo de especialistas y guardia continua.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {TESTIMONIALS.map((test, idx) => (
-              <motion.div
+            {TESTIMONIALS.map((test) => (
+              <div
                 key={test.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-white rounded-3xl p-6 sm:p-7 shadow-xs hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
               >
                 <div className="space-y-3.5">
@@ -187,7 +171,7 @@ export function SocialProofMetricsSection() {
                     <span className="text-[11px] text-slate-500 truncate block">{test.tutorName} • {test.service}</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
