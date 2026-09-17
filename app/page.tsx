@@ -27,9 +27,9 @@ import {
   MapPin,
   Car,
   ShieldCheck,
-  MessageCircle,
   Phone
 } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { buildWhatsAppUrl } from '@/lib/utils';
 import { 
   PetProduct, 
@@ -153,7 +153,7 @@ export default function HomePage() {
       />
 
       {/* Main Container - Full-bleed top so hero banners sit seamlessly under the header */}
-      <main className="overflow-x-hidden w-full pb-20 md:pb-0 flex-1">
+      <main className="overflow-x-hidden w-full flex-1">
         <AnimatePresence mode="wait">
           {/* TAB 1: INICIO */}
           {activeTab === 'inicio' && (
@@ -300,7 +300,7 @@ export default function HomePage() {
                           rel="noopener noreferrer"
                           className="px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2"
                         >
-                          <MessageCircle className="w-4 h-4" />
+                          <WhatsAppOfficialIcon className="w-4 h-4 shrink-0" />
                           <span>WhatsApp Directo</span>
                         </a>
                         <a
@@ -324,32 +324,15 @@ export default function HomePage() {
               </div>
 
               {/* 2. Complementary WSAVA Clinical Nutrition Calculator */}
-              <div id="calculadora-nutricional" className="py-16 bg-white border-t border-slate-200/80">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5 }}
-                  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center space-y-2"
-                >
-                  <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                    Herramienta Médica Complementaria
-                  </span>
-                  <h3 className="text-2xl sm:text-4xl font-extrabold text-[#0D3D20]">
-                    Calculadora Nutricional WSAVA
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
-                    Conoce el requerimiento calórico e hídrico exacto de tu mascota según especie, edad y condición antes de tu consulta médica.
-                  </p>
-                </motion.div>
+              <div id="calculadora-nutricional" className="bg-white border-t border-slate-200/80">
                 <SmartNutritionCalculator 
                   onSelectServiceForBooking={handleSelectServiceForBooking}
                 />
               </div>
 
               {/* 3. Guía de Preparación Previa para tu Consulta Médica */}
-              <section className="py-12 sm:py-16 bg-[#FAFBF7] border-t border-slate-200/70">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+              <section className="pt-4 pb-8 sm:pt-6 sm:pb-10 bg-[#FAFBF7] border-t border-slate-200/70">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                   
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
@@ -358,15 +341,9 @@ export default function HomePage() {
                     transition={{ duration: 0.5 }}
                     className="space-y-1 text-center max-w-3xl mx-auto"
                   >
-                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                      01 / INDICACIONES PREVIAS
-                    </span>
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-                      Preparación para tu Cita Médica
+                      Preparación para tu <span className="text-[#E05A47] font-extrabold">Cita Médica</span>
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-500">
-                      Recomendaciones sencillas para que la atención de tu mascota sea precisa, segura y libre de estrés.
-                    </p>
                   </motion.div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -374,9 +351,6 @@ export default function HomePage() {
                       <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
                         <Image src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" fill alt="Documentación Médica" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                        <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-white text-[10px] font-bold tracking-wider uppercase">
-                          Paso 1
-                        </div>
                       </div>
                       <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
                         <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-md z-10">
@@ -386,7 +360,7 @@ export default function HomePage() {
                           Documentación &amp; Historial
                         </h4>
                         <p className="text-xs text-slate-600 leading-relaxed flex-1">
-                          Trae su carnet de vacunación vigente, desparasitaciones y exámenes de laboratorio o ecografías previas para enriquecer la historia clínica.
+                          Trae su carnet de vacunas y exámenes médicos previos.
                         </p>
                         <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38] mt-auto">
                           <CheckCircle2 className="w-3.5 h-3.5" />
@@ -399,9 +373,6 @@ export default function HomePage() {
                       <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
                         <Image src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&q=80" fill alt="Protocolo de Ayuno" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                        <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-white text-[10px] font-bold tracking-wider uppercase">
-                          Paso 2
-                        </div>
                       </div>
                       <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
                         <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-md z-10">
@@ -411,7 +382,7 @@ export default function HomePage() {
                           Protocolo de Ayuno
                         </h4>
                         <p className="text-xs text-slate-600 leading-relaxed flex-1">
-                          Si tu mascota tiene programada ecografía abdominal, analítica de sangre o sedación, requiere de 8 a 12 horas de ayuno sólido. Mantén siempre agua a libre disposición.
+                          Ayuno sólido de 8 a 12 horas para exámenes o ecografía. Mantén agua disponible.
                         </p>
                         <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38] mt-auto">
                           <CheckCircle2 className="w-3.5 h-3.5" />
@@ -424,9 +395,6 @@ export default function HomePage() {
                       <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
                         <Image src="https://images.unsplash.com/photo-1450778869180-41d0601e0e68?auto=format&fit=crop&w=600&q=80" fill alt="Transporte Seguro" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                        <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-white text-[10px] font-bold tracking-wider uppercase">
-                          Paso 3
-                        </div>
                       </div>
                       <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
                         <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-md z-10">
@@ -436,7 +404,7 @@ export default function HomePage() {
                           Transporte Seguro Fear-Free
                         </h4>
                         <p className="text-xs text-slate-600 leading-relaxed flex-1">
-                          Perros con collar/arnés seguro y correa corta. Gatos siempre en transportadora rígida cubierta con una toalla para evitar sobreestimulación visual.
+                          Perros con correa corta y gatos en transportadora cubierta.
                         </p>
                         <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38] mt-auto">
                           <CheckCircle2 className="w-3.5 h-3.5" />
@@ -450,8 +418,8 @@ export default function HomePage() {
               </section>
 
               {/* 4. Sede Hospitalaria, Horarios & Acceso */}
-              <section className="py-12 sm:py-16 bg-white border-t border-slate-200/70">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+              <section className="pt-4 pb-8 sm:pt-6 sm:pb-10 bg-white border-t border-slate-200/70">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                   
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
@@ -460,15 +428,9 @@ export default function HomePage() {
                     transition={{ duration: 0.5 }}
                     className="space-y-1 text-center max-w-3xl mx-auto"
                   >
-                    <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                      02 / SEDE HOSPITALARIA &amp; ACCESIBILIDAD
-                    </span>
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-                      Ubicación, Horarios &amp; Facilidades
+                      Ubicación, Horarios &amp; <span className="text-[#E05A47] font-extrabold">Facilidades</span>
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-500">
-                      Instalaciones céntricas con parqueadero privado vigilado y rampa de acceso directo para camillas y emergencias.
-                    </p>
                   </motion.div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -534,7 +496,7 @@ export default function HomePage() {
                           rel="noopener noreferrer"
                           className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-emerald-50 text-[#0D3D20] font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mt-3"
                         >
-                          <MessageCircle className="w-4 h-4 text-[#1A6B38]" />
+                          <WhatsAppOfficialIcon className="w-4 h-4 text-[#1A6B38] shrink-0" />
                           <span>Línea Directa de Urgencias</span>
                         </a>
                       </div>

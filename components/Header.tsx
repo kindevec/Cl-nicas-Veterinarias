@@ -67,8 +67,8 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
           <BrandLogo variant="full" size="md" theme={isDarkHeader ? 'dark' : 'light'} />
         </a>
 
-        {/* Center Navigation (Desktop) - ZERO Box-in-Box, Thicker Bolder Typography */}
-        <nav className="hidden md:flex items-center gap-5 lg:gap-8">
+        {/* Center Navigation (Desktop >= 1024px) - ZERO Box-in-Box, Thicker Bolder Typography */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (

@@ -9,11 +9,11 @@ import {
   Minus, 
   ShoppingBag, 
   Truck, 
-  MessageSquare, 
   CheckCircle2, 
   ArrowRight,
   ShieldCheck
 } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import confetti from 'canvas-confetti';
 import { CartItem } from '@/lib/types';
 import { formatUSD, buildWhatsAppUrl, VETCARE_PHONE } from '@/lib/utils';
@@ -95,8 +95,8 @@ ${itemsList}
         className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col justify-between">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-4 sm:pl-10">
+        <div className="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col justify-between h-[100dvh] max-h-[100dvh]">
           
           {/* Header */}
           <div className="p-6 border-b border-slate-100 flex items-center justify-between">
@@ -199,7 +199,7 @@ ${itemsList}
 
           {/* Footer Checkout Form */}
           {items.length > 0 && (
-            <div className="p-6 border-t border-slate-100 bg-white space-y-4">
+            <div className="p-5 sm:p-6 border-t border-slate-100 bg-white space-y-4 pb-safe">
               <div className="space-y-2">
                 <input
                   type="text"
@@ -238,7 +238,7 @@ ${itemsList}
                 onClick={handleWhatsAppCheckout}
                 className="w-full py-3.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppOfficialIcon className="w-4 h-4 shrink-0" />
                 <span>Finalizar Pedido vía WhatsApp</span>
               </button>
             </div>

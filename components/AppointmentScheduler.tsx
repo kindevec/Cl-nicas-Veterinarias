@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Calendar, 
@@ -17,7 +18,6 @@ import {
   Send, 
   Check, 
   ExternalLink, 
-  ShieldCheck, 
   ArrowRight,
   Ambulance,
   HeartPulse
@@ -26,6 +26,7 @@ import confetti from 'canvas-confetti';
 import { PetType, Appointment } from '@/lib/types';
 import { saveAppointment } from '@/lib/supabaseClient';
 import { buildWhatsAppUrl } from '@/lib/utils';
+import { WhatsAppOfficialIcon } from './WhatsAppOfficialIcon';
 
 interface AppointmentSchedulerProps {
   initialService?: string;
@@ -142,17 +143,11 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl space-y-3"
+          className="max-w-3xl"
         >
-          <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono block">
-            Atención Médica Inmediata &amp; Turnos Programados
-          </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
-            Agenda tu Consulta o Contáctanos en Vivo
+            Agenda tu Consulta o <span className="text-[#E05A47] font-extrabold">Contáctanos en Vivo</span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Estamos disponibles las 24 horas para urgencias críticas y consultas de especialidad médica en el sector financiero de Quito.
-          </p>
         </motion.div>
 
         {/* 2-Column Creative Canvas: Hub de Contacto & Agendamiento Fluido (Zero Box-in-Box) */}
@@ -169,11 +164,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
             
             {/* 1. Emergency Live Triage Banner Card (High-Impact Emerald) */}
             <div className="rounded-[32px] bg-[#0D3D20] text-white p-7 sm:p-9 shadow-xl relative overflow-hidden space-y-5">
-              <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold tracking-wide border border-emerald-400/30">
-                  <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-                  <span>TRIAGE DE URGENCIAS EN VIVO</span>
-                </div>
+              <div className="flex items-center justify-end">
                 <HeartPulse className="w-5 h-5 text-emerald-400" />
               </div>
 
@@ -193,9 +184,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
                   rel="noopener noreferrer"
                   className="w-full py-3.5 px-5 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.64 4.2 3.7 2.46 1.07 2.46.71 2.91.67.45-.05 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/>
-                  </svg>
+                  <WhatsAppOfficialIcon className="w-4 h-4 text-white shrink-0" />
                   <span>Contactar Guardia por WhatsApp</span>
                 </a>
 
@@ -217,7 +206,6 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
                 </div>
                 <div>
                   <h4 className="font-bold text-sm text-slate-900">Ubicación de la Clínica</h4>
-                  <span className="text-xs text-slate-500 block">Acceso vehicular y peatonal seguro</span>
                 </div>
               </div>
 
@@ -255,7 +243,6 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
                 </div>
                 <div>
                   <h4 className="font-bold text-sm text-slate-900">Horarios de Atención</h4>
-                  <span className="text-xs text-slate-500 block">Soporte continuo sin interrupciones</span>
                 </div>
               </div>
 
@@ -279,12 +266,32 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
               </div>
             </div>
 
-            {/* 4. Trust Assurance */}
-            <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200/60 flex items-center gap-3">
-              <ShieldCheck className="w-6 h-6 text-[#1A6B38] shrink-0" />
-              <p className="text-xs text-[#0D3D20] font-medium leading-tight">
-                Instalaciones certificadas por Agrocalidad y protocolos Fear-Free™ con áreas felinas independientes para evitar el estrés.
-              </p>
+            {/* 4. Transporte Seguro Fear-Free */}
+            <div className="rounded-[28px] bg-white border border-slate-200/80 shadow-sm overflow-hidden group">
+              <div className="relative h-40 sm:h-44 w-full overflow-hidden bg-slate-100">
+                <Image
+                  src="https://images.unsplash.com/photo-1450778869180-41d0601e0e68?auto=format&fit=crop&w=600&q=80"
+                  alt="Transporte Seguro Fear-Free"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 100vw, 450px"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/80 backdrop-blur-xs flex items-center justify-center text-white">
+                      <Ambulance className="w-4 h-4" />
+                    </div>
+                    <span className="text-xs font-bold drop-shadow-sm">Transporte Seguro Fear-Free™</span>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5">
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Unidades equipadas con climatización controlada, feromonas apaciguantes y camillas ergonómicas para traslados clínicos sin estrés.
+                </p>
+              </div>
             </div>
 
           </motion.div>
@@ -407,21 +414,21 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
                     <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block font-mono">
                       4. Selecciona el Día
                     </span>
-                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                    <div className="grid grid-cols-7 gap-1 sm:gap-2">
                       {availableDates.map((d) => (
                         <button
                           type="button"
                           key={d.iso}
                           onClick={() => setSelectedDate(d.iso)}
-                          className={`p-3 rounded-2xl text-center border transition-all cursor-pointer ${
+                          className={`py-2 px-1 sm:p-3 rounded-xl sm:rounded-2xl text-center border transition-all cursor-pointer min-w-0 ${
                             selectedDate === d.iso
-                              ? 'bg-[#0D3D20] text-white border-[#0D3D20] font-bold shadow-sm scale-[1.03]'
+                              ? 'bg-[#0D3D20] text-white border-[#0D3D20] font-bold shadow-sm scale-[1.02]'
                               : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                           }`}
                         >
-                          <span className="text-[10px] block uppercase font-medium">{d.dayName}</span>
-                          <span className="text-base font-black block mt-0.5">{d.dayNumber}</span>
-                          <span className="text-[9px] block text-emerald-300 font-mono mt-0.5">{d.month}</span>
+                          <span className={`text-[8px] sm:text-[10px] block uppercase font-semibold truncate ${selectedDate === d.iso ? 'text-emerald-200' : 'text-slate-500'}`}>{d.dayName}</span>
+                          <span className="text-xs sm:text-base font-black block mt-0.5 leading-tight">{d.dayNumber}</span>
+                          <span className={`text-[7.5px] sm:text-[9px] block font-mono mt-0.5 uppercase truncate ${selectedDate === d.iso ? 'text-emerald-300' : 'text-slate-400'}`}>{d.month}</span>
                         </button>
                       ))}
                     </div>
@@ -595,9 +602,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
                       rel="noopener noreferrer"
                       className="flex-1 py-3.5 px-6 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.64 4.2 3.7 2.46 1.07 2.46.71 2.91.67.45-.05 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/>
-                      </svg>
+                      <WhatsAppOfficialIcon className="w-4 h-4 text-white shrink-0" />
                       <span>Notificar por WhatsApp</span>
                     </a>
 

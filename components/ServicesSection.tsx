@@ -8,9 +8,7 @@ import {
   ChevronLeft, 
   ChevronRight, 
   ChevronDown,
-  MessageSquare, 
   ArrowRight,
-  MessageCircle,
   Clock,
   Sparkles,
   Calendar,
@@ -19,8 +17,10 @@ import {
   ShieldCheck,
   Stethoscope,
   Microscope,
+  Scissors,
   Zap
 } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { VETERINARY_SERVICES } from '@/lib/mockData';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 
@@ -29,11 +29,11 @@ interface ServicesSectionProps {
 }
 
 const CATEGORY_FILTERS = [
-  { id: 'todos', label: 'Todos los Servicios' },
-  { id: 'urgencias', label: 'Urgencias & UCI 24/7' },
-  { id: 'cirugia', label: 'Cirugía de Alta Gama' },
-  { id: 'consulta', label: 'Consulta & Diagnóstico' },
-  { id: 'preventiva', label: 'Preventiva & Spa' },
+  { id: 'todos', label: 'Todos los Servicios', icon: Sparkles },
+  { id: 'urgencias', label: 'Urgencias & UCI 24/7', icon: Activity },
+  { id: 'cirugia', label: 'Cirugía de Alta Gama', icon: Scissors },
+  { id: 'consulta', label: 'Consulta & Diagnóstico', icon: Stethoscope },
+  { id: 'preventiva', label: 'Preventiva & Spa', icon: ShieldCheck },
 ];
 
 export function ServicesSection({ onSelectService }: ServicesSectionProps) {
@@ -112,7 +112,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 2. INTERACTIVE FEATURED SPOTLIGHT CAROUSEL */}
-      <section className="py-8 bg-white">
+      <section className="pt-6 pb-4 sm:py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -122,11 +122,8 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
             className="flex items-center justify-between"
           >
             <div className="space-y-1">
-              <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                Especialidades Destacadas
-              </span>
               <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
-                Unidades de Referencia Hospitalaria
+                Unidades de Referencia <span className="text-[#E05A47] font-extrabold">Hospitalaria</span>
               </h3>
             </div>
 
@@ -195,45 +192,18 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                         />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] lg:bg-gradient-to-r lg:from-transparent lg:to-[#0D3D20]" />
-                      <div className="absolute top-4 left-4 sm:left-16 flex gap-2">
-                        <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0D3D20] text-xs font-black shadow-sm">
-                          {feat.badge || feat.category}
-                        </span>
-                        {feat.available247 && (
-                          <span className="px-2.5 py-1 rounded-full bg-red-500 text-white text-[10px] font-bold shadow-sm flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                            24/7
-                          </span>
-                        )}
-                      </div>
                     </div>
 
                     {/* Content side */}
                     <div className="lg:col-span-6 p-6 sm:p-10 lg:pr-16 flex flex-col justify-between space-y-6">
                       <div className="space-y-3">
-                        <div className="flex items-center gap-2 text-xs text-amber-300 font-mono font-bold uppercase tracking-wider">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          <span>{feat.category}</span>
-                        </div>
-
                         <h4 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
                           {feat.name}
                         </h4>
 
                         <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-normal">
-                          {feat.fullDescription || feat.shortDescription}
+                          {feat.shortDescription}
                         </p>
-
-                        <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-emerald-200">
-                          <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                            <span>{feat.doctorInCharge}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                            <span>{feat.duration}</span>
-                          </div>
-                        </div>
                       </div>
 
                       {/* Action Bar */}
@@ -252,7 +222,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                             rel="noopener noreferrer"
                             className="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer border border-white/20"
                           >
-                            <MessageCircle className="w-4 h-4 text-emerald-400" />
+                            <WhatsAppOfficialIcon className="w-4 h-4 text-emerald-400 shrink-0" />
                             <span className="hidden sm:inline">WhatsApp</span>
                           </a>
 
@@ -293,8 +263,8 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 3. DYNAMIC SERVICES CATALOG (Zero Box-in-Box, Full Edge-to-Edge Cards) */}
-      <section className="py-16 sm:py-24 bg-[#FAFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <section className="pt-5 pb-6 sm:pt-10 sm:pb-8 bg-[#FAFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-10">
           
           {/* Header & Filter Pills */}
           <motion.div 
@@ -302,32 +272,58 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-6"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-6 border-b border-slate-200 pb-4 sm:pb-6"
           >
             <div className="space-y-1">
-              <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                Catálogo Hospitalario Completo
-              </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
-                Especialidades &amp; Consultas
+                Especialidades &amp; <span className="text-[#E05A47] font-extrabold">Consultas</span>
               </h2>
             </div>
 
-            {/* Interactive Category Filter Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full">
-              {CATEGORY_FILTERS.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs transition-all whitespace-nowrap cursor-pointer ${
-                    activeCategory === cat.id
-                      ? 'bg-[#0D3D20] text-white font-bold shadow-sm'
-                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+            {/* Vista Móvil: Cuadrícula organizada para el espacio móvil */}
+            <div className="grid grid-cols-2 gap-2 w-full md:hidden">
+              {CATEGORY_FILTERS.map((cat, idx) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`px-3 py-2.5 rounded-2xl text-xs transition-all cursor-pointer flex items-center justify-center text-center font-semibold min-h-[44px] active:scale-98 gap-1.5 ${
+                      idx === 0 ? 'col-span-2' : 'col-span-1'
+                    } ${
+                      activeCategory === cat.id
+                        ? 'bg-[#0D3D20] text-white font-bold shadow-sm'
+                        : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shadow-2xs'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5 shrink-0" />
+                    <span className="leading-tight">{cat.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Vista PC: Con barra deslizante como estaba originalmente */}
+            <div className="hidden md:flex items-center gap-2 overflow-x-auto pb-2 max-w-full">
+              {CATEGORY_FILTERS.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`px-4 py-2 rounded-full text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                      activeCategory === cat.id
+                        ? 'bg-[#0D3D20] text-white font-bold shadow-sm'
+                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5 shrink-0" />
+                    <span>{cat.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -355,30 +351,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                         referrerPolicy="no-referrer"
                       />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-
-                    {/* Floating Badges */}
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                      <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#0D3D20] shadow-sm">
-                        {svc.category}
-                      </span>
-                      {svc.available247 && (
-                        <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-red-500 text-white shadow-sm flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                          24/7
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Doctor & Duration Pill over the bottom of image */}
-                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[11px] text-white">
-                      <span className="font-semibold drop-shadow-sm truncate max-w-[190px]">
-                        {svc.doctorInCharge}
-                      </span>
-                      <span className="px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-sm text-emerald-300 font-mono text-[10px] shrink-0 font-bold">
-                        {svc.duration}
-                      </span>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   </div>
 
                   {/* Clean Content Body */}
@@ -390,11 +363,6 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
                       {svc.shortDescription}
                     </p>
-
-                    <div className="pt-1 text-xs text-slate-600 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#1A6B38] shrink-0" />
-                      <span className="text-slate-700 font-medium truncate">{svc.doctorSpecialty}</span>
-                    </div>
                   </div>
                 </div>
 
@@ -415,7 +383,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                       className="p-2 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-[#1A6B38] transition-all cursor-pointer"
                       title="Consultar por WhatsApp"
                     >
-                      <MessageCircle className="w-4 h-4 text-emerald-600" />
+                      <WhatsAppOfficialIcon className="w-4 h-4 text-emerald-600 shrink-0" />
                     </a>
 
                     <a
@@ -439,25 +407,19 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
       </section>
 
       {/* 4. RUTA CLÍNICA DEL PACIENTE (Paso a Paso Interactivo) */}
-      <section className="py-8 sm:py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="pt-4 pb-8 sm:pt-6 sm:pb-10 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="space-y-1 text-center max-w-3xl mx-auto"
+            className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              01 / PROTOCOLO HOSPITALARIO
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-              La Ruta de Atención de tu Mascota
+              La Ruta de Atención de <span className="text-[#E05A47] font-extrabold">tu Mascota</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Un flujo estandarizado paso a paso para garantizar diagnóstico certero, cero dolor y tranquilidad absoluta para ti.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
@@ -515,27 +477,13 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     />
                   </div>
                   
-                  <div className="p-6 space-y-4 flex flex-col flex-1">
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-[#1A6B38] font-mono tracking-wider">
-                          PASO {p.step}
-                        </span>
-                        <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full">
-                          {p.highlight}
-                        </span>
-                      </div>
-                      <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
-                        {p.title}
-                      </h4>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        {p.desc}
-                      </p>
-                    </div>
-                    <div className="pt-3 border-t border-slate-200/60 flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 mt-auto">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#1A6B38]" />
-                      <span>Protocolo Acreditado</span>
-                    </div>
+                  <div className="p-6 space-y-2 flex flex-col flex-1">
+                    <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
+                      {p.title}
+                    </h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      {p.desc}
+                    </p>
                   </div>
                 </motion.div>
               );
@@ -556,15 +504,9 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
             transition={{ duration: 0.5 }}
             className="space-y-1 text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              02 / INFRAESTRUCTURA BIOMÉDICA
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-              Equipamiento Quirúrgico de Precisión
+              Equipamiento Quirúrgico de <span className="text-[#E05A47] font-extrabold">Precisión</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Invertimos continuamente en tecnología médica para reducir los tiempos anestésicos y aumentar el éxito quirúrgico al 99.4%.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
@@ -610,11 +552,6 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     referrerPolicy="no-referrer"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="text-[10px] font-bold text-[#1A6B38] bg-emerald-50/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full inline-block border border-emerald-200/60 shadow-sm">
-                      {eq.badge}
-                    </span>
-                  </div>
                 </div>
                 
                 <div className="p-5 sm:p-6 space-y-3 flex-1 flex flex-col">
@@ -643,34 +580,28 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
             transition={{ duration: 0.5 }}
             className="space-y-1 text-center"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              03 / RESOLUCIÓN DE DUDAS MÉDICAS
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-              Preguntas Frecuentes sobre Especialidades
+              Preguntas Frecuentes sobre <span className="text-[#E05A47] font-extrabold">Especialidades</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Información clara y transparente para que tomes la mejor decisión de salud para tu mascota.
-            </p>
           </motion.div>
 
           <div className="space-y-3">
             {[
               {
                 q: '¿Cómo manejan el riesgo en cirugías de animales mayores o braquicéfalos?',
-                a: 'Utilizamos protocolos de anestesia balanceada con Sevoflurano (el gas anestésico más seguro del mundo veterinario), intubación asistida y monitoreo multiparamétrico constante de capnografía (EtCO2), presión arterial y electrocardiograma. Cada paciente de alto riesgo cuenta con un médico anestesiólogo dedicado exclusivamente durante toda la intervención.'
+                a: 'Con anestesia balanceada con Sevoflurano, monitoreo multiparamétrico continuo y un anestesiólogo dedicado durante todo el procedimiento.'
               },
               {
                 q: '¿Qué preparación previa requiere una cirugía o procedimiento programado?',
-                a: 'Se requiere un perfil prequirúrgico completo (hematología, química renal y hepática, y pruebas de coagulación) realizado máximo 7 días antes. El paciente debe guardar entre 6 y 8 horas de ayuno sólido (en cachorros o razas miniaturas el ayuno es menor) y agua disponible hasta 2 horas antes de ingresar.'
+                a: 'Perfil prequirúrgico de hasta 7 días de vigencia, ayuno de sólidos de 6 a 8 horas y ayuno de agua de 2 horas.'
               },
               {
                 q: '¿Cómo sé si la condición de mi mascota es una urgencia vital que requiere atención inmediata?',
-                a: 'Son emergencias inmediatas: dificultad respiratoria evidente (respira con la boca abierta o abdomen hundido), convulsiones de más de 2 minutos, intentos de vomitar sin éxito con abdomen distendido (posible dilatación gástrica), hemorragias activas, ingestión de tóxicos o atropellamientos. Nuestro triage hospitalario 24/7 atiende sin cita previa.'
+                a: 'Dificultad para respirar, convulsiones, abdomen distendido, sangrados o ingesta de tóxicos. Nuestro triage atiende 24/7 sin cita previa.'
               },
               {
                 q: '¿Ofrecen facilidades de pago o diferidos con tarjetas para procedimientos de alta complejidad?',
-                a: 'Sí. Aceptamos todas las tarjetas de crédito nacionales e internacionales con planes de diferido de 3, 6, 9 y 12 meses (con y sin intereses según la entidad bancaria). También emitimos presupuestos médicos desglosados para reclamos ante aseguradoras veterinarias.'
+                a: 'Sí, aceptamos tarjetas con diferidos de 3 a 12 meses y emitimos informes médicos detallados para reembolsos de seguros.'
               }
             ].map((faq, idx) => {
               const isOpen = openFaq === idx;
@@ -722,15 +653,9 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-7 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xs text-center sm:text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-amber-300 uppercase tracking-widest font-mono">
-                DISPONIBILIDAD HOSPITALARIA INMEDIATA
-              </span>
               <h3 className="text-xl sm:text-2xl font-black text-white">
                 ¿Tu mascota necesita evaluación médica especializada?
               </h3>
-              <p className="text-xs text-emerald-100/80">
-                Agenda con nuestros especialistas de turno o comunícate directamente con la guardia de urgencias.
-              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
@@ -751,7 +676,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <WhatsAppOfficialIcon className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Guardia WhatsApp</span>
               </a>
             </div>

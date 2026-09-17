@@ -161,7 +161,7 @@ export function AdminBackofficeModal({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto p-3 sm:p-6 flex items-center justify-center bg-black/85 backdrop-blur-md">
-      <div className="bg-slate-950 border border-white/15 rounded-3xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="bg-slate-950 border border-white/15 rounded-3xl w-full max-w-5xl max-h-[90dvh] flex flex-col shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
         
         {/* Top Modal Header */}
         <div className="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between bg-slate-900/60">
@@ -712,7 +712,7 @@ export function AdminBackofficeModal({
           onClick={() => setPreviewImage(null)}
           className="fixed inset-0 z-60 bg-black/90 flex items-center justify-center p-4 cursor-pointer"
         >
-          <div className="relative max-w-3xl max-h-[85vh] w-full h-[70vh]">
+          <div className="relative max-w-3xl max-h-[85dvh] w-full h-[70dvh]">
             <Image
               src={previewImage}
               alt="Vista previa clínica"

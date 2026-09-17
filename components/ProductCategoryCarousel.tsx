@@ -214,7 +214,7 @@ export function ProductCategoryCarousel({ onNavigate }: ProductCategoryCarouselP
           onClick={() => handleScroll('left')}
           disabled={!canScrollLeft}
           aria-label="Mover carrusel a la izquierda"
-          className={`absolute left-2 sm:left-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md border border-stone-200 shadow-md flex items-center justify-center text-stone-800 transition-all cursor-pointer ${
+          className={`absolute left-2 sm:left-4 top-[40%] -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md border border-stone-200 shadow-md flex items-center justify-center text-stone-800 transition-all cursor-pointer ${
             canScrollLeft
               ? 'hover:bg-[#2F4635] hover:text-white hover:scale-105 active:scale-95 opacity-100'
               : 'opacity-30 cursor-not-allowed'
@@ -229,7 +229,7 @@ export function ProductCategoryCarousel({ onNavigate }: ProductCategoryCarouselP
           onClick={() => handleScroll('right')}
           disabled={!canScrollRight}
           aria-label="Mover carrusel a la derecha"
-          className={`absolute right-2 sm:right-4 top-[40%] -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md border border-stone-200 shadow-md flex items-center justify-center text-stone-800 transition-all cursor-pointer ${
+          className={`absolute right-2 sm:right-4 top-[40%] -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md border border-stone-200 shadow-md flex items-center justify-center text-stone-800 transition-all cursor-pointer ${
             canScrollRight
               ? 'hover:bg-[#2F4635] hover:text-white hover:scale-105 active:scale-95 opacity-100'
               : 'opacity-30 cursor-not-allowed'
@@ -273,14 +273,9 @@ export function ProductCategoryCarousel({ onNavigate }: ProductCategoryCarouselP
                 />
               </div>
 
-              {/* Título en tipografía sans-serif uniforme */}
+              {/* Título de la categoría */}
               <span className="mt-2.5 text-xs sm:text-sm md:text-base font-bold text-[#1E2E22] group-hover:text-[#2F4635] text-center tracking-tight transition-colors">
                 {item.name}
-              </span>
-
-              {/* Etiqueta sutil de categoría */}
-              <span className="text-[10px] sm:text-[11px] text-stone-500 font-medium group-hover:text-stone-700 text-center transition-colors">
-                {item.tag}
               </span>
             </div>
           ))}

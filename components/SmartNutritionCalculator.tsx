@@ -12,12 +12,12 @@ import {
   Sparkles, 
   CheckCircle2, 
   ArrowRight, 
-  MessageCircle,
   ShieldAlert,
   Sliders,
   HeartPulse,
   ShoppingBag
 } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 import { PetProduct } from '@/lib/types';
 
@@ -99,8 +99,8 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
   const shareText = `Hola VetCare, realicé el cálculo nutricional para mi ${petType} (${weightKg} kg, ${ageStage}, condición: ${healthCondition}). Requerimiento: ${dailyKcal} kcal/día (${dailyGrams} g/día). Quisiera asesoría para adquirir: ${currentRec.name}.`;
 
   return (
-    <section id="nutricion-calculator" className="py-10 md:py-14 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
+    <section id="nutricion-calculator" className="py-6 md:py-8 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
         
         {/* Header Editorial */}
         <motion.div 
@@ -108,18 +108,11 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto space-y-4"
+          className="text-center max-w-3xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#1A6B38] text-xs font-bold uppercase tracking-wider shadow-sm">
-            <Calculator className="w-4 h-4 text-emerald-600" />
-            <span>ALGORITMO BIOMÉTRICO VETERINARIO</span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0D3D20] tracking-tight">
-            Calculadora Nutricional &amp; Requerimiento Calórico
+            Calculadora Nutricional &amp; <span className="text-[#E05A47] font-extrabold">Requerimiento Calórico</span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Basada en ecuaciones clínicas oficiales WSAVA (World Small Animal Veterinary Association) para calcular la energía metabólica exacta que tu mascota necesita.
-          </p>
         </motion.div>
 
         {/* Dual Column Calculator Card */}
@@ -276,10 +269,7 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
             className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white border border-emerald-200 p-6 sm:p-9 shadow-lg space-y-7"
           >
             <div>
-              <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider font-mono">
-                Dictamen Nutricional Calculado
-              </span>
-              <h3 className="text-2xl font-extrabold text-[#0D3D20] mt-1">
+              <h3 className="text-2xl font-extrabold text-[#0D3D20]">
                 Prescripción Diaria Recomendada
               </h3>
             </div>
@@ -333,9 +323,6 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
 
             {/* Recommended Product Formula */}
             <div className="p-4 rounded-2xl bg-white border border-emerald-200/80 shadow-sm space-y-2">
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 inline-block">
-                {currentRec.tag}
-              </span>
               <h4 className="text-sm font-bold text-slate-900 leading-snug">
                 {currentRec.name}
               </h4>
@@ -352,7 +339,7 @@ export function SmartNutritionCalculator({ onSelectServiceForBooking }: SmartNut
                 rel="noopener noreferrer"
                 className="w-full py-3.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02]"
               >
-                <MessageCircle className="w-4 h-4" />
+                <WhatsAppOfficialIcon className="w-4 h-4 shrink-0" />
                 <span>Pedir Asesoría Nutricional por WhatsApp</span>
               </a>
 

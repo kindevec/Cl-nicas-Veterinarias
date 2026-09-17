@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { buildWhatsAppUrl } from '@/lib/utils';
 
 interface PromoBundleBannerProps {
@@ -63,7 +64,7 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
           <div className="p-5 flex flex-col space-y-3 text-left">
             <div>
               <h2 className="font-extrabold text-xl sm:text-2xl text-[#182B1E] tracking-tight leading-tight">
-                Kit de Inicio para Mascotas
+                Kit de Inicio para <span className="text-[#E05A47] font-extrabold">Mascotas</span>
               </h2>
               <p className="text-xs text-stone-600 font-medium leading-relaxed pt-1">
                 Todos los esenciales en una sola caja perfecta. Ahorra hasta un <strong className="text-[#182B1E] font-bold">20%</strong> en tu primer set completo.
@@ -87,7 +88,7 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center h-11 px-3 rounded-full bg-white hover:bg-stone-50 border border-stone-300/90 text-[#182B1E] font-bold text-xs tracking-wide shadow-2xs active:scale-95 transition-all cursor-pointer"
               >
-                <MessageCircle className="w-3.5 h-3.5 mr-1.5 text-emerald-600 shrink-0" />
+                <WhatsAppOfficialIcon className="w-3.5 h-3.5 mr-1.5 text-emerald-600 shrink-0" />
                 <span>WhatsApp</span>
               </a>
             </div>
@@ -116,7 +117,7 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
             {/* Centro: Contenido Editorial y CTA */}
             <div className="flex-1 p-8 flex flex-col items-start justify-center text-left">
               <h2 className="font-extrabold text-3xl lg:text-4xl text-[#182B1E] tracking-tight leading-tight mb-2.5">
-                Kit de Inicio para Mascotas
+                Kit de Inicio para <span className="text-[#E05A47] font-extrabold">Mascotas</span>
               </h2>
 
               <p className="text-sm lg:text-base text-stone-600 font-medium leading-relaxed mb-4 max-w-md">
@@ -140,6 +141,7 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-white hover:bg-stone-50 border border-stone-300/80 text-[#182B1E] font-bold text-sm tracking-wide shadow-2xs hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
+                  <WhatsAppOfficialIcon className="w-4 h-4 mr-2 text-emerald-600 shrink-0" />
                   <span>Pedir por WhatsApp</span>
                 </a>
               </div>

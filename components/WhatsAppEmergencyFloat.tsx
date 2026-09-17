@@ -1,101 +1,90 @@
 'use client';
 
-import React, { useState } from 'react';
-import { X, ChevronUp } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import { buildWhatsAppUrl } from '@/lib/utils';
-
-const EMERGENCY_SERVICES = [
-  'Urgencias 24/7 Médica Inmediata',
-  'Cirugía de Alta Complejidad',
-  'Consulta Especializada',
-  'Despacho Farmacia & Pet Gourmet',
-];
+import { WhatsAppOfficialIcon } from './WhatsAppOfficialIcon';
 
 export function WhatsAppEmergencyFloat() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const whatsappUrl = buildWhatsAppUrl('Urgencia Veterinaria 24/7');
+  const [isHovered, setIsHovered] = useState(false);
+  const [isRevealedMobile, setIsRevealedMobile] = useState(false);
+  const hideTimerRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Cerrar el botón si el usuario hace click/touch fuera en móvil
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsRevealedMobile(false);
+        if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
+      }
+    };
+
+    document.addEventListener('touchstart', handleOutsideClick, { passive: true });
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('touchstart', handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
+      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
+    };
+  }, []);
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const isMobileView = typeof window !== 'undefined' && window.innerWidth < 1024;
+
+    if (isMobileView) {
+      // Si en móvil está recogido, el primer toque NO va a WhatsApp, solo lo revela
+      if (!isRevealedMobile) {
+        e.preventDefault();
+        setIsRevealedMobile(true);
+
+        // Si el cliente no lo aplasta, vuelve a ocultarse tras 5.5 segundos
+        if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
+        hideTimerRef.current = window.setTimeout(() => {
+          setIsRevealedMobile(false);
+        }, 5500);
+        return;
+      }
+
+      // Si ya estaba revelado y el cliente lo aplasta, navega normalmente a WhatsApp
+      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
+    }
+  };
+
+  const isVisible = isHovered || isRevealedMobile;
 
   return (
-    <div className="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 flex flex-col items-end">
-      
-      {/* Quick Services Popover */}
-      {isMenuOpen && (
-        <div className="mb-3 w-72 rounded-3xl bg-white border border-slate-200/90 p-4 shadow-2xl animate-in slide-in-from-bottom-5 duration-200 text-xs space-y-2.5">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-            <div className="flex items-center gap-1.5 text-[#1A6B38] font-bold">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>Veterinarios en Línea 24/7</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen(false)}
-              className="text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </div>
+    <div
+      ref={containerRef}
+      className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(1.75rem+env(safe-area-inset-bottom,0px))] right-0 z-50 flex items-center select-none pointer-events-auto"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        id="floating-whatsapp-btn"
+        onClick={handleButtonClick}
+        onFocus={() => setIsHovered(true)}
+        onBlur={() => setIsHovered(false)}
+        className={`relative group flex items-center justify-center w-12 h-12 xs:w-13 xs:h-13 sm:w-14 sm:h-14 md:w-15 md:h-15 rounded-full bg-gradient-to-tr from-[#20BA5A] to-[#25D366] border-2 border-white/90 shadow-[0_6px_20px_rgba(37,211,102,0.4),0_0_15px_rgba(37,211,102,0.3)] hover:shadow-[0_10px_28px_rgba(37,211,102,0.5),0_0_22px_rgba(37,211,102,0.6)] transition-all duration-400 ease-out cursor-pointer active:scale-95 ${
+          isVisible
+            ? '-translate-x-3 sm:-translate-x-4 md:-translate-x-5 md:scale-110'
+            : 'translate-x-6 sm:translate-x-7 md:translate-x-8 md:hover:translate-x-0'
+        }`}
+        aria-label="Contactar por WhatsApp a VetCare"
+      >
+        {/* Anillo de pulso verde cuando está en reposo */}
+        <span
+          className={`absolute inset-0 rounded-full bg-[#25D366] transition-opacity duration-300 pointer-events-none ${
+            isVisible ? 'opacity-0' : 'opacity-40 animate-ping'
+          }`}
+        />
 
-          <p className="text-[11px] text-slate-500 leading-tight">
-            Selecciona el motivo para contactar al triage de guardia:
-          </p>
-
-          <div className="space-y-1.5">
-            {EMERGENCY_SERVICES.map((svc) => (
-              <a
-                key={svc}
-                href={buildWhatsAppUrl(svc)}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMenuOpen(false)}
-                className="block p-2 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-[#1A6B38] border border-slate-200/60 text-slate-700 font-semibold transition-all"
-              >
-                {svc}
-              </a>
-            ))}
-          </div>
-
-          <div className="pt-1 text-[10px] text-slate-400 text-center font-medium">
-            Respuesta promedio: &lt; 2 minutos
-          </div>
-        </div>
-      )}
-
-      {/* Floating Action Button */}
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Abrir opciones de WhatsApp"
-          className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200/90 text-slate-700 text-xs font-bold shadow-md transition-all cursor-pointer group"
-        >
-          <svg className="w-3.5 h-3.5 fill-[#25D366]" viewBox="0 0 24 24">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.64 4.2 3.7 2.46 1.07 2.46.71 2.91.67.45-.05 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"/>
-          </svg>
-          <span>Urgencia WhatsApp</span>
-          <ChevronUp className={`w-3.5 h-3.5 text-slate-500 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
-        </button>
-
-        <a
-          id="floating-whatsapp-btn"
-          href={buildWhatsAppUrl('Urgencia Veterinaria 24/7')}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contactar Urgencia Veterinaria por WhatsApp"
-          className="inline-flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-200 cursor-pointer drop-shadow-xl"
-        >
-          {/* Official WhatsApp Vector Logo without container */}
-          <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none">
-            <path
-              fill="#25D366"
-              d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"
-            />
-            <path
-              fill="#FFFFFF"
-              d="M16.56 15.33c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.64 4.2 3.7 2.46 1.07 2.46.71 2.91.67.45-.05 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28z"
-            />
-          </svg>
-        </a>
-      </div>
-
+        {/* Ícono Oficial de WhatsApp en color blanco */}
+        <WhatsAppOfficialIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-7.5 md:h-7.5 text-white relative z-10 shrink-0 drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]" />
+      </a>
     </div>
   );
 }

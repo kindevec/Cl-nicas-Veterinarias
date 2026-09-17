@@ -7,7 +7,6 @@ import {
   Award, 
   Stethoscope, 
   Microscope, 
-  Sparkles, 
   CheckCircle2, 
   ArrowRight,
   ShieldCheck,
@@ -106,34 +105,31 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
               className="lg:col-span-5 space-y-6"
             >
               <div>
-                <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">
-                  Nuestra Trayectoria &amp; Filosofía
-                </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0D3D20] mt-1 leading-tight">
-                  Más de una década elevando el estándar de la salud animal
+                  Más de una década elevando el estándar de la <span className="text-[#E05A47] font-extrabold">Salud Animal</span>
                 </h2>
               </div>
 
               <p className="text-sm text-slate-600 leading-relaxed">
-                Combinamos equipamiento hospitalario de última generación con un enfoque compasivo centrado en la tranquilidad del tutor y el paciente. Desde cirugías ortopédicas de alta complejidad hasta planes nutricionales gourmet personalizados, cada intervención está sustentada en medicina basada en evidencia.
+                Combinamos equipamiento médico avanzado con un enfoque compasivo para el cuidado y la tranquilidad de cada mascota.
               </p>
 
               <div className="space-y-2.5 text-xs text-slate-700 font-semibold">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#1A6B38]" />
-                  <span>Quirófano estéril con flujo laminar de presión positiva</span>
+                  <span>Quirófano estéril con flujo laminar</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#1A6B38]" />
-                  <span>Manejo libre de estrés y miedo (Fear-Free™ Certified)</span>
+                  <span>Protocolos Fear-Free™ certificados</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#1A6B38]" />
-                  <span>Laboratorio hematológico automatizado en 15 minutos</span>
+                  <span>Laboratorio clínico en 15 minutos</span>
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex justify-center lg:justify-start">
                 <button
                   onClick={onNavigateToBooking}
                   className="px-6 py-3.5 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:scale-105 cursor-pointer flex items-center gap-2"
@@ -208,8 +204,8 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
       </section>
 
       {/* 3. DOCTORS / SPECIALISTS (Clean Open Cards, NO Box-in-Box) */}
-      <section className="py-16 bg-[#FAFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-12 sm:py-16 bg-[#FAFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -218,13 +214,9 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
             transition={{ duration: 0.5 }}
             className="text-center max-w-2xl mx-auto space-y-2"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider">Especialistas</span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0D3D20]">
-              Cuerpo Médico en Turno
+              Cuerpo Médico <span className="text-[#E05A47] font-extrabold">en Turno</span>
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Formación continua en centros de referencia de Estados Unidos y Europa.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -246,14 +238,10 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     sizes="(max-width: 768px) 100vw, 33vw"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#0D3D20]/90 text-white text-[10px] font-bold shadow-sm">
-                    {doc.badge}
-                  </div>
                 </div>
 
                 <div className="p-6 space-y-2">
                   <h4 className="text-base font-bold text-slate-900">{doc.name}</h4>
-                  <p className="text-xs font-semibold text-[#1A6B38]">{doc.role}</p>
                   <p className="text-xs text-slate-500 leading-relaxed">{doc.bio}</p>
                 </div>
               </motion.div>
@@ -270,7 +258,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
           >
             <div>
               <h4 className="text-base font-bold">¿Deseas una consulta con nuestro equipo médico?</h4>
-              <p className="text-xs text-emerald-200/80">Agenda con anticipación o acude a nuestro triage de urgencias disponible las 24 horas.</p>
             </div>
             <a
               href="#citas"
@@ -299,15 +286,9 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
             transition={{ duration: 0.5 }}
             className="space-y-1 text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              01 / INFRAESTRUCTURA QUIRÚRGICA &amp; HOSPITALARIA
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-              Tecnología Médica Diseñada para Salvar Vidas
+              Tecnología Médica Diseñada para <span className="text-[#E05A47] font-extrabold">Salvar Vidas</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Instalaciones especializadas con flujo laminar estéril, monitoreo hemodinámico continuo y áreas libres de estrés.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
@@ -329,9 +310,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     sizes="(max-width: 768px) 100vw, 25vw"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#0D3D20]/90 text-white text-[10px] font-bold">
-                    Estéril Clase 10,000
-                  </div>
                 </div>
                 <div className="p-5 space-y-2">
                   <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
@@ -341,10 +319,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     Flujo de aire estéril laminar que previene infecciones intrahospitalarias. Anestesia inhalatoria con Sevoflurano y electrobisturí bipolar.
                   </p>
                 </div>
-              </div>
-              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
-                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                <span>Monitoreo Multiparamétrico Mindray</span>
               </div>
             </motion.div>
 
@@ -366,10 +340,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     sizes="(max-width: 768px) 100vw, 25vw"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                    Guardia 24/7
-                  </div>
                 </div>
                 <div className="p-5 space-y-2">
                   <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
@@ -379,10 +349,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     Incubadoras de oxigenoterapia con control de temperatura, bombas de infusión volumétrica y soporte hemodinámico crítico continuo.
                   </p>
                 </div>
-              </div>
-              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
-                <Clock className="w-3.5 h-3.5 shrink-0" />
-                <span>Atención Médica Nocturna Activa</span>
               </div>
             </motion.div>
 
@@ -404,9 +370,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     sizes="(max-width: 768px) 100vw, 25vw"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#1A6B38] text-white text-[10px] font-bold">
-                    In-House 15 Min
-                  </div>
                 </div>
                 <div className="p-5 space-y-2">
                   <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
@@ -416,10 +379,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     Bioquímica sérica integral, hemograma automatizado por impedancia y citología diagnóstica inmediata sin necesidad de enviar muestras fuera.
                   </p>
                 </div>
-              </div>
-              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
-                <Microscope className="w-3.5 h-3.5 shrink-0" />
-                <span>Resultados en Tiempo Real</span>
               </div>
             </motion.div>
 
@@ -441,9 +400,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     sizes="(max-width: 768px) 100vw, 25vw"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                    ISFM Gold Certified
-                  </div>
                 </div>
                 <div className="p-5 space-y-2">
                   <h4 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
@@ -453,10 +409,6 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                     Consultorio y hospitalización exclusivos 100% aislados de ladridos u olores caninos. Difusión permanente de feromonas apaciguantes Feliway®.
                   </p>
                 </div>
-              </div>
-              <div className="p-5 pt-0 border-t border-slate-200/60 mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38]">
-                <Heart className="w-3.5 h-3.5 shrink-0" />
-                <span>Zero-Stress Felino Garantizado</span>
               </div>
             </motion.div>
           </div>
@@ -479,16 +431,9 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
             transition={{ duration: 0.5 }}
             className="space-y-2 text-center max-w-3xl mx-auto"
           >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-[10px] font-bold uppercase tracking-widest font-mono">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              02 / Acreditaciones Oficiales
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D3D20] tracking-tight">
-              Avalados por Estándares de <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A6B38] to-emerald-500">Referencia Mundial</span>
+              Avalados por Estándares de <span className="text-[#E05A47] font-extrabold">Referencia Mundial</span>
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
-              Certificaciones que garantizan el bienestar físico y emocional de tu compañero en cada etapa médica.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
@@ -549,22 +494,14 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
 
                   {/* Right side: Content */}
                   <div className="p-6 sm:p-7 flex flex-col justify-center flex-1 relative z-10">
-                    <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="mb-4">
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-inner group-hover:scale-110 transition-transform duration-300">
                         <Icon className="w-7 h-7" />
                       </div>
-                      <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/60 px-3 py-1 rounded-full border border-emerald-200/50 whitespace-nowrap">
-                        {cert.badge}
-                      </span>
                     </div>
                     
                     <h4 className="text-lg font-bold text-slate-900 leading-tight mb-2 group-hover:text-[#1A6B38] transition-colors">{cert.title}</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed mb-5">{cert.desc}</p>
-                    
-                    <div className="pt-4 border-t border-slate-100/80 flex items-center gap-1.5 text-xs font-semibold text-[#1A6B38] mt-auto">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                      <span>Verificado Activo 2026</span>
-                    </div>
+                    <p className="text-sm text-slate-500 leading-relaxed">{cert.desc}</p>
                   </div>
                 </motion.div>
               );
@@ -600,45 +537,34 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
             transition={{ duration: 0.5 }}
             className="space-y-3 text-center max-w-3xl mx-auto"
           >
-            <span className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-emerald-300 text-xs font-bold uppercase tracking-widest font-mono backdrop-blur-md">
-              <Sparkles className="w-4 h-4" />
-              03 / Nuestro Compromiso Deontológico
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              Los 4 Pilares Médicos de VetCare
+              Los 4 Pilares Médicos de <span className="text-[#E05A47] font-extrabold">VetCare</span>
             </h2>
-            <p className="text-sm sm:text-base text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
-              Principios inquebrantables que guían cada decisión clínica, cada cirugía y cada interacción con tu familia.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                num: '01',
                 title: 'Medicina Basada en Evidencia',
-                desc: 'Todo tratamiento está sustentado en analítica previa, imagenología y literatura veterinaria de consenso internacional.',
+                desc: 'Diagnósticos y tratamientos sustentados en analítica previa y literatura de consenso internacional.',
                 icon: Microscope,
                 bgImage: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80'
               },
               {
-                num: '02',
                 title: 'Cero Tolerancia al Dolor',
-                desc: 'Protocolos de analgesia multimodal preventiva y posquirúrgica. Ningún paciente sufre dolor evitable bajo nuestro cuidado.',
+                desc: 'Analgesia multimodal preventiva para que ningún paciente sufra dolor bajo nuestro cuidado.',
                 icon: ShieldCheck,
                 bgImage: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80'
               },
               {
-                num: '03',
                 title: 'Transparencia con el Tutor',
-                desc: 'Explicación diagnóstica detallada, presupuestos claros antes de cada procedimiento e informes clínicos accesibles.',
+                desc: 'Diagnósticos claros, presupuestos transparentes e informes clínicos siempre accesibles.',
                 icon: FileText,
                 bgImage: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=600&q=80'
               },
               {
-                num: '04',
                 title: 'Nutrición como Medicina',
-                desc: 'Creemos en la dietoterapia biológica como el pilar fundamental para prevenir patologías y alargar la longevidad del animal.',
+                desc: 'Dietoterapia biológica personalizada para prevenir patologías y alargar su longevidad.',
                 icon: Heart,
                 bgImage: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=600&q=80'
               }
@@ -651,41 +577,34 @@ export function AboutSection({ onNavigateToBooking }: { onNavigateToBooking?: ()
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="group relative h-full flex flex-col justify-end p-6 rounded-[2rem] overflow-hidden border border-white/10 hover:border-emerald-400/50 transition-all duration-500 shadow-2xl min-h-[320px]"
+                  className="group relative h-full flex flex-col justify-between p-4 sm:p-5 rounded-[2rem] overflow-hidden border border-white/20 hover:border-emerald-400/80 bg-[#072111] transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1.5 min-h-[360px] sm:min-h-[380px]"
                 >
-                  {/* Background Image for Card */}
+                  {/* Background Image for Card with High Visibility */}
                   <div className="absolute inset-0">
                     <Image
                       src={pilar.bgImage}
                       alt={pilar.title}
                       fill
                       referrerPolicy="no-referrer"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-60"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 group-hover:opacity-100"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
-                    {/* Gradient Overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#092B16] via-[#092B16]/80 to-transparent" />
-                    <div className="absolute inset-0 bg-[#0D3D20]/40 group-hover:bg-[#0D3D20]/20 transition-colors duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30 pointer-events-none" />
                   </div>
 
-                  {/* Card Content */}
-                  <div className="relative z-10 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-emerald-300 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-amber-200/80 to-amber-500/40 font-mono tracking-tighter">
-                        {pilar.num}
-                      </span>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-white leading-tight mb-2">
-                        {pilar.title}
-                      </h4>
-                      <p className="text-sm text-emerald-50/80 leading-relaxed font-light">
-                        {pilar.desc}
-                      </p>
-                    </div>
+                  {/* Top Icon Badge */}
+                  <div className="relative z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white text-[#1A6B38] shadow-lg border border-white/80 flex items-center justify-center group-hover:scale-105 group-hover:bg-[#0D3D20] group-hover:text-white transition-all duration-300">
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+
+                  {/* Cuadro con Fondo Blanco Sólido para Máxima Legibilidad */}
+                  <div className="relative z-10 mt-auto bg-white rounded-2xl p-4 sm:p-5 border border-white/90 shadow-2xl space-y-1.5 text-left">
+                    <h4 className="text-base sm:text-lg font-extrabold text-[#0D3D20] leading-snug group-hover:text-[#1A6B38] transition-colors">
+                      {pilar.title}
+                    </h4>
+                    <p className="text-xs sm:text-[13px] text-stone-700 leading-relaxed font-medium">
+                      {pilar.desc}
+                    </p>
                   </div>
                 </motion.div>
               );

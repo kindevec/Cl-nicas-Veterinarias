@@ -182,7 +182,7 @@ export function FeaturedServicesBanner({
               data-carousel-card
               style={{ backgroundColor: card.bgHex }}
               onClick={() => handleCardClick(card)}
-              className="relative rounded-[22px] sm:rounded-[26px] p-4.5 sm:p-5 overflow-hidden flex justify-between min-h-[190px] sm:min-h-[205px] border border-stone-200/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 group w-[85vw] max-w-[340px] sm:max-w-[360px] lg:w-auto shrink-0 snap-center lg:shrink cursor-pointer select-none"
+              className="relative rounded-[22px] sm:rounded-[26px] p-4.5 sm:p-5 overflow-hidden flex justify-between min-h-[190px] sm:min-h-[205px] border border-stone-200/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 group w-full min-w-full max-w-full sm:w-[85vw] sm:min-w-0 sm:max-w-[360px] lg:w-auto lg:max-w-none shrink-0 snap-center lg:shrink cursor-pointer select-none"
             >
               {/* Contenido Editorial a la Izquierda */}
               <div className="flex flex-col justify-between z-10 w-[58%] min-w-0 pr-2">
@@ -241,29 +241,33 @@ export function FeaturedServicesBanner({
             onClick={() => scrollDirection('left')}
             disabled={!canScrollLeft}
             aria-label="Anterior servicio"
-            className={`w-8 h-8 rounded-full bg-white border border-stone-200 shadow-2xs flex items-center justify-center text-stone-700 transition-all active:scale-95 cursor-pointer ${
+            className={`w-11 h-11 rounded-full bg-white border border-stone-200 shadow-2xs flex items-center justify-center text-stone-700 transition-all active:scale-95 cursor-pointer ${
               canScrollLeft
                 ? 'hover:bg-[#2F4635] hover:text-white opacity-100'
                 : 'opacity-30 cursor-not-allowed'
             }`}
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
 
           {/* Indicadores de Paginación (Dots) */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1">
             {SERVICE_CARDS.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => scrollToIndex(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentIndex === idx
-                    ? 'w-6 bg-[#2F4635]'
-                    : 'w-1.5 bg-stone-300 hover:bg-stone-400'
-                }`}
+                className="py-3 px-1 cursor-pointer flex items-center justify-center"
                 aria-label={`Ir al bloque ${idx + 1}`}
-              />
+              >
+                <span
+                  className={`h-2 rounded-full block transition-all duration-300 ${
+                    currentIndex === idx
+                      ? 'w-6 bg-[#2F4635]'
+                      : 'w-2 bg-stone-300 hover:bg-stone-400'
+                  }`}
+                />
+              </button>
             ))}
           </div>
 
@@ -273,13 +277,13 @@ export function FeaturedServicesBanner({
             onClick={() => scrollDirection('right')}
             disabled={!canScrollRight}
             aria-label="Siguiente servicio"
-            className={`w-8 h-8 rounded-full bg-white border border-stone-200 shadow-2xs flex items-center justify-center text-stone-700 transition-all active:scale-95 cursor-pointer ${
+            className={`w-11 h-11 rounded-full bg-white border border-stone-200 shadow-2xs flex items-center justify-center text-stone-700 transition-all active:scale-95 cursor-pointer ${
               canScrollRight
                 ? 'hover:bg-[#2F4635] hover:text-white opacity-100'
                 : 'opacity-30 cursor-not-allowed'
             }`}
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 

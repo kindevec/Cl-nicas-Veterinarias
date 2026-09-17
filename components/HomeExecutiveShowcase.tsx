@@ -10,7 +10,6 @@ import {
   ShieldCheck, 
   Clock, 
   Sparkles, 
-  MessageCircle, 
   Star, 
   CheckCircle2, 
   Award, 
@@ -18,6 +17,7 @@ import {
   Phone,
   ArrowUpRight
 } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { VETERINARY_SERVICES, PET_PRODUCTS } from '@/lib/mockData';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 
@@ -67,7 +67,10 @@ export function HomeExecutiveShowcase({
     if (ref.current) {
       const container = ref.current;
       const firstCard = container.querySelector(':scope > div') as HTMLElement | null;
-      const step = firstCard ? firstCard.offsetWidth + 24 : 360;
+      const secondCard = firstCard?.nextElementSibling as HTMLElement | null;
+      const step = (firstCard && secondCard)
+        ? (secondCard.offsetLeft - firstCard.offsetLeft)
+        : (firstCard ? firstCard.offsetWidth + 20 : 360);
       const maxScroll = container.scrollWidth - container.clientWidth;
 
       if (direction === 'right') {
@@ -112,7 +115,10 @@ export function HomeExecutiveShowcase({
     if (ref.current) {
       const container = ref.current;
       const firstCard = container.querySelector(':scope > div') as HTMLElement | null;
-      const step = firstCard ? firstCard.offsetWidth + 24 : 360;
+      const secondCard = firstCard?.nextElementSibling as HTMLElement | null;
+      const step = (firstCard && secondCard)
+        ? (secondCard.offsetLeft - firstCard.offsetLeft)
+        : (firstCard ? firstCard.offsetWidth + 20 : 360);
       const idx = Math.round(container.scrollLeft / step);
       setIndex(Math.max(0, idx));
     }
@@ -136,9 +142,6 @@ export function HomeExecutiveShowcase({
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
                 Conoce la Clínica <span className="text-[#E05A47] font-extrabold">VetCare</span>
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
-                Quirófano estéril de flujo laminar con presión positiva, unidad de cuidados intensivos continua y equipo médico certificado en centros de referencia internacional.
-              </p>
             </div>
 
             <a
@@ -147,10 +150,10 @@ export function HomeExecutiveShowcase({
                 e.preventDefault();
                 onNavigate('nosotros');
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-50 hover:bg-[#0D3D20] border border-slate-300 hover:border-[#0D3D20] text-slate-800 hover:text-white text-xs font-bold uppercase tracking-wider transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center text-center gap-2 px-6 py-3 rounded-full bg-slate-50 hover:bg-[#0D3D20] border border-slate-300 hover:border-[#0D3D20] text-slate-800 hover:text-white text-xs font-bold uppercase tracking-wider transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer shrink-0 w-full sm:w-auto"
             >
-              <span>Explorar La Clínica</span>
-              <ArrowRight className="w-4 h-4 text-[#1A6B38] group-hover:text-white" />
+              <span className="text-center">Explorar La Clínica</span>
+              <ArrowRight className="w-4 h-4 text-[#1A6B38] group-hover:text-white shrink-0" />
             </a>
           </div>
 
@@ -172,31 +175,24 @@ export function HomeExecutiveShowcase({
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                    <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-[#0D3D20]/90 text-white text-[10px] font-bold shadow-md backdrop-blur-xs border border-white/20">
-                      {doc.badge}
-                    </div>
                   </div>
 
                   <div className="p-5 sm:p-6 space-y-2">
                     <h4 className="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-[#1A6B38] transition-colors">
                       {doc.name}
                     </h4>
-                    <p className="text-xs font-semibold text-[#1A6B38] uppercase tracking-wider">{doc.role}</p>
                     <p className="text-xs text-slate-600 leading-relaxed pt-1">{doc.bio}</p>
                   </div>
                 </div>
 
-                <div className="p-5 sm:p-6 pt-0 border-t border-slate-200/60 mt-2 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-slate-600 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#1A6B38]" /> Fear-Free Certified
-                  </span>
+                <div className="p-5 sm:p-6 pt-3 border-t border-slate-200/60 mt-2 flex items-center justify-center">
                   <a
                     href="#citas"
                     onClick={(e) => {
                       e.preventDefault();
                       onSelectServiceForBooking(`Consulta Médica con ${doc.name}`);
                     }}
-                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-emerald-50 hover:bg-[#1A6B38] text-[#1A6B38] hover:text-white text-xs font-bold transition-all duration-200 shadow-2xs hover:scale-105 active:scale-95 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-full bg-emerald-50 hover:bg-[#1A6B38] text-[#1A6B38] hover:text-white text-xs font-bold transition-all duration-200 shadow-2xs hover:scale-105 active:scale-95 cursor-pointer w-full sm:w-auto text-center"
                   >
                     <span>Agendar</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -224,9 +220,6 @@ export function HomeExecutiveShowcase({
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
                 Especialidades <span className="text-[#E05A47] font-extrabold">Médicas &amp; Quirúrgicas</span>
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
-                Desliza para conocer los procedimientos de referencia de alta complejidad disponibles en nuestro hospital veterinario.
-              </p>
             </div>
 
             <a
@@ -235,10 +228,10 @@ export function HomeExecutiveShowcase({
                 e.preventDefault();
                 onNavigate('servicios');
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center text-center gap-2 px-6 py-3 rounded-full bg-[#1A6B38] hover:bg-[#14532D] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer shrink-0 w-full sm:w-auto"
             >
-              <span>Ver Todas las Especialidades</span>
-              <ArrowRight className="w-4 h-4" />
+              <span className="text-center">Ver Todas las Especialidades</span>
+              <ArrowRight className="w-4 h-4 shrink-0" />
             </a>
           </div>
 
@@ -270,7 +263,7 @@ export function HomeExecutiveShowcase({
               {VETERINARY_SERVICES.map((svc) => (
                 <div
                   key={svc.id}
-                  className="min-w-[290px] sm:min-w-[340px] max-w-[340px] snap-start bg-white rounded-[28px] overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group/card hover:-translate-y-2 shrink-0"
+                  className="w-full min-w-full max-w-full snap-center sm:w-[340px] sm:min-w-[340px] sm:max-w-[340px] sm:snap-start bg-white rounded-[28px] overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group/card hover:-translate-y-2 shrink-0"
                 >
                   <div>
                     <div className="relative h-50 w-full overflow-hidden bg-slate-100">
@@ -284,26 +277,7 @@ export function HomeExecutiveShowcase({
                           referrerPolicy="no-referrer"
                         />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                      
-                      <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
-                        <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[#0D3D20] shadow-sm">
-                          {svc.category}
-                        </span>
-                        {svc.available247 && (
-                          <span className="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-red-500 text-white shadow-sm flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                            24/7
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="absolute bottom-2.5 left-3.5 right-3.5 flex items-center justify-between text-[11px] text-white">
-                        <span className="font-semibold truncate max-w-[200px] drop-shadow-xs">{svc.doctorInCharge}</span>
-                        <span className="px-2 py-0.5 rounded-full bg-black/40 text-emerald-300 font-mono text-[10px] font-bold">
-                          {svc.duration}
-                        </span>
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                     </div>
 
                     <div className="p-5 sm:p-6 space-y-2">
@@ -369,9 +343,13 @@ export function HomeExecutiveShowcase({
                     key={idx}
                     onClick={() => {
                       if (servicesScrollRef.current) {
-                        const firstCard = servicesScrollRef.current.querySelector(':scope > div') as HTMLElement | null;
-                        const step = firstCard ? firstCard.offsetWidth + 24 : 364;
-                        servicesScrollRef.current.scrollTo({ left: idx * step, behavior: 'smooth' });
+                        const container = servicesScrollRef.current;
+                        const firstCard = container.querySelector(':scope > div') as HTMLElement | null;
+                        const secondCard = firstCard?.nextElementSibling as HTMLElement | null;
+                        const step = (firstCard && secondCard)
+                          ? (secondCard.offsetLeft - firstCard.offsetLeft)
+                          : (firstCard ? firstCard.offsetWidth + 20 : 364);
+                        container.scrollTo({ left: idx * step, behavior: 'smooth' });
                       }
                     }}
                     className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
@@ -423,10 +401,10 @@ export function HomeExecutiveShowcase({
                 e.preventDefault();
                 onNavigate('petshop');
               }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center text-center gap-2 px-6 py-3 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer shrink-0 w-full sm:w-auto"
             >
-              <span>Ver Catálogo Gourmet</span>
-              <ArrowRight className="w-4 h-4" />
+              <span className="text-center">Ver Catálogo Gourmet</span>
+              <ArrowRight className="w-4 h-4 shrink-0" />
             </a>
           </div>
 
@@ -458,7 +436,7 @@ export function HomeExecutiveShowcase({
               {PET_PRODUCTS.map((prod) => (
                 <div
                   key={prod.id}
-                  className="min-w-[250px] sm:min-w-[280px] max-w-[280px] snap-start bg-[#FAFBF7] rounded-[28px] overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group/prod hover:-translate-y-2 shrink-0"
+                  className="w-full min-w-full max-w-full snap-center sm:w-[280px] sm:min-w-[280px] sm:max-w-[280px] sm:snap-start bg-[#FAFBF7] rounded-[28px] overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group/prod hover:-translate-y-2 shrink-0"
                 >
                   <div>
                     <div className="relative h-48 w-full overflow-hidden bg-slate-100">
@@ -472,15 +450,10 @@ export function HomeExecutiveShowcase({
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                      <div className="absolute top-2.5 left-2.5 flex items-center">
                         <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[#0D3D20] shadow-sm">
                           {prod.category}
                         </span>
-                        {prod.formulaVeterinaria && (
-                          <span className="text-[9px] font-black px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wider shadow-sm">
-                            Rx Médica
-                          </span>
-                        )}
                       </div>
 
                       <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1 text-amber-300 text-[10px] font-bold drop-shadow-sm">
@@ -514,7 +487,7 @@ export function HomeExecutiveShowcase({
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
                       title={`Cotizar ${prod.name} por WhatsApp`}
                     >
-                      <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                      <WhatsAppOfficialIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span>Cotizar</span>
                     </a>
                   </div>
@@ -551,9 +524,13 @@ export function HomeExecutiveShowcase({
                     key={idx}
                     onClick={() => {
                       if (productsScrollRef.current) {
-                        const firstCard = productsScrollRef.current.querySelector(':scope > div') as HTMLElement | null;
-                        const step = firstCard ? firstCard.offsetWidth + 24 : 304;
-                        productsScrollRef.current.scrollTo({ left: idx * step, behavior: 'smooth' });
+                        const container = productsScrollRef.current;
+                        const firstCard = container.querySelector(':scope > div') as HTMLElement | null;
+                        const secondCard = firstCard?.nextElementSibling as HTMLElement | null;
+                        const step = (firstCard && secondCard)
+                          ? (secondCard.offsetLeft - firstCard.offsetLeft)
+                          : (firstCard ? firstCard.offsetWidth + 20 : 304);
+                        container.scrollTo({ left: idx * step, behavior: 'smooth' });
                       }
                     }}
                     className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
@@ -582,7 +559,7 @@ export function HomeExecutiveShowcase({
       {/* =========================================================================
           BLOQUE 5: RESERVA DE CONSULTAS & CUIDADO INTEGRAL (Orden 5 - #citas)
           ========================================================================= */}
-      <section className="py-6 sm:py-9 bg-[#FAFBF7] relative overflow-hidden">
+      <section className="pt-6 pb-4 sm:py-9 bg-[#FAFBF7] relative overflow-hidden">
         {/* Ambient Lighting */}
         <div className="absolute top-10 left-1/3 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-5 right-10 w-80 h-80 bg-orange-100/30 rounded-full blur-3xl pointer-events-none" />
@@ -593,9 +570,6 @@ export function HomeExecutiveShowcase({
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
               Reserva de Consultas &amp; <span className="text-[#E05A47] font-extrabold">Cuidado Integral</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
-              Elige entre agendamiento programado con nuestros especialistas, el cálculo de nutrición biológica WSAVA o el protocolo libre de estrés.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -606,22 +580,22 @@ export function HomeExecutiveShowcase({
                   Agenda tu Consulta Médica
                 </h3>
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  Selecciona la especie de tu mascota, la especialidad requerida y el horario que mejor se adapte a tu rutina.
+                  Elige especialidad y horario para tu mascota.
                 </p>
 
                 {/* Benefits Checklist */}
                 <div className="pt-2 space-y-2 text-xs text-slate-600">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Atención personalizada de 45 a 60 min</span>
+                    <span>Atención personalizada</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Acceso a historia clínica digital</span>
+                    <span>Historia clínica digital</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Recordatorio automático por WhatsApp</span>
+                    <span>Recordatorio por WhatsApp</span>
                   </div>
                 </div>
               </div>
@@ -646,22 +620,22 @@ export function HomeExecutiveShowcase({
                   Calculadora Nutricional
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Obtén el requerimiento calórico exacto (kcal) y raciones de alimento en gramos según el peso y condición corporal.
+                  Calcula la porción y calorías según su peso.
                 </p>
 
                 {/* Benefits Checklist */}
                 <div className="pt-2 space-y-2 text-xs text-slate-700">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                    <span>Requerimiento energético diario exacto</span>
+                    <span>Calorías diarias recomendadas</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                    <span>Gramos de comida calculados por ración</span>
+                    <span>Porción exacta en gramos</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                    <span>Fórmulas para cachorros, adultos y seniors</span>
+                    <span>Para cachorros y adultos</span>
                   </div>
                 </div>
               </div>
@@ -686,22 +660,22 @@ export function HomeExecutiveShowcase({
                   Entorno Amable &amp; Sin Estrés
                 </h3>
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  Instalaciones adaptadas con difusores de feromonas calmantes, salas silenciosas y manejo empático certificado.
+                  Espacios adaptados para una visita tranquila.
                 </p>
 
                 {/* Benefits Checklist */}
                 <div className="pt-2 space-y-2 text-xs text-slate-600">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Salas de espera felinas y caninas separadas</span>
+                    <span>Salas de espera separadas</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Difusores continuos Feliway y Adaptil</span>
+                    <span>Feromonas calmantes</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Técnicas de manejo sin sujeción forzada</span>
+                    <span>Manejo libre de estrés</span>
                   </div>
                 </div>
               </div>

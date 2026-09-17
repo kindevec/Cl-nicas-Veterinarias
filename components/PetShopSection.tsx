@@ -12,14 +12,17 @@ import {
   RotateCcw,
   Headphones,
   ArrowRight,
-  MessageCircle,
   CheckCircle2,
   HeartPulse,
   Activity,
   ShieldCheck,
   ThermometerSnowflake,
-  Heart
+  Heart,
+  ShoppingBag,
+  Bone,
+  Pill
 } from 'lucide-react';
+import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { PetProduct, ProductCategory } from '@/lib/types';
 import { formatUSD, buildWhatsAppUrl } from '@/lib/utils';
 
@@ -29,12 +32,20 @@ interface PetShopSectionProps {
   initialSearch?: string;
 }
 
-const CATEGORIES: { id: ProductCategory; label: string }[] = [
-  { id: 'todos', label: 'Todo el Catálogo' },
-  { id: 'alimento', label: 'Dietas de Prescripción' },
-  { id: 'farmacia', label: 'Farmacia & Nutracéuticos' },
-  { id: 'snacks', label: 'Snacks 100% Mono-Proteicos' },
-  { id: 'accesorios', label: 'Accesorios Médicos' },
+const CATEGORIES: { id: ProductCategory; label: string; icon: React.ElementType }[] = [
+  { id: 'todos', label: 'Todo el Catálogo', icon: ShoppingBag },
+  { id: 'alimento', label: 'Dietas de Prescripción', icon: HeartPulse },
+  { id: 'farmacia', label: 'Farmacia & Nutracéuticos', icon: Pill },
+  { id: 'snacks', label: 'Snacks Mono-Proteicos', icon: Bone },
+  { id: 'accesorios', label: 'Accesorios Médicos', icon: ShieldCheck },
+];
+
+const PATHOLOGIES = [
+  { label: 'Salud Renal & Urinaria', icon: '💧' },
+  { label: 'Sensibilidad Digestiva (IBD)', icon: '🌿' },
+  { label: 'Alergias & Dermatología', icon: '✨' },
+  { label: 'Control de Peso & Saciedad', icon: '⚖️' },
+  { label: 'Condroprotección Articular', icon: '🦴' },
 ];
 
 export function PetShopSection({ products, initialCategory, initialSearch }: PetShopSectionProps) {
@@ -42,17 +53,18 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
   const [searchQuery, setSearchQuery] = useState(initialSearch || '');
   const [selectedPathology, setSelectedPathology] = useState(0);
 
-  React.useEffect(() => {
-    if (initialCategory) {
-      setSelectedCategory(initialCategory);
-    }
-  }, [initialCategory]);
+  const [prevCategory, setPrevCategory] = useState(initialCategory);
+  const [prevSearch, setPrevSearch] = useState(initialSearch);
 
-  React.useEffect(() => {
-    if (initialSearch !== undefined) {
-      setSearchQuery(initialSearch);
-    }
-  }, [initialSearch]);
+  if (initialCategory && initialCategory !== prevCategory) {
+    setPrevCategory(initialCategory);
+    setSelectedCategory(initialCategory);
+  }
+
+  if (initialSearch !== undefined && initialSearch !== prevSearch) {
+    setPrevSearch(initialSearch);
+    setSearchQuery(initialSearch);
+  }
 
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
@@ -69,7 +81,7 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
   return (
     <div className="w-full">
       {/* 1. TOP HERO BANNER with Photographic Canvas & Modern Transition */}
-      <section className="relative w-full min-h-[480px] sm:min-h-[520px] pt-32 sm:pt-36 pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
+      <section className="relative w-full min-h-[440px] sm:min-h-[520px] pt-32 sm:pt-36 pb-8 sm:pb-16 flex flex-col justify-center overflow-hidden bg-[#0D3D20] text-white">
         {/* Modern Photographic Canvas with Seamless Transition (Zero Dividing Lines) */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* Full-bleed Image Layer */}
@@ -113,8 +125,8 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
       </section>
 
       {/* 2. CATALOG & BEST SELLERS (Direct PetFood Layout, Zero Box-in-Box) */}
-      <section className="py-16 sm:py-20 bg-[#FAFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="pt-5 pb-4 sm:pt-8 sm:pb-8 bg-[#FAFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 sm:space-y-8">
           
           {/* Controls Bar: Search & Category Pills */}
           <motion.div 
@@ -122,22 +134,52 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center justify-between gap-6"
+            className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-6"
           >
-            <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs transition-all whitespace-nowrap cursor-pointer ${
-                    selectedCategory === cat.id
-                      ? 'bg-[#0D3D20] text-white font-bold shadow-sm'
-                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+            {/* Vista Móvil: Cuadrícula organizada para el espacio móvil */}
+            <div className="grid grid-cols-2 gap-2 w-full md:hidden">
+              {CATEGORIES.map((cat, idx) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-3 py-2.5 rounded-2xl text-xs transition-all cursor-pointer flex items-center justify-center text-center font-semibold min-h-[44px] active:scale-98 gap-1.5 ${
+                      idx === 0 ? 'col-span-2' : 'col-span-1'
+                    } ${
+                      selectedCategory === cat.id
+                        ? 'bg-[#0D3D20] text-white font-bold shadow-sm'
+                        : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shadow-2xs'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5 shrink-0" />
+                    <span className="leading-tight">{cat.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Vista PC: Con barra deslizante como estaba originalmente */}
+            <div className="hidden md:flex items-center gap-2 overflow-x-auto w-auto pb-2">
+              {CATEGORIES.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-4 py-2 rounded-full text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                      selectedCategory === cat.id
+                        ? 'bg-[#0D3D20] text-white font-bold shadow-sm'
+                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5 shrink-0" />
+                    <span>{cat.label}</span>
+                  </button>
+                );
+              })}
             </div>
 
             <div className="flex items-center gap-3 w-full md:w-auto justify-end">
@@ -179,15 +221,10 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                       
-                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                      <div className="absolute top-2.5 left-2.5 flex items-center">
                         <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-md text-[#0D3D20] shadow-sm">
                           {product.category}
                         </span>
-                        {product.formulaVeterinaria && (
-                          <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wider shadow-sm">
-                            Rx Médica
-                          </span>
-                        )}
                       </div>
 
                       <div className="absolute bottom-2 left-2.5 flex items-center gap-1 text-amber-300 text-[10px] font-bold drop-shadow-sm">
@@ -197,7 +234,7 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
                     </div>
 
                     {/* Content Section */}
-                    <div className="p-4 sm:p-5 space-y-1.5">
+                    <div className="p-3.5 sm:p-5 space-y-1.5">
                       <span className="text-[10px] font-bold text-[#1A6B38] uppercase tracking-wider block">
                         {product.brand}
                       </span>
@@ -211,8 +248,8 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
                   </div>
 
                   {/* Price & Action Section */}
-                  <div className="p-4 sm:p-5 pt-0 flex items-center justify-between gap-2 border-t border-slate-100 mt-2">
-                    <div>
+                  <div className="p-3.5 sm:p-5 pt-0 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 mt-2">
+                    <div className="min-w-0">
                       <span className="text-[9px] text-slate-400 block font-medium">Precio:</span>
                       <span className="text-sm sm:text-base font-black text-[#0D3D20]">
                         {formatUSD(product.price)}
@@ -223,10 +260,10 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
                       href={buildWhatsAppUrl(`Cotizar Producto: ${product.name}`, `(Precio referencia: ${formatUSD(product.price)})`)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+                      className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white text-[11px] sm:text-xs font-bold transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer ml-auto"
                       title={`Cotizar ${product.name} por WhatsApp`}
                     >
-                      <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                      <WhatsAppOfficialIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span>Cotizar</span>
                     </a>
                   </div>
@@ -262,16 +299,13 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
             {/* Offer Headline & Action */}
             <div className="md:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-center space-y-4 relative z-10 text-center md:text-left">
               <div>
-                <span className="text-xs font-bold text-amber-300 uppercase tracking-widest block font-mono">
-                  BENEFICIO EXCLUSIVO
-                </span>
                 <h3 className="text-3xl sm:text-4xl font-extrabold text-white mt-1 leading-tight">
                   Oferta Especial <span className="text-amber-300">30% OFF</span> en nutrición clínica
                 </h3>
               </div>
 
               <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed max-w-lg mx-auto md:mx-0">
-                En tu primer pedido de dietas especializadas (renal, gastro o hipoalergénica) formuladas con ingredientes 100% biológicos y certificación médica veterinaria.
+                En tu primer pedido de dietas especializadas formuladas con ingredientes biológicos certificados.
               </p>
 
               <div className="pt-2">
@@ -319,8 +353,8 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
       </section>
 
       {/* 5. GUÍA INTERACTIVA DE NUTRICIÓN CLÍNICA POR PATOLOGÍA */}
-      <section className="py-8 sm:py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="pt-4 pb-8 sm:pt-6 sm:pb-10 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -329,26 +363,35 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
             transition={{ duration: 0.5 }}
             className="space-y-1 text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              01 / ASESORÍA CLÍNICA DE PRESCRIPCIÓN
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-              Guía Terapéutica por Condición Médica
+              Guía Terapéutica por <span className="text-[#E05A47] font-extrabold">Condición Médica</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Selecciona la patología de tu mascota para conocer los nutrientes clínicos recomendados y las fórmulas certificadas por nuestros especialistas.
-            </p>
           </motion.div>
 
-          {/* Pathology Selector Pills */}
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            {[
-              { label: 'Salud Renal & Urinaria', icon: '💧' },
-              { label: 'Sensibilidad Digestiva (IBD)', icon: '🌿' },
-              { label: 'Alergias & Dermatología', icon: '✨' },
-              { label: 'Control de Peso & Saciedad', icon: '⚖️' },
-              { label: 'Condroprotección Articular', icon: '🦴' },
-            ].map((pathology, idx) => (
+          {/* Vista Móvil: Distribución ergonómica en cuadrícula de 2 columnas */}
+          <div className="grid grid-cols-2 gap-2 w-full md:hidden">
+            {PATHOLOGIES.map((pathology, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setSelectedPathology(idx)}
+                className={`px-3 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center text-center gap-1.5 min-h-[44px] active:scale-98 ${
+                  idx === 0 ? 'col-span-2' : 'col-span-1'
+                } ${
+                  selectedPathology === idx
+                    ? 'bg-[#0D3D20] text-white shadow-sm'
+                    : 'bg-[#FAFBF7] border border-slate-200/90 text-slate-700 hover:bg-slate-100'
+                }`}
+              >
+                <span className="shrink-0 text-sm">{pathology.icon}</span>
+                <span className="leading-tight">{pathology.label}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Vista PC: Botones tipo pill centrados */}
+          <div className="hidden md:flex items-center justify-center gap-2 flex-wrap">
+            {PATHOLOGIES.map((pathology, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -370,41 +413,41 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
             const PATHOLOGY_DETAILS = [
               {
                 condition: 'Insuficiencia Renal Crónica & Síndrome FLUTD',
-                spec: 'Dietas formuladas con bajo fósforo quelado para frenar la progresión glomerular, citrato de potasio para regular el pH urinario y niveles altos de ácidos grasos EPA/DHA que estimulan la perfusión renal.',
-                doctorNote: 'Dra. Sofía Rueda: "En pacientes renales, la nutrición representa el 70% del éxito en el control de la creatinina y la urea."',
-                keyNutrients: ['Fósforo restringido (<0.4%)', 'Proteína de alta digestibilidad', 'Complejo Omega-3 marino', 'Antioxidantes celulares'],
+                spec: 'Bajo fósforo quelado, citrato de potasio y ácidos grasos EPA/DHA que protegen y estimulan la función renal.',
+                doctorNote: 'Dra. Sofía Rueda: "La nutrición representa el 70% del éxito en el control renal."',
+                keyNutrients: ['Fósforo restringido (<0.4%)', 'Proteína de alta asimilación', 'Omega-3 marino', 'Antioxidantes celulares'],
                 recommendedDiet: "Royal Canin Renal Feline / Canine o Hill's k/d Prescription Diet",
                 quoteText: 'Cotizar Dieta Renal Especializada'
               },
               {
                 condition: 'Sensibilidad Gastrointestinal, Vómito & Colitis (IBD)',
-                spec: 'Fórmulas basadas en proteínas hidrolizadas de bajo peso molecular (Daltons reducidos) que evitan la reacción inmune entérica, adicionadas con prebióticos FOS/MOS y electrolitos para restablecer la microbiota.',
-                doctorNote: 'Dra. Sofía Rueda: "Una dieta gastrointestinal adecuada corta la inflamación del epitelio intestinal en menos de 72 horas."',
-                keyNutrients: ['Proteína hidrolizada', 'Prebióticos FOS & MOS', 'Alta densidad energética', 'Fibra de psyllium soluble'],
+                spec: 'Proteínas hidrolizadas de alta digestibilidad con prebióticos FOS/MOS para calmar la mucosa y equilibrar la microbiota.',
+                doctorNote: 'Dra. Sofía Rueda: "Frena la inflamación intestinal en menos de 72 horas."',
+                keyNutrients: ['Proteína hidrolizada', 'Prebióticos FOS & MOS', 'Alta densidad calórica', 'Fibra de psyllium'],
                 recommendedDiet: "Hill's i/d Gastrointestinal o Royal Canin Gastrointestinal Low Fat",
                 quoteText: 'Cotizar Dieta Digestiva'
               },
               {
                 condition: 'Dermatología Atópica & Alergias Alimentarias',
-                spec: 'Dietas monoproteicas con fuentes proteicas no convencionales (salmón biológico o proteína purificada de soya) enriquecidas con ácido gamma-linolénico (GLA) y ceramidas para sellar la barrera epidérmica.',
-                doctorNote: 'Dra. Valentina Morales: "El prurito crónico suele erradicarse mediante dietas de eliminación estricta durante 8 semanas."',
-                keyNutrients: ['Fuente monoproteica pura', 'Ratio Omega 6:3 (5:1)', 'Vitamina E & Zinc quelado', 'Cero trigo y cero soya cruda'],
+                spec: 'Fórmulas monoproteicas puras enriquecidas con Omega 3 y ceramidas para sellar y calmar la barrera cutánea.',
+                doctorNote: 'Dra. Valentina Morales: "Elimina el prurito y las reacciones alérgicas de forma progresiva."',
+                keyNutrients: ['Monoproteico puro', 'Ratio Omega 6:3', 'Zinc y Vitamina E', 'Cero trigo y soya'],
                 recommendedDiet: "Royal Canin Hypoallergenic o Pro Plan Veterinary Diets HA",
                 quoteText: 'Cotizar Dieta Hipoalergénica'
               },
               {
                 condition: 'Control de Peso, Obesidad & Manejo de Glucosa',
-                spec: 'Fórmulas con elevado contenido de proteína magra y fibras voluminosas de baja fermentación que promueven la saciedad gástrica, combinadas con L-carnitina para estimular la beta-oxidación de grasas.',
-                doctorNote: 'Dr. Carlos Mendoza: "Reducir un 10% de sobrepeso alivia la carga cardíaca y la presión sobre discos intervertebrales."',
-                keyNutrients: ['L-Carnitina 300 mg/kg', 'Alto volumen de saciedad', 'Bajo índice glucémico', 'Condroprotectores integrados'],
+                spec: 'Proteína magra y fibra saciante con L-carnitina para quemar grasa preservando la masa muscular.',
+                doctorNote: 'Dr. Carlos Mendoza: "Bajar de peso alivia la carga cardíaca y la presión articular."',
+                keyNutrients: ['L-Carnitina activa', 'Alta saciedad gástrica', 'Bajo índice glucémico', 'Condroprotectores'],
                 recommendedDiet: "Hill's Metabolic Weight Management o Royal Canin Satiety Support",
                 quoteText: 'Cotizar Dieta de Control de Peso'
               },
               {
                 condition: 'Soporte Articular, Displasia & Osteoartritis Geriátrica',
-                spec: 'Suplementación de grado farmacéutico con glucosamina HCl, sulfato de condroitina de origen marino y colágeno hidrolizado tipo II no desnaturalizado (UC-II®) que frenan la degradación del cartílago hialino.',
-                doctorNote: 'Dra. Valentina Morales: "La condroprotección continua devuelve la movilidad y las ganas de jugar a pacientes con artrosis."',
-                keyNutrients: ['Glucosamina 1000 mg/kg', 'Sulfato de Condroitina', 'Colágeno no desnaturalizado UC-II', 'Mejillón de labio verde'],
+                spec: 'Glucosamina, condroitina marina y colágeno UC-II® para frenar el desgaste del cartílago y mejorar la movilidad.',
+                doctorNote: 'Dra. Valentina Morales: "Devuelve la movilidad y alivia la rigidez articular."',
+                keyNutrients: ['Glucosamina y Condroitina', 'Colágeno UC-II®', 'Mejillón verde', 'Antioxidantes articulares'],
                 recommendedDiet: "Hill's j/d Joint Care o Suplemento Cosequin Maximum Strength",
                 quoteText: 'Cotizar Dieta Articular'
               }
@@ -422,9 +465,6 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
               >
                 <div className="lg:col-span-8 space-y-4">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-                      PROTOCOLO CLÍNICO SELECCIONADO
-                    </span>
                     <h3 className="text-xl sm:text-2xl font-extrabold text-[#0D3D20]">
                       {current.condition}
                     </h3>
@@ -462,9 +502,6 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
                     <h4 className="text-sm font-bold text-[#0D3D20] leading-snug">
                       {current.recommendedDiet}
                     </h4>
-                    <span className="inline-block text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 uppercase">
-                      Fórmula Regulada Rx
-                    </span>
                   </div>
 
                   <div className="pt-2">
@@ -474,7 +511,7 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
                       rel="noopener noreferrer"
                       className="w-full py-3 px-4 rounded-2xl bg-[#0D3D20] hover:bg-[#1A6B38] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 hover:scale-[1.02] cursor-pointer"
                     >
-                      <MessageCircle className="w-4 h-4 text-emerald-400" />
+                      <WhatsAppOfficialIcon className="w-4 h-4 text-emerald-400 shrink-0" />
                       <span>Consultar con Especialista</span>
                     </a>
                   </div>
@@ -503,15 +540,9 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
             transition={{ duration: 0.5 }}
             className="space-y-3 text-center max-w-3xl mx-auto"
           >
-            <span className="text-sm font-bold text-[#1A6B38] uppercase tracking-wider font-mono">
-              02 / TRAZABILIDAD Y BIOPROTECCIÓN
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D3D20] tracking-tight">
-              ¿Por Qué Comprar tus Fármacos y Dietas en VetCare?
+              ¿Por Qué Comprar tus Fármacos y Dietas en <span className="text-[#E05A47] font-extrabold">VetCare</span>?
             </h2>
-            <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-              Diferencias de grado hospitalario que protegen la salud real de tu mascota frente a tiendas convencionales.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -539,7 +570,7 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
               </div>
               <div className="p-6 sm:p-8 flex-1 flex flex-col">
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Vacunas, insulinas y probióticos conservados con monitoreo térmico continuo (2°C a 8°C) y alarmas digitales 24 horas. Nunca pierden su potencia biológica.
+                  Monitoreo térmico continuo (2°C a 8°C) que asegura la máxima potencia biológica de cada producto.
                 </p>
               </div>
             </motion.div>
@@ -568,7 +599,7 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
               </div>
               <div className="p-6 sm:p-8 flex-1 flex flex-col">
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Cada pedido de medicación o alimento medicado es revisado por un veterinario para certificar dosis correcta, posología y evitar interacciones peligrosas.
+                  Revisión veterinaria para verificar dosis, posología y evitar interacciones medicamentosas.
                 </p>
               </div>
             </motion.div>
@@ -597,7 +628,7 @@ export function PetShopSection({ products, initialCategory, initialSearch }: Pet
               </div>
               <div className="p-6 sm:p-8 flex-1 flex flex-col">
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Entrega rápida a domicilio en Quito urbano y valles. Envíos programados mensuales para que tu mascota nunca se quede sin su tratamiento médico continuo.
+                  Entrega rápida a domicilio y envíos programados para que nunca le falte su tratamiento médico.
                 </p>
               </div>
             </motion.div>

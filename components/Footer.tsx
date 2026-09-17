@@ -53,15 +53,15 @@ export function Footer({ onNavigate }: FooterProps) {
   ];
 
   return (
-    <footer id="main-footer" className="w-full bg-[#FAFBF7] text-stone-700 pb-14 lg:pb-0">
+    <footer id="main-footer" className="w-full bg-[#FAFBF7] text-stone-700 pb-16 lg:pb-0">
       
       {/* 1. Barra Superior Verde Oliva con Propuestas de Valor (Compacta) */}
-      <div className="w-full bg-[#526650] text-white py-2 sm:py-3 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 items-center">
+      <div className="w-full bg-[#526650] text-white py-2.5 sm:py-3 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-2 sm:gap-6 items-center">
           {topValueProps.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="flex items-center gap-2 sm:gap-2.5">
+              <div key={idx} className="flex items-center justify-center sm:justify-start gap-2 sm:gap-2.5">
                 <Icon className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white/90 shrink-0 stroke-[1.5]" />
                 <div className="min-w-0">
                   <h4 className="text-[11px] sm:text-xs font-bold text-white leading-tight truncate">
@@ -211,7 +211,7 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Fila 3: Newsletter Compacto de 1 Línea */}
-          <div className="pt-0.5">
+          <div className="pt-3.5 pb-1">
             <form onSubmit={handleSubscribe} className="flex items-center gap-1.5">
               <input
                 type="email"
@@ -219,12 +219,12 @@ export function Footer({ onNavigate }: FooterProps) {
                 placeholder="Recibe novedades en tu correo..."
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                className="flex-1 px-3 py-1.5 rounded-full bg-white border border-stone-300 text-xs text-stone-800 placeholder:text-stone-400 focus:outline-none focus:border-[#526650] shadow-2xs"
+                className="flex-1 px-3.5 py-2 rounded-full bg-white border border-stone-300 text-xs text-stone-800 placeholder:text-stone-400 focus:outline-none focus:border-[#526650] shadow-2xs"
               />
               <button
                 type="submit"
-                aria-label="Suscribirme"
-                className="px-3.5 py-1.5 rounded-full bg-[#526650] hover:bg-[#3d4c3c] text-white text-xs font-semibold shrink-0 transition-colors cursor-pointer"
+                aria-label="Unirme"
+                className="px-4 py-2 rounded-full bg-[#526650] hover:bg-[#3d4c3c] text-white text-xs font-semibold shrink-0 transition-colors cursor-pointer shadow-2xs"
               >
                 Unirme
               </button>
