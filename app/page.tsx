@@ -8,7 +8,6 @@ import { BottomNav } from '@/components/BottomNav';
 import { Hero } from '@/components/Hero';
 import { AboutSection } from '@/components/AboutSection';
 import { ServicesSection } from '@/components/ServicesSection';
-import { SmartNutritionCalculator } from '@/components/SmartNutritionCalculator';
 import { PetShopSection } from '@/components/PetShopSection';
 import { AppointmentScheduler } from '@/components/AppointmentScheduler';
 import { WhatsAppEmergencyFloat } from '@/components/WhatsAppEmergencyFloat';
@@ -17,18 +16,7 @@ import { ProductCategoryCarousel } from '@/components/ProductCategoryCarousel';
 import { FeaturedServicesBanner } from '@/components/FeaturedServicesBanner';
 import { PromoBundleBanner } from '@/components/PromoBundleBanner';
 import { Footer } from '@/components/Footer';
-import { 
-  ArrowRight, 
-  Calendar, 
-  Sparkles,
-  FileText,
-  CheckCircle2,
-  Clock,
-  MapPin,
-  Car,
-  ShieldCheck,
-  Phone
-} from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { buildWhatsAppUrl } from '@/lib/utils';
 import { 
@@ -322,189 +310,6 @@ export default function HomePage() {
                   onAppointmentCreated={(newApt) => setAppointments((prev) => [newApt, ...prev])}
                 />
               </div>
-
-              {/* 2. Complementary WSAVA Clinical Nutrition Calculator */}
-              <div id="calculadora-nutricional" className="bg-white border-t border-slate-200/80">
-                <SmartNutritionCalculator 
-                  onSelectServiceForBooking={handleSelectServiceForBooking}
-                />
-              </div>
-
-              {/* 3. Guía de Preparación Previa para tu Consulta Médica */}
-              <section className="pt-4 pb-8 sm:pt-6 sm:pb-10 bg-[#FAFBF7] border-t border-slate-200/70">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-                  
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.5 }}
-                    className="space-y-1 text-center max-w-3xl mx-auto"
-                  >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-                      Preparación para tu <span className="text-[#E05A47] font-extrabold">Cita Médica</span>
-                    </h2>
-                  </motion.div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="rounded-3xl bg-white border border-slate-200/80 shadow-xs overflow-hidden flex flex-col group">
-                      <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
-                        <Image src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" fill alt="Documentación Médica" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                      </div>
-                      <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
-                        <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-md z-10">
-                          <FileText className="w-6 h-6" />
-                        </div>
-                        <h4 className="text-base font-bold text-slate-900 leading-snug pt-2">
-                          Documentación &amp; Historial
-                        </h4>
-                        <p className="text-xs text-slate-600 leading-relaxed flex-1">
-                          Trae su carnet de vacunas y exámenes médicos previos.
-                        </p>
-                        <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38] mt-auto">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>Historial Digital Centralizado</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="rounded-3xl bg-white border border-slate-200/80 shadow-xs overflow-hidden flex flex-col group">
-                      <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
-                        <Image src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&q=80" fill alt="Protocolo de Ayuno" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                      </div>
-                      <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
-                        <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-md z-10">
-                          <Clock className="w-6 h-6" />
-                        </div>
-                        <h4 className="text-base font-bold text-slate-900 leading-snug pt-2">
-                          Protocolo de Ayuno
-                        </h4>
-                        <p className="text-xs text-slate-600 leading-relaxed flex-1">
-                          Ayuno sólido de 8 a 12 horas para exámenes o ecografía. Mantén agua disponible.
-                        </p>
-                        <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38] mt-auto">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>Agua Fresca Permitida</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="rounded-3xl bg-white border border-slate-200/80 shadow-xs overflow-hidden flex flex-col group">
-                      <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
-                        <Image src="https://images.unsplash.com/photo-1450778869180-41d0601e0e68?auto=format&fit=crop&w=600&q=80" fill alt="Transporte Seguro" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                      </div>
-                      <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
-                        <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-emerald-100 shadow-md z-10">
-                          <ShieldCheck className="w-6 h-6" />
-                        </div>
-                        <h4 className="text-base font-bold text-slate-900 leading-snug pt-2">
-                          Transporte Seguro Fear-Free
-                        </h4>
-                        <p className="text-xs text-slate-600 leading-relaxed flex-1">
-                          Perros con correa corta y gatos en transportadora cubierta.
-                        </p>
-                        <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#1A6B38] mt-auto">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>Protocolo Anti-Estrés</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </section>
-
-              {/* 4. Sede Hospitalaria, Horarios & Acceso */}
-              <section className="pt-4 pb-8 sm:pt-6 sm:pb-10 bg-white border-t border-slate-200/70">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-                  
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.5 }}
-                    className="space-y-1 text-center max-w-3xl mx-auto"
-                  >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20]">
-                      Ubicación, Horarios &amp; <span className="text-[#E05A47] font-extrabold">Facilidades</span>
-                    </h2>
-                  </motion.div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs overflow-hidden flex flex-col group">
-                      <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
-                        <Image src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" fill alt="Sede Hospitalaria" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                      </div>
-                      <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
-                        <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-md z-10">
-                          <Clock className="w-6 h-6" />
-                        </div>
-                        <h4 className="text-base font-bold text-slate-900 leading-snug pt-2">
-                          Horarios Hospitalarios
-                        </h4>
-                        <div className="space-y-1.5 text-xs text-slate-600 flex-1">
-                          <p><strong className="text-slate-900">Consultas Externas:</strong> Lunes a Sábado de 08:00 a 20:00</p>
-                          <p><strong className="text-slate-900">Domingos y Feriados:</strong> 09:00 a 18:00</p>
-                          <p className="text-[#1A6B38] font-bold pt-2 border-t border-slate-100 mt-2 block">Urgencias, Quirófano &amp; UCI: Abierto 24/7 los 365 días</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="rounded-3xl bg-[#FAFBF7] border border-slate-200/80 shadow-xs overflow-hidden flex flex-col group">
-                      <div className="relative h-44 w-full bg-slate-100 shrink-0 overflow-hidden">
-                        <Image src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" fill alt="Parqueadero" className="object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                      </div>
-                      <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative">
-                        <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-white text-[#1A6B38] flex items-center justify-center border border-slate-200 shadow-md z-10">
-                          <Car className="w-6 h-6" />
-                        </div>
-                        <h4 className="text-base font-bold text-slate-900 leading-snug pt-2">
-                          Parqueadero &amp; Movilidad
-                        </h4>
-                        <div className="space-y-1.5 text-xs text-slate-600 flex-1">
-                          <p>12 plazas de parqueo privado vigilado exclusivo para tutores y clientes.</p>
-                          <p>Rampa accesible directa para camillas de urgencia y mascotas con movilidad reducida.</p>
-                          <p className="text-slate-900 font-semibold pt-2 border-t border-slate-100 mt-2 block">Zona segura y monitoreada por cámaras</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="rounded-3xl bg-[#0D3D20] shadow-md overflow-hidden flex flex-col group relative">
-                      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-500 via-transparent to-transparent z-0" />
-                      <div className="relative h-44 w-full bg-slate-900 shrink-0 overflow-hidden z-10">
-                        <Image src="https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=600&q=80" fill alt="Urgencias" className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0D3D20] via-[#0D3D20]/50 to-transparent" />
-                      </div>
-                      <div className="p-6 sm:p-7 flex-1 flex flex-col space-y-3 relative z-20">
-                        <div className="absolute -top-6 left-6 w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md border border-emerald-400">
-                          <Phone className="w-6 h-6" />
-                        </div>
-                        <h4 className="text-base font-bold text-white leading-snug pt-2">
-                          Central de Urgencias 24/7
-                        </h4>
-                        <p className="text-xs text-emerald-100/90 flex-1">
-                          Si tu mascota presenta síntomas agudos, comunícate de inmediato para preparar la estación de trauma antes de tu arribo.
-                        </p>
-                        <a
-                          href={buildWhatsAppUrl('URGENCIA MÉDICA 24 HORAS')}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-3 px-4 rounded-2xl bg-white hover:bg-emerald-50 text-[#0D3D20] font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mt-3"
-                        >
-                          <WhatsAppOfficialIcon className="w-4 h-4 text-[#1A6B38] shrink-0" />
-                          <span>Línea Directa de Urgencias</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </section>
             </motion.div>
           )}
         </AnimatePresence>
