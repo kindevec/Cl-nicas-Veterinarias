@@ -107,7 +107,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
 
   return (
     <section id="agendar" className="py-10 sm:py-14 bg-[#FAFBF7] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <motion.div 
@@ -115,7 +115,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto"
+          className="text-center max-w-3xl mx-auto px-4 sm:px-0"
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight">
             Contacto &amp; <span className="text-[#E05A47] font-extrabold">Ubicación</span>
@@ -123,7 +123,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
         </motion.div>
 
         {/* Clean 2-Column Grid: Formulario a la IZQUIERDA (7 cols) y Datos/Mapa a la DERECHA (5 cols) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-start w-full">
           
           {/* LEFT COLUMN: Formulario Sencillo y Directo (7 cols) */}
           <motion.div 
@@ -131,9 +131,9 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-7"
+            className="lg:col-span-7 w-full"
           >
-            <div className="bg-white rounded-3xl p-6 sm:p-9 border border-slate-200/90 shadow-xs">
+            <div className="bg-white rounded-none sm:rounded-3xl p-5 sm:p-9 border-y sm:border border-slate-200/90 shadow-xs w-full">
               <AnimatePresence mode="wait">
                 {!confirmedAppointment ? (
                   <form onSubmit={handleSubmit} className="space-y-5">
@@ -387,10 +387,10 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-4 sm:space-y-6 w-full"
           >
             {/* 1. Datos de Contacto Directo */}
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-5">
+            <div className="bg-white rounded-none sm:rounded-3xl p-5 sm:p-7 border-y sm:border border-slate-200/90 shadow-xs space-y-5 w-full">
               <h3 className="text-base sm:text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
                 <span>Información de Contacto</span>
                 <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
@@ -521,7 +521,7 @@ export function AppointmentScheduler({ initialService, onAppointmentCreated }: A
             </div>
 
             {/* 2. Mapa de Google Embed */}
-            <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/90 shadow-xs space-y-3">
+            <div className="bg-white rounded-none sm:rounded-3xl p-4 sm:p-5 border-y sm:border border-slate-200/90 shadow-xs space-y-3 w-full">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#1A6B38]" />
