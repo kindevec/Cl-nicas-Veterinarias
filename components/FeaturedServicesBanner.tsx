@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ServiceCard {
@@ -164,7 +165,13 @@ export function FeaturedServicesBanner({
   };
 
   return (
-    <section className="w-full bg-[#FAFBF7] py-4 sm:py-6 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <motion.section 
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full bg-[#FAFBF7] py-4 sm:py-6 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto relative">
         
         {/* Contenedor Carrusel Horizontal en Móvil/Tablet & Grid de 4 Columnas en Desktop */}
@@ -176,13 +183,18 @@ export function FeaturedServicesBanner({
           onMouseLeave={handleMouseUpOrLeave}
           className="flex lg:grid lg:grid-cols-4 gap-3.5 sm:gap-4 lg:gap-5 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scroll-smooth pb-1 lg:pb-0 cursor-grab active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {SERVICE_CARDS.map((card) => (
-            <div
+          {SERVICE_CARDS.map((card, idx) => (
+            <motion.div
               key={card.id}
               data-carousel-card
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
               style={{ backgroundColor: card.bgHex }}
               onClick={() => handleCardClick(card)}
-              className="relative rounded-[22px] sm:rounded-[26px] p-4.5 sm:p-5 overflow-hidden flex justify-between min-h-[190px] sm:min-h-[205px] border border-stone-200/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 group w-full min-w-full max-w-full sm:w-[85vw] sm:min-w-0 sm:max-w-[360px] lg:w-auto lg:max-w-none shrink-0 snap-center lg:shrink cursor-pointer select-none"
+              className="relative rounded-[22px] sm:rounded-[26px] p-4.5 sm:p-5 overflow-hidden flex justify-between min-h-[190px] sm:min-h-[205px] border border-stone-200/60 shadow-xs hover:shadow-md transition-all duration-300 group w-full min-w-full max-w-full sm:w-[85vw] sm:min-w-0 sm:max-w-[360px] lg:w-auto lg:max-w-none shrink-0 snap-center lg:shrink cursor-pointer select-none"
             >
               {/* Contenido Editorial a la Izquierda */}
               <div className="flex flex-col justify-between z-10 w-[58%] min-w-0 pr-2">
@@ -229,7 +241,7 @@ export function FeaturedServicesBanner({
                 </div>
               </div>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -288,6 +300,6 @@ export function FeaturedServicesBanner({
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -137,7 +137,13 @@ export function HomeExecutiveShowcase({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
           {/* Header de la sección */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6"
+          >
             <div className="space-y-2">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
                 Conoce la Clínica <span className="text-[#E05A47] font-extrabold">VetCare</span>
@@ -155,13 +161,17 @@ export function HomeExecutiveShowcase({
               <span className="text-center">Explorar La Clínica</span>
               <ArrowRight className="w-4 h-4 text-[#1A6B38] group-hover:text-white shrink-0" />
             </a>
-          </div>
+          </motion.div>
 
           {/* Grid de 3 Especialistas Médicos Principales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {LEADING_DOCTORS.map((doc, idx) => (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-[#FAFBF7] rounded-[32px] overflow-hidden shadow-xs hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2"
               >
                 <div>
@@ -198,7 +208,7 @@ export function HomeExecutiveShowcase({
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -215,7 +225,13 @@ export function HomeExecutiveShowcase({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
           {/* Header con Enlace de Navegación */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6"
+          >
             <div className="space-y-2">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
                 Especialidades <span className="text-[#E05A47] font-extrabold">Médicas &amp; Quirúrgicas</span>
@@ -233,10 +249,14 @@ export function HomeExecutiveShowcase({
               <span className="text-center">Ver Todas las Especialidades</span>
               <ArrowRight className="w-4 h-4 shrink-0" />
             </a>
-          </div>
+          </motion.div>
 
           {/* Carrusel Horizontal de Especialidades */}
-          <div 
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="relative group"
             onMouseEnter={() => setIsServicesHovered(true)}
             onMouseLeave={() => setIsServicesHovered(false)}
@@ -370,7 +390,7 @@ export function HomeExecutiveShowcase({
                 <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
               </button>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -385,7 +405,13 @@ export function HomeExecutiveShowcase({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
           {/* Header con Enlace a Pet Shop */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6"
+          >
             <div className="space-y-2">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
                 Pet Shop Gourmet &amp; <span className="text-[#E05A47] font-extrabold">Dietas Clínicas</span>
@@ -406,10 +432,14 @@ export function HomeExecutiveShowcase({
               <span className="text-center">Ver Catálogo Gourmet</span>
               <ArrowRight className="w-4 h-4 shrink-0" />
             </a>
-          </div>
+          </motion.div>
 
           {/* Carrusel Horizontal de Productos */}
-          <div 
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="relative group"
             onMouseEnter={() => setIsProductsHovered(true)}
             onMouseLeave={() => setIsProductsHovered(false)}
@@ -551,7 +581,7 @@ export function HomeExecutiveShowcase({
                 <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
               </button>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -566,15 +596,27 @@ export function HomeExecutiveShowcase({
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
           
-          <div className="space-y-2.5 text-center max-w-3xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55 }}
+            className="space-y-2.5 text-center max-w-3xl mx-auto"
+          >
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D3D20] tracking-tight leading-tight">
               Reserva de Consultas &amp; <span className="text-[#E05A47] font-extrabold">Cuidado Integral</span>
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Card 1: Agendamiento en Línea */}
-            <div className="p-7 sm:p-8 rounded-[32px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="p-7 sm:p-8 rounded-[32px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group"
+            >
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-slate-900 leading-snug group-hover:text-[#0D3D20] transition-colors">
                   Agenda tu Consulta Médica
@@ -611,10 +653,16 @@ export function HomeExecutiveShowcase({
                 <span>Agendar en Sistema</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
-            </div>
+            </motion.div>
 
             {/* Card 2: Calculadora WSAVA */}
-            <div className="p-7 sm:p-8 rounded-[32px] bg-gradient-to-br from-emerald-50/90 to-teal-50/50 border border-emerald-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="p-7 sm:p-8 rounded-[32px] bg-gradient-to-br from-emerald-50/90 to-teal-50/50 border border-emerald-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group"
+            >
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-[#0D3D20] leading-snug">
                   Calculadora Nutricional
@@ -651,10 +699,16 @@ export function HomeExecutiveShowcase({
                 <span>Calcular Nutrición Gratis</span>
                 <ArrowRight className="w-4 h-4 text-emerald-600" />
               </a>
-            </div>
+            </motion.div>
 
             {/* Card 3: Protocolos Fear-Free™ en Consulta */}
-            <div className="p-7 sm:p-8 rounded-[32px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="p-7 sm:p-8 rounded-[32px] bg-white border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 group"
+            >
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-slate-900 leading-snug group-hover:text-[#0D3D20] transition-colors">
                   Entorno Amable &amp; Sin Estrés
@@ -691,7 +745,7 @@ export function HomeExecutiveShowcase({
                 <span>Conocer Protocolos</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
-            </div>
+            </motion.div>
           </div>
 
         </div>

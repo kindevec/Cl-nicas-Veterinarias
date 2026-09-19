@@ -103,7 +103,13 @@ export function Hero({ onSelectServiceForBooking, onNavigate }: HeroProps) {
         </div>
 
         {/* Contenido Editorial — Espaciado superior balanceado */}
-        <div className="relative z-10 max-w-[260px] sm:max-w-xs pt-16 sm:pt-20 text-left">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 max-w-[260px] sm:max-w-xs pt-16 sm:pt-20 text-left"
+        >
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0D3D20] leading-[1.18] mb-2 drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]">
             Todo lo que <br />
             necesitan <br />
@@ -127,10 +133,16 @@ export function Hero({ onSelectServiceForBooking, onNavigate }: HeroProps) {
               <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1 text-white/90" />
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Barra Inferior: 4 Iconos Táctiles con Funcionamiento Desplegable */}
-        <div className="relative z-10 max-w-md mx-auto w-full mt-auto pt-6 pb-0.5">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 max-w-md mx-auto w-full mt-auto pt-6 pb-0.5"
+        >
           <div className="w-full bg-[#FAF8F5]/95 backdrop-blur-md rounded-2xl border border-stone-200/90 shadow-md p-2 sm:p-2.5">
             {/* Fila Horizontal de 4 Iconos Táctiles */}
             <div className="grid grid-cols-4 gap-2">
@@ -198,7 +210,7 @@ export function Hero({ onSelectServiceForBooking, onNavigate }: HeroProps) {
               )}
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* ========================================================= */}
@@ -222,7 +234,13 @@ export function Hero({ onSelectServiceForBooking, onNavigate }: HeroProps) {
         </div>
 
         {/* Contenido Editorial Superior en Pared Despejada */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-2">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-2"
+        >
           <div className="max-w-xl">
             
             <h1 className="text-4xl lg:text-5xl xl:text-[3.2rem] font-extrabold tracking-tight text-[#0D3D20] leading-[1.15] mb-3">
@@ -250,10 +268,16 @@ export function Hero({ onSelectServiceForBooking, onNavigate }: HeroProps) {
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
         {/* Barra Flotante Inferior de 4 Iconos — Solo iconos interactivos como en móvil */}
-        <div className="relative z-10 max-w-2xl xl:max-w-3xl mx-auto w-full px-6 lg:px-8 mt-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 max-w-2xl xl:max-w-3xl mx-auto w-full px-6 lg:px-8 mt-8"
+        >
           <div className="w-full bg-[#FAF8F5]/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-xl shadow-stone-900/5 p-2.5 sm:p-3">
             {/* Fila Horizontal de 4 Iconos Interactivos */}
             <div className="grid grid-cols-4 gap-3 sm:gap-4">
@@ -321,7 +345,7 @@ export function Hero({ onSelectServiceForBooking, onNavigate }: HeroProps) {
               )}
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
       </div>
 

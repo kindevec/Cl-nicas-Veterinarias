@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { WhatsAppOfficialIcon } from '@/components/WhatsAppOfficialIcon';
 import { buildWhatsAppUrl } from '@/lib/utils';
@@ -28,7 +29,13 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
   );
 
   return (
-    <section className="w-full bg-[#FAFBF7] py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
+    <motion.section 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full bg-[#FAFBF7] py-4 sm:py-6 px-4 sm:px-6 lg:px-8"
+    >
       <div className="max-w-7xl mx-auto">
         
         {/* ========================================================= */}
@@ -36,7 +43,13 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
         {/* Rediseño nativo: Tarjeta integrada con media fluida,     */}
         {/* badge 20% OFF flotante en foto y dual CTA al pulgar       */}
         {/* ========================================================= */}
-        <div className="block lg:hidden relative rounded-[24px] bg-[#F5EFE6] border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-md transition-shadow">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="block lg:hidden relative rounded-[24px] bg-[#F5EFE6] border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-md transition-shadow"
+        >
           
           {/* Imagen de Producto con Badge 20% OFF Integrado */}
           <div className="relative w-full aspect-[16/9] overflow-hidden bg-stone-200">
@@ -94,7 +107,7 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
         {/* ========================================================= */}
         {/* 🖥️ 2. VISTA DE ESCRITORIO (hidden lg:block)                 */}
@@ -104,7 +117,13 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
           <div className="flex flex-row items-stretch justify-between">
             
             {/* Izquierda: Composición de Productos */}
-            <div className="relative w-[38%] xl:w-[36%] min-h-[280px] shrink-0 overflow-hidden">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-[38%] xl:w-[36%] min-h-[280px] shrink-0 overflow-hidden"
+            >
               <Image
                 src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=85"
                 alt="Pack de Inicio Nueva Mascota — Accesorios, juguetes, comedero y nutrición premium"
@@ -112,10 +131,16 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
                 sizes="450px"
                 className="object-cover object-center hover:scale-105 transition-transform duration-500"
               />
-            </div>
+            </motion.div>
 
             {/* Centro: Contenido Editorial y CTA */}
-            <div className="flex-1 p-8 flex flex-col items-start justify-center text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="flex-1 p-8 flex flex-col items-start justify-center text-left"
+            >
               <h2 className="font-extrabold text-3xl lg:text-4xl text-[#182B1E] tracking-tight leading-tight mb-2.5">
                 Kit de Inicio para <span className="text-[#E05A47] font-extrabold">Mascotas</span>
               </h2>
@@ -145,24 +170,30 @@ export function PromoBundleBanner({ onNavigate }: PromoBundleBannerProps) {
                   <span>Pedir por WhatsApp</span>
                 </a>
               </div>
-            </div>
+            </motion.div>
 
             {/* Derecha: Círculo Verde Oliva con el Descuento (20% OFF) */}
             <div className="w-[22%] p-8 flex items-center justify-center">
-              <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full bg-[#344E3B] text-white flex flex-col items-center justify-center shadow-lg shadow-[#344E3B]/25 hover:scale-105 transition-transform select-none">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.7 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: 0.2, type: 'spring', bounce: 0.3 }}
+                className="w-32 h-32 lg:w-36 lg:h-36 rounded-full bg-[#344E3B] text-white flex flex-col items-center justify-center shadow-lg shadow-[#344E3B]/25 hover:scale-105 transition-transform select-none"
+              >
                 <span className="font-extrabold text-4xl lg:text-5xl leading-none">
                   20%
                 </span>
                 <span className="text-xs font-bold tracking-widest uppercase mt-1 text-emerald-200">
                   OFF
                 </span>
-              </div>
+              </motion.div>
             </div>
 
           </div>
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }

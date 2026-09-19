@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CategoryItem {
@@ -205,7 +206,13 @@ export function ProductCategoryCarousel({ onNavigate }: ProductCategoryCarouselP
   };
 
   return (
-    <section className="relative w-full bg-[#FAFBF7] py-5 sm:py-7 overflow-hidden select-none">
+    <motion.section 
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="relative w-full bg-[#FAFBF7] py-5 sm:py-7 overflow-hidden select-none"
+    >
       <div className="w-full relative px-2 sm:px-6">
         
         {/* Flecha Izquierda — Se mueve ÚNICAMENTE al hacer clic */}
@@ -247,9 +254,14 @@ export function ProductCategoryCarousel({ onNavigate }: ProductCategoryCarouselP
           onMouseLeave={handleMouseUpOrLeave}
           className="flex items-start gap-6 sm:gap-8 md:gap-10 overflow-x-auto scroll-smooth px-8 sm:px-16 lg:px-20 py-2 cursor-grab active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {CATEGORY_ITEMS.map((item) => (
-            <div
+          {CATEGORY_ITEMS.map((item, idx) => (
+            <motion.div
               key={item.id}
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: Math.min(idx * 0.04, 0.4), ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
               onClick={() => handleCategoryClick(item)}
               role="button"
               tabIndex={0}
@@ -277,11 +289,11 @@ export function ProductCategoryCarousel({ onNavigate }: ProductCategoryCarouselP
               <span className="mt-2.5 text-xs sm:text-sm md:text-base font-bold text-[#1E2E22] group-hover:text-[#2F4635] text-center tracking-tight transition-colors">
                 {item.name}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }

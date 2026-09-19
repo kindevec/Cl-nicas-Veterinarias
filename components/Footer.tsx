@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { 
   Truck, 
   RotateCcw, 
@@ -56,7 +57,13 @@ export function Footer({ onNavigate }: FooterProps) {
     <footer id="main-footer" className="w-full bg-[#FAFBF7] text-stone-700 pb-16 lg:pb-0">
       
       {/* 1. Barra Superior Verde Oliva con Propuestas de Valor (Compacta) */}
-      <div className="w-full bg-[#526650] text-white py-2.5 sm:py-3 px-4 sm:px-6 lg:px-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+        className="w-full bg-[#526650] text-white py-2.5 sm:py-3 px-4 sm:px-6 lg:px-8"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-2 sm:gap-6 items-center">
           {topValueProps.map((item, idx) => {
             const Icon = item.icon;
@@ -75,13 +82,19 @@ export function Footer({ onNavigate }: FooterProps) {
             );
           })}
         </div>
-      </div>
+      </motion.div>
 
       {/* 2. Cuerpo Principal del Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         
         {/* VISTA MÓVIL COMPACTA (< lg) — Sin desbordamiento ni exceso vertical */}
-        <div className="block lg:hidden space-y-3.5">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55 }}
+          className="block lg:hidden space-y-3.5"
+        >
           {/* Fila 1: Logo y Redes Sociales */}
           <div className="flex items-center justify-between border-b border-stone-200/60 pb-2.5">
             <a 
@@ -235,10 +248,16 @@ export function Footer({ onNavigate }: FooterProps) {
               </span>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* VISTA ESCRITORIO COMPLETA (>= lg) — Grilla de 12 Columnas Rica en Contenido */}
-        <div className="hidden lg:grid grid-cols-12 gap-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6 }}
+          className="hidden lg:grid grid-cols-12 gap-8"
+        >
           
           {/* Col 1: Marca & Redes Sociales */}
           <div className="col-span-4 space-y-2">
@@ -529,10 +548,16 @@ export function Footer({ onNavigate }: FooterProps) {
             </form>
           </div>
 
-        </div>
+        </motion.div>
 
         {/* Fila Inferior de Copyright & Créditos (Compacta) */}
-        <div className="mt-6 pt-3.5 border-t border-stone-200/70 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] sm:text-xs text-stone-500">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-6 pt-3.5 border-t border-stone-200/70 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] sm:text-xs text-stone-500"
+        >
           <div>
             <span>© 2026 VetCare &amp; Pet Gourmet. Todos los derechos reservados.</span>
           </div>
@@ -550,7 +575,7 @@ export function Footer({ onNavigate }: FooterProps) {
               <ExternalLink className="w-2.5 h-2.5" />
             </a>
           </div>
-        </div>
+        </motion.div>
 
       </div>
 
